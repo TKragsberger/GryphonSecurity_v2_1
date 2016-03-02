@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2014/deployment" AppPlatformVersion="8.1">
+  <DefaultLanguage xmlns="" code="en-US" />
+  <App xmlns="" ProductID="{9b2194af-2656-46c4-b664-8542265dfc86}" Title="Gryphon Security Pivot" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="GryphonSecurity_v2_1 author" Description="Sample description" SDOptOut="false" BackUpOptOut="false" Publisher="GryphonSecurity_v2_1" PublisherID="{8def4361-2a62-4e9b-9298-d8df2646f750}">
+    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+    <Capabilities>
+      <Capability Name="ID_CAP_NETWORKING" />
+      <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
+      <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
+      <Capability Name="ID_CAP_SENSORS" />
+      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_LOCATION" />
+      <Capability Name="ID_CAP_PHONEDIALER" />
+      <Capability Name="ID_CAP_PROXIMITY" />
+    </Capabilities>
+    <Tasks>
+      <DefaultTask Name="_default" NavigationPage="MainPage.xaml" ActivationPolicy="Resume" />
+    </Tasks>
+    <Tokens>
+      <PrimaryToken TokenID="GryphonSecurity_v2_1Token" TaskName="_default">
+        <TemplateIconic>
+          <SmallImageURI IsRelative="true" IsResource="false">IconicTileSmall.png</SmallImageURI>
+          <Count>0</Count>
+          <IconImageURI IsRelative="true" IsResource="false">IconicTileMediumLarge.png</IconImageURI>
+          <Title>Gryphon Security Pivot</Title>
+          <Message>
+          </Message>
+          <BackgroundColor>
+          </BackgroundColor>
+          <HasLarge>false</HasLarge>
+          <LargeContent1>
+          </LargeContent1>
+          <LargeContent2>
+          </LargeContent2>
+          <LargeContent3>
+          </LargeContent3>
+          <DeviceLockImageURI IsRelative="true" IsResource="false">
+          </DeviceLockImageURI>
+        </TemplateIconic>
+      </PrimaryToken>
+    </Tokens>
+    <ScreenResolutions>
+      <ScreenResolution Name="ID_RESOLUTION_WVGA" />
+      <ScreenResolution Name="ID_RESOLUTION_WXGA" />
+      <ScreenResolution Name="ID_RESOLUTION_HD720P" />
+    </ScreenResolutions>
+  </App>
+</Deployment>
