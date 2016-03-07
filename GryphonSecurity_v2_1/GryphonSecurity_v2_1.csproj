@@ -96,8 +96,9 @@
     </Compile>
     <Compile Include="DataSource\DBFacade.cs" />
     <Compile Include="DataSource\DummyDB.cs" />
-    <Compile Include="Controller.cs" />
+    <Compile Include="Domain\Controller.cs" />
     <Compile Include="Domain\Entity\AlarmReport.cs" />
+    <Compile Include="Domain\Entity\NFC.cs" />
     <Compile Include="Domain\Entity\User.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">

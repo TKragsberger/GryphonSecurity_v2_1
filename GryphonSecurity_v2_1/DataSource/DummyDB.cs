@@ -50,7 +50,18 @@ namespace GryphonSecurity_v2_1.DataSource
         private String KEY_REPORT_GUARDRADIOEDTO = "GUARDRADIOEDTO";
         private String KEY_REPORT_ARRIVEDAT = "ARRIVEDAT";
         private String KEY_REPORT_DONE = "DONE";
-        
+
+        private String KEY_NFC_RANGECHECK = "RANGECHECK";
+        private String KEY_NFC_TAGADDRESS = "TAGADDRESS";
+
+        private String KEY_ADDRESS_ONE = "1";
+        private String KEY_ADDRESS_TWO = "2";
+        private String KEY_ADDRESS_THREE = "3";
+        private String KEY_ADDRESS_FOUR = "4";
+        private String KEY_ADDRESS_FIVE = "5";
+
+        private List<String> addresses = new List<String>();
+
         public Boolean createUser(User user)
         {
             if (appSettings.Contains(KEY_FIRSTNAME))
@@ -212,6 +223,94 @@ namespace GryphonSecurity_v2_1.DataSource
             }
             else
             {
+                return null;
+            }
+        }
+
+        public Boolean createAddresses()
+        {
+            if (appSettings.Contains(KEY_ADDRESS_ONE))
+            {
+                appSettings.Remove(KEY_ADDRESS_ONE);
+                appSettings.Remove(KEY_ADDRESS_TWO);
+                appSettings.Remove(KEY_ADDRESS_THREE);
+                appSettings.Remove(KEY_ADDRESS_FOUR);
+                appSettings.Remove(KEY_ADDRESS_FIVE);
+            }
+            try
+            {
+
+                appSettings.Add(KEY_ADDRESS_ONE, "Lyngby st.");
+                appSettings.Add(KEY_ADDRESS_TWO, "København hovedbanegård");
+                appSettings.Add(KEY_ADDRESS_THREE, "Farum st.");
+                appSettings.Add(KEY_ADDRESS_FOUR, "Kokkedal st.");
+                appSettings.Add(KEY_ADDRESS_FIVE, "Buddinge st.");
+                appSettings.Save();
+                return true;
+            }
+            catch (IsolatedStorageException)
+            {
+                Debug.WriteLine("Addresses did not get saved in dummyDB");
+                return false;
+            }
+
+        }
+
+        public String getAddress(String id)
+        {
+            addresses.Add(KEY_ADDRESS_ONE);
+            addresses.Add(KEY_ADDRESS_TWO);
+            addresses.Add(KEY_ADDRESS_THREE);
+            addresses.Add(KEY_ADDRESS_FOUR);
+            addresses.Add(KEY_ADDRESS_FIVE);
+            for (int i = 0; i < addresses.Count; i++)
+            {
+                Debug.WriteLine("what is i " + i);
+                if (addresses[i].Equals(id))
+                {
+                    Debug.WriteLine("success address found");
+                    return appSettings[addresses[i]] as String;
+                }
+            }
+            return null;
+        }
+
+        public Boolean createNFC(NFC nfc)
+        {
+            if (appSettings.Contains(KEY_NFC_TAGADDRESS))
+            {
+                appSettings.Remove(KEY_NFC_RANGECHECK);
+                appSettings.Remove(KEY_NFC_TAGADDRESS);
+            }
+
+            try
+            {
+
+                appSettings.Add(KEY_NFC_RANGECHECK, nfc.RangeCheck);
+                appSettings.Add(KEY_NFC_TAGADDRESS, nfc.TagAddress);
+                
+                appSettings.Save();
+                return true;
+            }
+            catch (IsolatedStorageException)
+            {
+                Debug.WriteLine("Addresses did not get saved in dummyDB");
+                return false;
+            }
+
+        }
+
+        public NFC getNFC()
+        {
+            if (appSettings.Contains(KEY_NFC_TAGADDRESS))
+            {
+                Boolean rangeCheck =Convert.ToBoolean(appSettings[KEY_NFC_RANGECHECK] as String);
+                String tagAddress = appSettings[KEY_NFC_TAGADDRESS] as String;
+                User user = getUser();
+                return new NFC(rangeCheck, tagAddress, user);
+            }
+            else
+            { 
                 return null;
             }
         }

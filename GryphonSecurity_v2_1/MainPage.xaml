@@ -20,6 +20,13 @@
 
         <!--Pivot Control-->
         <phone:Pivot x:Name="pivot" SelectionChanged="Pivot_SelectionChanged" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
+            <phone:PivotItem x:Name="scan" Header="{Binding Path=LocalizedResources.LayoutTitleScanNFC, Source={StaticResource LocalizedStrings}}">
+                <StackPanel Margin="0,0,0,17">
+                    <TextBlock x:Name="textBlockTest" HorizontalAlignment="Center"  TextWrapping="Wrap" Margin="0,200,0,0" Text="Ready to scan nfc" VerticalAlignment="Top"/>
+                    <Button x:Name="scanButton" Content="Button" HorizontalAlignment="Left" Margin="155,50,0,0" VerticalAlignment="Top" Click="scanButton_Click"/>
+                </StackPanel>
+            </phone:PivotItem>
+            
             <!--Pivot item one-->
             <phone:PivotItem x:Name="rapport" Header="{Binding Path=LocalizedResources.LayoutTitleAlarmReport, Source={StaticResource LocalizedStrings}}" >
                 <ScrollViewer>
@@ -65,12 +72,7 @@
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem x:Name="scan" Header="{Binding Path=LocalizedResources.LayoutTitleScanNFC, Source={StaticResource LocalizedStrings}}">
-                <StackPanel Margin="0,0,0,17">
-                    <TextBlock x:Name="textBlockTest" HorizontalAlignment="Center"  TextWrapping="Wrap" Margin="0,200,0,0" Text="Ready to scan nfc" VerticalAlignment="Top" Height="57"/>
-                    <Button x:Name="scanButton" Content="Button" HorizontalAlignment="Left" Margin="155,50,0,0" VerticalAlignment="Top" Click="scanButton_Click"/>
-                </StackPanel>
-            </phone:PivotItem>
+            
 
         </phone:Pivot>
     </Grid>

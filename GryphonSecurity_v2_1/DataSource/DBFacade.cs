@@ -31,5 +31,25 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             return dummyDB.createAlarmReport(alarmReport);
         }
+
+        public String getAdress(String id)
+        {
+            return dummyDB.getAddress(id);
+        }
+
+        public Boolean createAddresses()
+        {
+            return dummyDB.createAddresses();
+        }
+
+        public Boolean createNFC(NFC nfc)
+        {
+            return dummyDB.createNFC(nfc);
+        }
+
+        public NFC getNFC()
+        {
+            return dummyDB.getNFC();
+        }
     }
 }

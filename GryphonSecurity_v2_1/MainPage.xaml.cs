@@ -14,19 +14,29 @@ using Windows.Networking.Proximity;
 using System.Diagnostics;
 using System.Text;
 using Windows.Storage.Streams;
+using Windows.Devices.Geolocation;
+using Microsoft.Phone.Maps.Services;
+using System.Device.Location;
+using System.IO.IsolatedStorage;
+using System.Threading.Tasks;
 
 namespace GryphonSecurity_v2_1
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        Controller controller = Controller.Instance;
+        private Controller controller = Controller.Instance;
         private Windows.Networking.Proximity.ProximityDevice device;
+        private long deviceId;
         // Constructor
         public MainPage()
         {
             InitializeComponent();
+            if (controller.getUser().Equals(null))
+            {
+                NavigationService.Navigate(new Uri("/RegisterLayout.xaml", UriKind.RelativeOrAbsolute));
+            }
+            controller.createAddresses();
             initializeProximitySample();
-
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
 
@@ -79,59 +89,19 @@ namespace GryphonSecurity_v2_1
 
         private void scanButton_Click(object sender, RoutedEventArgs e)
         {
-
-            device.SubscribeForMessage("NDEF", messageReceived);
-            //  Debug.WriteLine("Published Message. ID is {0}", Id);
+            NFC nfc = controller.getNFC();
+            textBlockTest.Text = " Range Check: "+nfc.RangeCheck+"\r\n Tag Address: "+nfc.TagAddress+ "\r\n User Firstname: " + nfc.User.Firstname;
         }
 
-        private void messageReceived(ProximityDevice sender, ProximityMessage message)
-        {
-            Debug.WriteLine("Der sker noget");
-            //var buffer = message.Data.ToArray();
-            var buffer = DataReader.FromBuffer(message.Data);
-            Debug.WriteLine("1: " + buffer.ReadByte());
-            Debug.WriteLine("2: " + buffer.ReadByte());
-            int payloadLength = buffer.ReadByte();
-            Debug.WriteLine("5: " + buffer.ReadByte());
-            Debug.WriteLine("payload length: " + payloadLength);
-            var payload = new byte[payloadLength];
-            Debug.WriteLine("3: " + payload);
+        
 
-            buffer.ReadBytes(payload);
-
-            var langLen = (byte)(payload[0] & 0x3f);
-            Debug.WriteLine("LangLen: " + langLen);
-            var textLeng = payload.Length - 1 - langLen;
-            var textBuf = new byte[textLeng];
-            System.Buffer.BlockCopy(payload, 1 + langLen, textBuf, 0, textLeng);
-            //var messageType = Encoding.UTF8.GetString(buffer, 0, mimesize);
-            //Debug.WriteLine("Buffer: " + buffer + "buffer length: " + buffer.Length);
-            var scanned_message = Encoding.UTF8.GetString(textBuf, 0, textBuf.Length);
-
-            Dispatcher.BeginInvoke(() =>
-            {
-                Debug.WriteLine("Tekst: " + scanned_message);
-                textBlockTest.Text = scanned_message;
-            });
-        }
-
-        private void initializeProximitySample()
-        {
-            device = Windows.Networking.Proximity.ProximityDevice.GetDefault();
-            if (device == null)
-                Debug.WriteLine("Failed to initialized proximity device.\n" +
-                                 "Your device may not have proximity hardware.");
-        }
+        
 
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             
-            User user = controller.getUser();
-            if (user != null)
-            {
-                textBoxName.Text = user.Firstname + " " + user.Lastname;
-            }
+            
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadData();
@@ -156,6 +126,29 @@ namespace GryphonSecurity_v2_1
             aboutMe.Click += AboutMe_Click;
         }
 
+        private void messageReceived(ProximityDevice sender, ProximityMessage message)
+        {
+            controller.OneShotLocation();
+            String tagAddress = controller.readDataFromNFCTag(message);
+
+            Dispatcher.BeginInvoke(() =>
+            {
+                Debug.WriteLine("Tekst: " + tagAddress);
+                controller.GetPosition(tagAddress);
+                System.Threading.Tasks.Task.Delay(10000).Wait();
+                Debug.WriteLine("this should take be shown after 5 sek");
+                textBlockTest.Text = tagAddress;
+            });
+        }
+
+        private void initializeProximitySample()
+        {
+            device = Windows.Networking.Proximity.ProximityDevice.GetDefault();
+            if (device == null)
+                Debug.WriteLine("Failed to initialized proximity device.\n" +
+                                 "Your device may not have proximity hardware.");
+        }
+
         private void AboutMe_Click(object sender, EventArgs e)
         {
             throw new NotImplementedException();
@@ -169,13 +162,22 @@ namespace GryphonSecurity_v2_1
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(pivot.SelectedIndex == 0)
-            {
-                Debug.WriteLine("this is alarm report");
+            { 
+                deviceId = device.SubscribeForMessage("NDEF", messageReceived);
+                Debug.WriteLine("this is scan");
             } else if(pivot.SelectedIndex == 1)
             {
-                Debug.WriteLine("this is scan");
+                User user = controller.getUser();
+                if (user != null)
+                {
+                    textBoxName.Text = user.Firstname + " " + user.Lastname;
+                }
+                device.StopSubscribingForMessage(deviceId);
+                Debug.WriteLine("this is alarm report");
             }
             
         }
+
+        
     }
 }
