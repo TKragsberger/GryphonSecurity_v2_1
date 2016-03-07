@@ -9,47 +9,41 @@ namespace GryphonSecurity_v2_1.DataSource
 {
     class DBFacade
     {
-        DummyDB dummyDB = new DummyDB();
-
-
-        public void login(String userName, String password)
-        {
-
-        }
+        DummyDB connection = new DummyDB();
 
         public Boolean createUser(User user)
         {
-            return dummyDB.createUser(user);
+            return connection.createUser(user);
         }
 
         public User getUser()
         {
-            return dummyDB.getUser();
+            return connection.getUser();
         }
 
         public Boolean createAlarmReport(AlarmReport alarmReport)
         {
-            return dummyDB.createAlarmReport(alarmReport);
+            return connection.createAlarmReport(alarmReport);
         }
 
         public String getAdress(String id)
         {
-            return dummyDB.getAddress(id);
+            return connection.getAddress(id);
         }
 
         public Boolean createAddresses()
         {
-            return dummyDB.createAddresses();
+            return connection.createAddresses();
         }
 
         public Boolean createNFC(NFC nfc)
         {
-            return dummyDB.createNFC(nfc);
+            return connection.createNFC(nfc);
         }
 
         public NFC getNFC()
         {
-            return dummyDB.getNFC();
+            return connection.getNFC();
         }
     }
 }

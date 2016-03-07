@@ -239,7 +239,6 @@ namespace GryphonSecurity_v2_1.DataSource
             }
             try
             {
-
                 appSettings.Add(KEY_ADDRESS_ONE, "Lyngby st.");
                 appSettings.Add(KEY_ADDRESS_TWO, "København hovedbanegård");
                 appSettings.Add(KEY_ADDRESS_THREE, "Farum st.");

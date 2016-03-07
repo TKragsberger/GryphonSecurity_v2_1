@@ -27,6 +27,7 @@ namespace GryphonSecurity_v2_1
         private Controller controller = Controller.Instance;
         private Windows.Networking.Proximity.ProximityDevice device;
         private long deviceId;
+
         // Constructor
         public MainPage()
         {
@@ -42,7 +43,6 @@ namespace GryphonSecurity_v2_1
 
             // Sample code to localize the ApplicationBar
             BuildLocalizedApplicationBar();
-
         }
 
         private void sendReport_Click(object sender, RoutedEventArgs e)
@@ -91,17 +91,11 @@ namespace GryphonSecurity_v2_1
         {
             NFC nfc = controller.getNFC();
             textBlockTest.Text = " Range Check: "+nfc.RangeCheck+"\r\n Tag Address: "+nfc.TagAddress+ "\r\n User Firstname: " + nfc.User.Firstname;
-        }
-
-        
-
-        
+        }        
 
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
-            
+        {            
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadData();
@@ -128,13 +122,13 @@ namespace GryphonSecurity_v2_1
 
         private void messageReceived(ProximityDevice sender, ProximityMessage message)
         {
-            controller.OneShotLocation();
+            controller.oneShotLocation();
             String tagAddress = controller.readDataFromNFCTag(message);
 
             Dispatcher.BeginInvoke(() =>
             {
                 Debug.WriteLine("Tekst: " + tagAddress);
-                controller.GetPosition(tagAddress);
+                controller.calcPosition(tagAddress);
                 System.Threading.Tasks.Task.Delay(10000).Wait();
                 Debug.WriteLine("this should take be shown after 5 sek");
                 textBlockTest.Text = tagAddress;
