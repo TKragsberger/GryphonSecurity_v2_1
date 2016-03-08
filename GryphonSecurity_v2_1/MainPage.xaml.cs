@@ -27,15 +27,16 @@ namespace GryphonSecurity_v2_1
         private Controller controller = Controller.Instance;
         private Windows.Networking.Proximity.ProximityDevice device;
         private long deviceId;
+        private Boolean isConnected = false;
 
         // Constructor
         public MainPage()
         {
             InitializeComponent();
-            if (controller.getUser().Equals(null))
-            {
-                NavigationService.Navigate(new Uri("/RegisterLayout.xaml", UriKind.RelativeOrAbsolute));
-            }
+            //if (controller.getUser().Equals(null))
+            //{
+            //    NavigationService.Navigate(new Uri("/RegisterLayout.xaml", UriKind.RelativeOrAbsolute));
+            //}
             controller.createAddresses();
             initializeProximitySample();
             // Set the data context of the listbox control to the sample data
@@ -122,17 +123,28 @@ namespace GryphonSecurity_v2_1
 
         private void messageReceived(ProximityDevice sender, ProximityMessage message)
         {
-            controller.oneShotLocation();
-            String tagAddress = controller.readDataFromNFCTag(message);
-
-            Dispatcher.BeginInvoke(() =>
+            isConnected = true;//controller.checkNetworkConnection();
+            if (isConnected)
             {
-                Debug.WriteLine("Tekst: " + tagAddress);
-                controller.calcPosition(tagAddress);
-                System.Threading.Tasks.Task.Delay(10000).Wait();
-                Debug.WriteLine("this should take be shown after 5 sek");
-                textBlockTest.Text = tagAddress;
-            });
+                controller.onLocationScan();
+                String tagAddress = controller.readDataFromNFCTag(message, isConnected);
+
+                Dispatcher.BeginInvoke(() =>
+                {
+                    Debug.WriteLine("Tekst: " + tagAddress);
+                    controller.calcPosition(tagAddress);
+                    System.Threading.Tasks.Task.Delay(10000).Wait();
+                    Debug.WriteLine("this should take be shown after 5 sek");
+                    textBlockTest.Text = tagAddress;
+                });
+            } else
+            {
+                String tagId = controller.readDataFromNFCTag(message, isConnected);
+                Dispatcher.BeginInvoke(() =>
+                {
+                    textBlockTest.Text = "NFC chip " + tagId + " Scannet \r\nInformation gemt på telefon indtil der er adgang til nettet";
+                });
+            }
         }
 
         private void initializeProximitySample()
