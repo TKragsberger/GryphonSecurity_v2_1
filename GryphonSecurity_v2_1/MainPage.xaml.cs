@@ -33,15 +33,10 @@ namespace GryphonSecurity_v2_1
         public MainPage()
         {
             InitializeComponent();
-            //if (controller.getUser().Equals(null))
-            //{
-            //    NavigationService.Navigate(new Uri("/RegisterLayout.xaml", UriKind.RelativeOrAbsolute));
-            //}
             controller.createAddresses();
             initializeProximitySample();
             // Set the data context of the listbox control to the sample data
-            DataContext = App.ViewModel;
-
+            DataContext = App.ViewModel;            
             // Sample code to localize the ApplicationBar
             BuildLocalizedApplicationBar();
         }
@@ -101,6 +96,10 @@ namespace GryphonSecurity_v2_1
             {
                 App.ViewModel.LoadData();
             }
+            if (object.ReferenceEquals(controller.getUser(), null))
+            {
+                NavigationService.Navigate(new Uri("/RegisterLayout.xaml", UriKind.RelativeOrAbsolute));
+            }
         }
 
         // Sample code for building a localized ApplicationBar
@@ -123,12 +122,15 @@ namespace GryphonSecurity_v2_1
 
         private void messageReceived(ProximityDevice sender, ProximityMessage message)
         {
-            isConnected = true;//controller.checkNetworkConnection();
+            isConnected = controller.checkNetworkConnection();
             if (isConnected)
             {
                 controller.onLocationScan();
                 String tagAddress = controller.readDataFromNFCTag(message, isConnected);
-
+                for(int i = 0; i < 10; i++)
+                {
+                    Debug.WriteLine("hvad starter i på "+i);
+                }
                 Dispatcher.BeginInvoke(() =>
                 {
                     Debug.WriteLine("Tekst: " + tagAddress);
@@ -184,6 +186,9 @@ namespace GryphonSecurity_v2_1
             
         }
 
-        
+        private void sendPendingButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -96,7 +96,7 @@
     </Compile>
     <Compile Include="DataSource\DBFacade.cs" />
     <Compile Include="DataSource\DummyDB.cs" />
-    <Compile Include="DataSource\TempStorage.cs" />
+    <Compile Include="DataSource\LocalStorage.cs" />
     <Compile Include="Domain\Controller.cs" />
     <Compile Include="Domain\Entity\AlarmReport.cs" />
     <Compile Include="Domain\Entity\NFC.cs" />

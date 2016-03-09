@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GryphonSecurity_v2_1.Domain.Entity
 {
-    class User
+    public class User
     {
         private String firstname;
         private String lastname;

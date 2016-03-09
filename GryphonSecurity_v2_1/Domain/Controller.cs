@@ -28,9 +28,8 @@ namespace GryphonSecurity_v2_1
         GeoCoordinate presentCoordinate;
         GeoCoordinate targetCoordinates;
         private double checker;
-
-
         private static Controller instance;
+
         private Controller()
         {
             dBFacade = new DBFacade();
@@ -51,10 +50,12 @@ namespace GryphonSecurity_v2_1
         {
             startup = false;
         }
+
         public Boolean getStartup()
         {
             return startup;
         }
+
         public Boolean createUser(User user)
         {
             return dBFacade.createUser(user);
@@ -86,27 +87,21 @@ namespace GryphonSecurity_v2_1
 
         public String readDataFromNFCTag(ProximityMessage message, Boolean isConnected)
         {
-            Debug.WriteLine("Der sker noget");
-
-            //var buffer = message.Data.ToArray();
-
-            var buffer = DataReader.FromBuffer(message.Data);
+            DataReader buffer = DataReader.FromBuffer(message.Data);
             Debug.WriteLine("1: " + buffer.ReadByte());
             Debug.WriteLine("2: " + buffer.ReadByte());
             int payloadLength = buffer.ReadByte();
             Debug.WriteLine("5: " + buffer.ReadByte());
             Debug.WriteLine("jaja length: " + payloadLength);
-            var payload = new byte[payloadLength];
+            byte[] payload = new byte[payloadLength];
             Debug.WriteLine("3: " + payload);
-
             buffer.ReadBytes(payload);
-
-            var langLen = (byte)(payload[0] & 0x3f);
+            byte langLen = (byte)(payload[0] & 0x3f);
             Debug.WriteLine("LanLeng: " + langLen);
-            var textLeng = payload.Length - 1 - langLen;
-            var textBuf = new byte[textLeng];
+            int textLeng = payload.Length - 1 - langLen;
+            byte[] textBuf = new byte[textLeng];
             System.Buffer.BlockCopy(payload, 1 + langLen, textBuf, 0, textLeng);
-            var scanned_message = Encoding.UTF8.GetString(textBuf, 0, textBuf.Length);
+            String scanned_message = Encoding.UTF8.GetString(textBuf, 0, textBuf.Length);
             if (isConnected)
             {
                 String tagAddress = dBFacade.getAdress(scanned_message);
@@ -119,9 +114,6 @@ namespace GryphonSecurity_v2_1
         
         public async void onLocationScan()
         {
-
-
-
             //if ((bool)IsolatedStorageSettings.ApplicationSettings["LocationConsent"] != true)
             //{
             //    // The user has opted out of Location.
@@ -137,8 +129,6 @@ namespace GryphonSecurity_v2_1
                     maximumAge: TimeSpan.FromMinutes(5),
                     timeout: TimeSpan.FromSeconds(10)
                     );
-
-
                 double latitude = geoposition.Coordinate.Point.Position.Latitude;
                 double longitude = geoposition.Coordinate.Point.Position.Longitude;
                 presentCoordinate = new GeoCoordinate(latitude, longitude);
@@ -159,18 +149,18 @@ namespace GryphonSecurity_v2_1
 
         public void calcPosition(String tagAddress)
         {
-            var latitude = 0d;
-            var longitude = 0d;
-            var locator = new Geolocator();
-            var geocodequery = new GeocodeQuery();
+            double latitude = 0d;
+            double longitude = 0d;
+            Geolocator locator = new Geolocator();
+            GeocodeQuery geocodequery = new GeocodeQuery();
             CancellationTokenSource cts = new CancellationTokenSource();
+
             try
             {
                 cts.CancelAfter(10000);
 
                 if (!locator.LocationStatus.Equals(PositionStatus.Disabled))
                 {
-
                     geocodequery.GeoCoordinate = new GeoCoordinate(0, 0);
                     geocodequery.SearchTerm = tagAddress + "Denmark";
                     geocodequery.QueryAsync();
@@ -181,13 +171,12 @@ namespace GryphonSecurity_v2_1
                             if (!args.Result.Equals(null))
                             {
                                 Debug.WriteLine("new test");
-                                var result = args.Result.FirstOrDefault();
+                                MapLocation result = args.Result.FirstOrDefault();
                                 latitude = result.GeoCoordinate.Latitude;
                                 Debug.WriteLine("Latitude: " + latitude);
                                 longitude = result.GeoCoordinate.Longitude;
                                 Debug.WriteLine("Longitude: " + longitude);
                                 targetCoordinates = new GeoCoordinate(latitude, longitude);
-
                                 getDistance(targetCoordinates, tagAddress);
                             }
                         };
@@ -195,12 +184,9 @@ namespace GryphonSecurity_v2_1
                     {
                         getDistance(presentCoordinate, tagAddress);
                     }
-                }
-
-                else
+                } else
                 {
                     MessageBox.Show("Service Geolocation not enabled!", AppResources.ApplicationTitle, MessageBoxButton.OK);
-
                     return;
                 }
             } catch(OperationCanceledException e)
@@ -219,8 +205,7 @@ namespace GryphonSecurity_v2_1
                 if (checker > 500)
                 {
                     rangeCheck = false;
-                }
-                else
+                } else
                 {
                     rangeCheck = true;
                 }
@@ -245,8 +230,7 @@ namespace GryphonSecurity_v2_1
 
         public bool checkNetworkConnection()
         {
-            var ni = NetworkInterface.NetworkInterfaceType;
-
+            NetworkInterfaceType ni = NetworkInterface.NetworkInterfaceType;
             bool IsConnected = false;
             if ((ni == NetworkInterfaceType.Wireless80211) || (ni == NetworkInterfaceType.MobileBroadbandCdma) || (ni == NetworkInterfaceType.MobileBroadbandGsm))
                 IsConnected = true;

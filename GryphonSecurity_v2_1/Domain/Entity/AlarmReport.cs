@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GryphonSecurity_v2_1.Domain.Entity
 {
-    class AlarmReport
+    public class AlarmReport
     {
         String customerName;
         long customerNumber;

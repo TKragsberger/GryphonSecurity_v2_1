@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GryphonSecurity_v2_1.Domain.Entity
 {
-    class NFC
+    public class NFC
     {
         private Boolean rangeCheck;
         private String tagAddress;
