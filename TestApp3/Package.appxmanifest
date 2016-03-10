@@ -4,15 +4,15 @@
          xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest"
          xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
 
-  <Identity Name="cf65fdaf-971d-4972-ac09-76952763cb2f"
+  <Identity Name="ca5e48a5-ddd3-4012-bac6-a0e70488d541"
             Publisher="CN=Thomas"
             Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="f9d39e52-2cec-42a7-8a42-26e57a29f5f4"
-                    PhonePublisherId="920b0afd-b6bb-4b3f-886d-b80640db7e83"/>
+  <mp:PhoneIdentity PhoneProductId="8c406b9d-1fad-459a-b9be-b88c1e24b615"
+                    PhonePublisherId="03e01374-3c7e-477d-8b3d-6442f76852d4"/>
 
   <Properties>
-    <DisplayName>TestApp1</DisplayName>
+    <DisplayName>TestApp3</DisplayName>
     <PublisherDisplayName>Thomas</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -31,10 +31,10 @@
                  Executable="AGHost.exe"
                  EntryPoint="MainPage.xaml">
       <m3:VisualElements
-          DisplayName="TestApp1"
+          DisplayName="TestApp3"
           Square150x150Logo="Assets\SquareTile150x150.png"
           Square44x44Logo="Assets\Logo.png"
-          Description="TestApp1"
+          Description="TestApp3"
           ForegroundText="light"
           BackgroundColor="#464646">
         <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png"/>

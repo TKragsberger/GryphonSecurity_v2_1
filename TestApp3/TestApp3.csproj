@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F9D39E52-2CEC-42A7-8A42-26E57A29F5F4}</ProjectGuid>
+    <ProjectGuid>{8C406B9D-1FAD-459A-B9BE-B88C1E24B615}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestApp1</RootNamespace>
-    <AssemblyName>TestApp1</AssemblyName>
+    <RootNamespace>TestApp3</RootNamespace>
+    <AssemblyName>TestApp3</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -20,9 +20,9 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>TestApp1_$(Configuration)_$(Platform).xap</XapFilename>
+    <XapFilename>TestApp3_$(Configuration)_$(Platform).xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>TestApp1.App</SilverlightAppEntry>
+    <SilverlightAppEntry>TestApp3.App</SilverlightAppEntry>
     <ValidateXaml>false</ValidateXaml>
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
@@ -138,6 +138,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GryphonSecurity_v2_1\GryphonSecurity_v2_1.csproj">

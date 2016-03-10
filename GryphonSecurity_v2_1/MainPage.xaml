@@ -70,10 +70,10 @@
                 </ScrollViewer>
             </phone:PivotItem>
 
-            <phone:PivotItem x:Name="pending" Header="{Binding Path=LocalizedResources.LayoutTitleScanNFC, Source={StaticResource LocalizedStrings}}">
+            <phone:PivotItem x:Name="pending" Header="Pending">
                 <StackPanel Margin="0,0,0,17">
-                    <TextBlock x:Name="textBlockPendingNFCScans" HorizontalAlignment="Center"  TextWrapping="Wrap" Margin="0,200,0,0" Text="Ready to scan nfc" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="textBlockPendingAlarmReports" HorizontalAlignment="Center"  TextWrapping="Wrap" Margin="0,10,0,0" Text="Ready to scan nfc" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textBlockPendingNFCScans" HorizontalAlignment="left"  TextWrapping="Wrap" Margin="100,200,0,0" Text="Pending NFC: " VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textBlockPendingAlarmReports" HorizontalAlignment="left"  TextWrapping="Wrap" Margin="100,10,0,0" Text="Pending Alarm Reports: " VerticalAlignment="Top"/>
                     <Button x:Name="sendPendingButton" Content="Button" HorizontalAlignment="Left" Margin="155,50,0,0" VerticalAlignment="Top" Click="sendPendingButton_Click"/>
                 </StackPanel>
             </phone:PivotItem>

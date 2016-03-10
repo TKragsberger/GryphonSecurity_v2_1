@@ -123,9 +123,9 @@ namespace GryphonSecurity_v2_1
         private void messageReceived(ProximityDevice sender, ProximityMessage message)
         {
             isConnected = controller.checkNetworkConnection();
+            controller.onLocationScan();
             if (isConnected)
             {
-                controller.onLocationScan();
                 String tagAddress = controller.readDataFromNFCTag(message, isConnected);
                 for(int i = 0; i < 10; i++)
                 {
@@ -144,7 +144,9 @@ namespace GryphonSecurity_v2_1
                 String tagId = controller.readDataFromNFCTag(message, isConnected);
                 Dispatcher.BeginInvoke(() =>
                 {
+                    System.Threading.Tasks.Task.Delay(5000).Wait();
                     textBlockTest.Text = "NFC chip " + tagId + " Scannet \r\nInformation gemt på telefon indtil der er adgang til nettet";
+                    controller.getDistance(null, tagId);
                 });
             }
         }
@@ -182,13 +184,33 @@ namespace GryphonSecurity_v2_1
                 }
                 device.StopSubscribingForMessage(deviceId);
                 Debug.WriteLine("this is alarm report");
+            } else if(pivot.SelectedIndex == 2)
+            {
+                int nfcs = controller.getLocalStorageNFCs();
+                int alarmReports = controller.getLocalStorageAlarmReports();
+                textBlockPendingNFCScans.Text = "Pending NFCs: " + nfcs;
+                textBlockPendingAlarmReports.Text = "Pending Alarm Reports: " + alarmReports;
+                Debug.WriteLine("this is pending");
             }
             
         }
 
         private void sendPendingButton_Click(object sender, RoutedEventArgs e)
         {
+            Debug.WriteLine("Pending button pushed");
+            isConnected = controller.checkNetworkConnection();
+            if (isConnected)
+            {
+                if (controller.sendPendingNFCs())
+                {
+                    textBlockPendingNFCScans.Text = "Pending NFCs: " + 0;
+                }
 
+                if (controller.sendPendingAlarmReports())
+                {
+                    textBlockPendingAlarmReports.Text = "Pending Alarm Reports: " + 0;
+                }
+            }
         }
     }
 }

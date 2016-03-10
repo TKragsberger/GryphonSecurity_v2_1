@@ -22,44 +22,45 @@ namespace GryphonSecurity_v2_1.DataSource
         private String KEY_USERNAME = "USERNAME";
         private String KEY_PASSWORD = "PASSWORD";
 
-        private String KEY_ID_NFC = "NFCID";
-        private String KEY_ID_ALARMREPORT = "ALARMREPORTID";
+        private String KEY_ID_NFC = "ID_NFC";
+        private String KEY_ID_ALARMREPORT = "ID_ALARMREPORT";
 
         private String KEY_CURRENTNUMBEROFALARMREPORTS = "CURRENTNUMBEROFALARMREPORTS";
         private String KEY_CURRENTNUMBEROFNFCS = "CURRENTNUMBEROFNFCS";
 
-        private String KEY_REPORT_CUSTOMERNAME = "CUSTOMERNAME";
-        private String KEY_REPORT_CUSTOMERNUMBER = "CUSTOMERNUMBER";
-        private String KEY_REPORT_STREETANDHOUSENUMBER = "STREETANDHOUSENUMBER";
-        private String KEY_REPORT_ZIPCODE = "ZIPCODE";
-        private String KEY_REPORT_CITY = "CITY";
-        private String KEY_REPORT_PHONENUMBER = "PHONENUMBER";
-        private String KEY_REPORT_DATE = "DATE";
-        private String KEY_REPORT_TIME = "TIME";
-        private String KEY_REPORT_ZONE = "ZONE";
-        private String KEY_REPORT_BURGLARYVANDALISM = "BURGLARYVANDALISM";
-        private String KEY_REPORT_WINDOWDOORCLOSED = "WINDOWDOORCLOSED";
-        private String KEY_REPORT_APPREHENDEDPERSON = "APPREHENDEDPERSON";
-        private String KEY_REPORT_STAFFERROR = "STAFFERROR";
-        private String KEY_REPORT_NOTHINGTOREPORT = "NOTHINGTOREPORT";
-        private String KEY_REPORT_TECHNICALERROR = "TECHNICALERROR";
-        private String KEY_REPORT_UNKNOWNREASON = "UNKNOWNREASON";
-        private String KEY_REPORT_OTHER = "OTHER";
-        private String KEY_REPORT_CANCELDURINGEMERGENCY = "CANCELDURINGEMERGENCY";
-        private String KEY_REPORT_COVERMADE = "COVERMADE";
-        private String KEY_REPORT_REMARK = "REMARK";
-        private String KEY_REPORT_NAME = "NAME";
-        private String KEY_REPORT_INSTALLER = "INSTALLER";
-        private String KEY_REPORT_CONTROLCENTER = "CONTROLCENTER";
-        private String KEY_REPORT_GUARDRADIOEDDATE = "GUARDRADIOEDDATE";
-        private String KEY_REPORT_GUARDRADIOEDFROM = "GUARDRADIOEDFROM";
-        private String KEY_REPORT_GUARDRADIOEDTO = "GUARDRADIOEDTO";
-        private String KEY_REPORT_ARRIVEDAT = "ARRIVEDAT";
-        private String KEY_REPORT_DONE = "DONE";
+        private String KEY_REPORT_CUSTOMERNAME = "REPORT_CUSTOMERNAME";
+        private String KEY_REPORT_CUSTOMERNUMBER = "REPORT_CUSTOMERNUMBER";
+        private String KEY_REPORT_STREETANDHOUSENUMBER = "REPORT_STREETANDHOUSENUMBER";
+        private String KEY_REPORT_ZIPCODE = "REPORT_ZIPCODE";
+        private String KEY_REPORT_CITY = "REPORT_CITY";
+        private String KEY_REPORT_PHONENUMBER = "REPORT_PHONENUMBER";
+        private String KEY_REPORT_DATE = "REPORT_DATE";
+        private String KEY_REPORT_TIME = "REPORT_TIME";
+        private String KEY_REPORT_ZONE = "REPORT_ZONE";
+        private String KEY_REPORT_BURGLARYVANDALISM = "REPORT_BURGLARYVANDALISM";
+        private String KEY_REPORT_WINDOWDOORCLOSED = "REPORT_WINDOWDOORCLOSED";
+        private String KEY_REPORT_APPREHENDEDPERSON = "REPORT_APPREHENDEDPERSON";
+        private String KEY_REPORT_STAFFERROR = "REPORT_STAFFERROR";
+        private String KEY_REPORT_NOTHINGTOREPORT = "REPORT_NOTHINGTOREPORT";
+        private String KEY_REPORT_TECHNICALERROR = "REPORT_TECHNICALERROR";
+        private String KEY_REPORT_UNKNOWNREASON = "REPORT_UNKNOWNREASON";
+        private String KEY_REPORT_OTHER = "REPORT_OTHER";
+        private String KEY_REPORT_CANCELDURINGEMERGENCY = "REPORT_CANCELDURINGEMERGENCY";
+        private String KEY_REPORT_COVERMADE = "REPORT_COVERMADE";
+        private String KEY_REPORT_REMARK = "REPORT_REMARK";
+        private String KEY_REPORT_NAME = "REPORT_NAME";
+        private String KEY_REPORT_INSTALLER = "REPORT_INSTALLER";
+        private String KEY_REPORT_CONTROLCENTER = "REPORT_CONTROLCENTER";
+        private String KEY_REPORT_GUARDRADIOEDDATE = "REPORT_GUARDRADIOEDDATE";
+        private String KEY_REPORT_GUARDRADIOEDFROM = "REPORT_GUARDRADIOEDFROM";
+        private String KEY_REPORT_GUARDRADIOEDTO = "REPORT_GUARDRADIOEDTO";
+        private String KEY_REPORT_ARRIVEDAT = "REPORT_ARRIVEDAT";
+        private String KEY_REPORT_DONE = "REPORT_DONE";
 
-        private String KEY_NFC_RANGECHECK = "RANGECHECK";
-        private String KEY_NFC_TAGADDRESS = "TAGADDRESS";
-
+        private String KEY_NFC_RANGECHECK = "NFC_RANGECHECK";
+        private String KEY_NFC_TAGADDRESS = "NFC_TAGADDRESS";
+        private String KEY_NFC_PRESENTLATITUDE = "NFC_PRESENTLATITUDE";
+        private String KEY_NFC_PRESENTLONGITUDE = "NFC_PRESENTLONGITUDE";
 
         public Boolean createUser(User user)
         {
@@ -148,8 +149,10 @@ namespace GryphonSecurity_v2_1.DataSource
 
         private long getCurrentNfcId()
         {
+            Debug.WriteLine(appSettings.Contains(KEY_ID_NFC));
             if (!appSettings.Contains(KEY_ID_NFC))
             {
+                Debug.WriteLine("when are we here");
                 appSettings.Add(KEY_ID_NFC, id);
                 appSettings.Save();
             }
@@ -158,11 +161,26 @@ namespace GryphonSecurity_v2_1.DataSource
 
         private long getNextNfcId()
         {
-            long nextId = getCurrentNfcId() + 1;
+            try
+            {
+            long test = getCurrentNfcId();
+            Debug.WriteLine(test);
+            long nextId = test + 1;
             appSettings.Remove(KEY_ID_NFC);
+                appSettings.Save();
             appSettings.Add(KEY_ID_NFC, nextId);
             appSettings.Save();
+                
+
             return nextId;
+
+            }
+            catch (IsolatedStorageException)
+            {
+                Debug.WriteLine("error");
+                return 1111111111111111111;
+            }
+            
         }
 
         public int currentNumberOfNFCs()
@@ -177,8 +195,22 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public void addNumberOfNFCs()
         {
-            appSettings.Add(KEY_CURRENTNUMBEROFNFCS, currentNumberOfNFCs() + 1);
-            appSettings.Save();
+            try
+            {
+                int current = currentNumberOfNFCs();
+                if (appSettings.Contains(KEY_CURRENTNUMBEROFNFCS))
+                {
+                    appSettings.Remove(KEY_CURRENTNUMBEROFNFCS);
+                }
+                appSettings.Add(KEY_CURRENTNUMBEROFNFCS, current + 1);
+                appSettings.Save();
+
+
+            }
+            catch (IsolatedStorageException)
+            {
+                return;
+            }
         }
 
         public Boolean createAlarmReport(AlarmReport alarmReport)
@@ -308,20 +340,26 @@ namespace GryphonSecurity_v2_1.DataSource
                     appSettings.Remove(id + KEY_REPORT_DONE);
                 }
                 itemsRemoved = true;
+                appSettings.Remove(KEY_ID_ALARMREPORT);
             }
             return itemsRemoved;
         }
 
-        public Boolean createNFC(NFC nfc)
+        public Boolean createNFC(double presentLatitude, double presentLongitude, String tagAddress)
         {
-            long id = getNextNfcId();
+            long NFCId = getNextNfcId();
+            Debug.WriteLine("this is create nfc local storage");
             try
             {
 
-                appSettings.Add(id + KEY_NFC_RANGECHECK, nfc.RangeCheck);
-                appSettings.Add(id + KEY_NFC_TAGADDRESS, nfc.TagAddress);
+                //appSettings.Add(id + KEY_NFC_RANGECHECK, nfc.RangeCheck);
+                Debug.WriteLine(NFCId);
+                appSettings.Add(NFCId + KEY_NFC_PRESENTLATITUDE, presentLatitude + "");
+                appSettings.Add(NFCId + KEY_NFC_PRESENTLONGITUDE, presentLongitude + "");
+                appSettings.Add(NFCId + KEY_NFC_TAGADDRESS, tagAddress);
 
                 appSettings.Save();
+                addNumberOfNFCs();
                 return true;
             }
             catch (IsolatedStorageException)
@@ -332,19 +370,23 @@ namespace GryphonSecurity_v2_1.DataSource
 
         }
 
-        public List<NFC> getNFC()
+        public List<List<String>> getNFCs()
         {
-            List<NFC> nfcs = new List<NFC>();
+            List<List<String>> nfcs = new List<List<String>>();
             int length = currentNumberOfAlarmReports();
             if (length > 0)
             {
                 for (int i = 0; i < length; i++)
                 {
+                    List<String> items = new List<String>();
                     id = i + 1;
-                    Boolean rangeCheck = Convert.ToBoolean(appSettings[id + KEY_NFC_RANGECHECK] as String);
+                    String presentLatitude = appSettings[id + KEY_NFC_PRESENTLATITUDE] as String;
+                    String presentLongitude = appSettings[id + KEY_NFC_PRESENTLONGITUDE] as String;
                     String tagAddress = appSettings[id + KEY_NFC_TAGADDRESS] as String;
-                    User user = getUser();
-                    nfcs.Add(new NFC(rangeCheck, tagAddress, user));
+                    items.Add(presentLatitude);
+                    items.Add(presentLongitude);
+                    items.Add(tagAddress);
+                    nfcs.Add(items);
                 }
             }
             return nfcs;
@@ -352,6 +394,7 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public Boolean removeNFCs()
         {
+            Debug.WriteLine("removeNFCs invoked");
             int length = currentNumberOfAlarmReports();
             Boolean itemsRemoved = false;
             if (length > 0)
@@ -359,10 +402,12 @@ namespace GryphonSecurity_v2_1.DataSource
                 for (int i = 0; i < length; i++)
                 {
                     id = i + 1;
-                    appSettings.Remove(id + KEY_NFC_RANGECHECK);
+                    appSettings.Remove(id + KEY_NFC_PRESENTLATITUDE);
+                    appSettings.Remove(id + KEY_NFC_PRESENTLONGITUDE);
                     appSettings.Remove(id + KEY_NFC_TAGADDRESS);
                 }
                 itemsRemoved = true;
+                appSettings.Remove(KEY_ID_NFC);
             }
             return itemsRemoved;
         }

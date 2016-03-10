@@ -7,14 +7,14 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using TestApp2.Resources;
+using TestApp3.Resources;
 using System.Threading;
 using Microsoft.VisualStudio.TestPlatform.Core;
 using vstest_executionengine_platformbridge;
 using Microsoft.VisualStudio.TestPlatform.TestExecutor;
 using System.Reflection;
 
-namespace TestApp2
+namespace TestApp3
 {
     public partial class MainPage : PhoneApplicationPage
     {

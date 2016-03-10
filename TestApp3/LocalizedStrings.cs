@@ -1,6 +1,6 @@
-﻿using TestApp2.Resources;
+﻿using TestApp3.Resources;
 
-namespace TestApp2
+namespace TestApp3
 {
     /// <summary>
     /// Provides access to string resources.

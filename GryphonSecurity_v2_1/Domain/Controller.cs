@@ -20,15 +20,15 @@ using Windows.Storage.Streams;
 
 namespace GryphonSecurity_v2_1
 {
-    class Controller
+    public class Controller
     {
         private Windows.Networking.Proximity.ProximityDevice device;
         private DBFacade dBFacade;
-        Boolean startup = true;
-        GeoCoordinate presentCoordinate;
-        GeoCoordinate targetCoordinates;
-        private double checker;
+        private Boolean startup = true;
+        private GeoCoordinate presentCoordinate;
+        private GeoCoordinate targetCoordinates;
         private static Controller instance;
+        private Boolean check = false;
 
         private Controller()
         {
@@ -122,13 +122,15 @@ namespace GryphonSecurity_v2_1
 
             Geolocator geolocator = new Geolocator();
             geolocator.DesiredAccuracyInMeters = 50;
-
+            Debug.WriteLine("test 1");
             try
             {
+                Debug.WriteLine("test 2");
                 Geoposition geoposition = await geolocator.GetGeopositionAsync(
                     maximumAge: TimeSpan.FromMinutes(5),
                     timeout: TimeSpan.FromSeconds(10)
                     );
+                Debug.WriteLine("test 3");
                 double latitude = geoposition.Coordinate.Point.Position.Latitude;
                 double longitude = geoposition.Coordinate.Point.Position.Longitude;
                 presentCoordinate = new GeoCoordinate(latitude, longitude);
@@ -189,7 +191,7 @@ namespace GryphonSecurity_v2_1
                     MessageBox.Show("Service Geolocation not enabled!", AppResources.ApplicationTitle, MessageBoxButton.OK);
                     return;
                 }
-            } catch(OperationCanceledException e)
+            } catch(OperationCanceledException)
             {
                 Debug.WriteLine("cancellation token");
             }
@@ -197,22 +199,23 @@ namespace GryphonSecurity_v2_1
 
         public void getDistance(GeoCoordinate targetCoordinates, String tagAddress)
         {
-            if (!presentCoordinate.Equals(targetCoordinates))
+            if (!presentCoordinate.Equals(targetCoordinates) && !object.ReferenceEquals(targetCoordinates, null))
             {
                 double distance = targetCoordinates.GetDistanceTo(presentCoordinate);
                 Boolean rangeCheck = false;
                 Debug.WriteLine("Distance: " + distance);
-                if (checker > 500)
+                if (distance > 500)
                 {
                     rangeCheck = false;
                 } else
                 {
                     rangeCheck = true;
                 }
-                dBFacade.createNFC(new NFC(rangeCheck, tagAddress, dBFacade.getUser()));
+                check = dBFacade.createNFC(new NFC(rangeCheck, tagAddress, dBFacade.getUser()));
             } else
             {
                 //TODO gem i tempstorage
+                dBFacade.createLocalStorageNFCs(presentCoordinate.Latitude, presentCoordinate.Longitude, tagAddress);
             }
 
 
@@ -239,6 +242,48 @@ namespace GryphonSecurity_v2_1
             return IsConnected;
         }
 
+        public int getLocalStorageNFCs()
+        {
+            return dBFacade.getLocalStorageNumberOfNFCs();
+        }
+
+        public int getLocalStorageAlarmReports()
+        {
+            return dBFacade.getLocalStorageNumberOfAlarmReports();
+        }
+
+        public Boolean sendPendingNFCs()
+        {
+            List<List<String>> items = dBFacade.getLocalStorageNFCs();
+            foreach (List<String> item in items)
+            {
+                double presentLatitude = Convert.ToDouble(item[0]);
+                double presentLongitude = Convert.ToDouble(item[1]);
+                presentCoordinate = new GeoCoordinate(presentLatitude, presentLongitude);
+                String tagAddress = item[2];
+                calcPosition(tagAddress);
+                if (!check)
+                {
+                    return check;
+                }
+            }
+            return check;
+        }
+
+        public Boolean sendPendingAlarmReports()
+        {
+            Boolean alarmReportCheck = true;
+
+            //TODO når der er lavet backend så lav metoder der kan modtage en hel list i items i stedet for kun 1 item afgangen
+            //alarmReportCheck = dBFacade.createAlarmReports(alarmReports);
+
+            if (alarmReportCheck)
+            {
+                return dBFacade.removeLocalStorageAlarmReports();
+            }
+
+            return false;
+        }
     }
 }
 

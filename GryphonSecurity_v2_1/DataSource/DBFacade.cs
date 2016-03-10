@@ -10,15 +10,16 @@ namespace GryphonSecurity_v2_1.DataSource
     class DBFacade
     {
         DummyDB connection = new DummyDB();
+        LocalStorage localStorage = new LocalStorage();
 
         public Boolean createUser(User user)
         {
-            return connection.createUser(user);
+            return localStorage.createUser(user);
         }
 
         public User getUser()
         {
-            return connection.getUser();
+            return localStorage.getUser();
         }
 
         public Boolean createAlarmReport(AlarmReport alarmReport)
@@ -45,5 +46,46 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             return connection.getNFC();
         }
+
+        public Boolean createLocalStorageNFCs(double presentLatitude, double presentLongitude, String tagAddress)
+        {
+            return localStorage.createNFC(presentLatitude, presentLongitude, tagAddress);
+        }
+
+        public Boolean createLocalStorageAlarmReports(AlarmReport alarmReport)
+        {
+            return localStorage.createAlarmReport(alarmReport);
+        }
+
+        public List<List<String>> getLocalStorageNFCs()
+        {
+            return localStorage.getNFCs();
+        }
+
+        public List<AlarmReport> getLocalStorageAlarmReports()
+        {
+            return localStorage.getAlarmReports();
+        }
+
+        public Boolean removeLocalStorageNFCs()
+        {
+            return localStorage.removeNFCs();
+        }
+
+        public Boolean removeLocalStorageAlarmReports()
+        {
+            return localStorage.removeAlarmReports();
+        }
+
+        public int getLocalStorageNumberOfNFCs()
+        {
+            return localStorage.currentNumberOfNFCs();
+        }
+
+        public int getLocalStorageNumberOfAlarmReports()
+        {
+            return localStorage.currentNumberOfAlarmReports();
+        }
+
     }
 }
