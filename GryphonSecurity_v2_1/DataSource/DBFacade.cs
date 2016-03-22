@@ -26,7 +26,10 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             return connection.createAlarmReport(alarmReport);
         }
-
+        public Boolean createTempLocalStorageAlarmReport(AlarmReport alarmReport)
+        {
+            return localStorage.createTempAlarmReport(alarmReport);
+        }
         public String getAdress(String id)
         {
             return connection.getAddress(id);
@@ -65,6 +68,10 @@ namespace GryphonSecurity_v2_1.DataSource
         public List<AlarmReport> getLocalStorageAlarmReports()
         {
             return localStorage.getAlarmReports();
+        }
+        public List<AlarmReport> getLocalStorageTempAlarmReports()
+        {
+            return localStorage.getTempAlarmReports();
         }
 
         public Boolean removeLocalStorageNFCs()

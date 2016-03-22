@@ -66,6 +66,7 @@
                         <TextBlock Margin="28,0,0,0" Text="{Binding Path=LocalizedResources.ReportDoneTB, Source={StaticResource LocalizedStrings}}"/>
                         <toolkit:TimePicker x:Name="textBoxDone" Height="72" Margin="14,0,14,0" Grid.Row="1" VerticalAlignment="Top" Background="#BDBDBD" Foreground="Black" BorderBrush="#BDBDBD"/>
                         <Button x:Name="buttonSendReport" Content="{Binding Path=LocalizedResources.ReportSendReportButton, Source={StaticResource LocalizedStrings}}" Margin="14,0,14,0" VerticalAlignment="Top" Click="sendReport_Click"/>
+                        <Button x:Name="GemReport" Content="Gem" Margin="14,0,14,0" VerticalAlignment="Top" Click="buttonGemReport_Click"/>
                     </StackPanel>
                 </ScrollViewer>
             </phone:PivotItem>
@@ -75,7 +76,13 @@
                     <TextBlock x:Name="textBlockPendingNFCScans" HorizontalAlignment="left"  TextWrapping="Wrap" Margin="100,200,0,0" Text="Pending NFC: " VerticalAlignment="Top"/>
                     <TextBlock x:Name="textBlockPendingAlarmReports" HorizontalAlignment="left"  TextWrapping="Wrap" Margin="100,10,0,0" Text="Pending Alarm Reports: " VerticalAlignment="Top"/>
                     <Button x:Name="sendPendingButton" Content="Button" HorizontalAlignment="Left" Margin="155,50,0,0" VerticalAlignment="Top" Click="sendPendingButton_Click"/>
+                    <ScrollViewer>
+                        <StackPanel x:Name="tempAlarmReportScroll" Margin="100,0,0,0">
+                            
+                        </StackPanel>
+                    </ScrollViewer>
                 </StackPanel>
+                
             </phone:PivotItem>
 
             

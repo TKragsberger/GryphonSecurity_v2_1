@@ -25,9 +25,12 @@ namespace GryphonSecurity_v2_1.DataSource
 
         private String KEY_ID_NFC = "ID_NFC";
         private String KEY_ID_ALARMREPORT = "ID_ALARMREPORT";
+        private String KEY_ID_TEMP_ALARMREPORT = "ID_TEMP_ALARMREPORT";
+        
 
         private String KEY_CURRENTNUMBEROFALARMREPORTS = "CURRENTNUMBEROFALARMREPORTS";
         private String KEY_CURRENTNUMBEROFNFCS = "CURRENTNUMBEROFNFCS";
+        private String KEY_CURRENTNUMBEROFTEMPALARMREPORTS = "CURRENTNUMBEROFTEMPALARMREPORTS";
 
         private String KEY_REPORT_CUSTOMERNAME = "REPORT_CUSTOMERNAME";
         private String KEY_REPORT_CUSTOMERNUMBER = "REPORT_CUSTOMERNUMBER";
@@ -57,6 +60,35 @@ namespace GryphonSecurity_v2_1.DataSource
         private String KEY_REPORT_GUARDRADIOEDTO = "REPORT_GUARDRADIOEDTO";
         private String KEY_REPORT_ARRIVEDAT = "REPORT_ARRIVEDAT";
         private String KEY_REPORT_DONE = "REPORT_DONE";
+
+        private String KEY_TEMP_REPORT_CUSTOMERNAME = "TEMP_REPORT_CUSTOMERNAME";
+        private String KEY_TEMP_REPORT_CUSTOMERNUMBER = "TEMP_REPORT_CUSTOMERNUMBER";
+        private String KEY_TEMP_REPORT_STREETANDHOUSENUMBER = "TEMP_REPORT_STREETANDHOUSENUMBER";
+        private String KEY_TEMP_REPORT_ZIPCODE = "TEMP_REPORT_ZIPCODE";
+        private String KEY_TEMP_REPORT_CITY = "TEMP_REPORT_CITY";
+        private String KEY_TEMP_REPORT_PHONENUMBER = "TEMP_REPORT_PHONENUMBER";
+        private String KEY_TEMP_REPORT_DATE = "TEMP_REPORT_DATE";
+        private String KEY_TEMP_REPORT_TIME = "TEMP_REPORT_TIME";
+        private String KEY_TEMP_REPORT_ZONE = "TEMP_REPORT_ZONE";
+        private String KEY_TEMP_REPORT_BURGLARYVANDALISM = "TEMP_REPORT_BURGLARYVANDALISM";
+        private String KEY_TEMP_REPORT_WINDOWDOORCLOSED = "TEMP_REPORT_WINDOWDOORCLOSED";
+        private String KEY_TEMP_REPORT_APPREHENDEDPERSON = "TEMP_REPORT_APPREHENDEDPERSON";
+        private String KEY_TEMP_REPORT_STAFFERROR = "TEMP_REPORT_STAFFERROR";
+        private String KEY_TEMP_REPORT_NOTHINGTOREPORT = "TEMP_REPORT_NOTHINGTOREPORT";
+        private String KEY_TEMP_REPORT_TECHNICALERROR = "TEMP_REPORT_TECHNICALERROR";
+        private String KEY_TEMP_REPORT_UNKNOWNREASON = "TEMP_REPORT_UNKNOWNREASON";
+        private String KEY_TEMP_REPORT_OTHER = "TEMP_REPORT_OTHER";
+        private String KEY_TEMP_REPORT_CANCELDURINGEMERGENCY = "TEMP_REPORT_CANCELDURINGEMERGENCY";
+        private String KEY_TEMP_REPORT_COVERMADE = "TEMP_REPORT_COVERMADE";
+        private String KEY_TEMP_REPORT_REMARK = "TEMP_REPORT_REMARK";
+        private String KEY_TEMP_REPORT_NAME = "TEMP_REPORT_NAME";
+        private String KEY_TEMP_REPORT_INSTALLER = "TEMP_REPORT_INSTALLER";
+        private String KEY_TEMP_REPORT_CONTROLCENTER = "TEMP_REPORT_CONTROLCENTER";
+        private String KEY_TEMP_REPORT_GUARDRADIOEDDATE = "TEMP_REPORT_GUARDRADIOEDDATE";
+        private String KEY_TEMP_REPORT_GUARDRADIOEDFROM = "TEMP_REPORT_GUARDRADIOEDFROM";
+        private String KEY_TEMP_REPORT_GUARDRADIOEDTO = "TEMP_REPORT_GUARDRADIOEDTO";
+        private String KEY_TEMP_REPORT_ARRIVEDAT = "TEMP_REPORT_ARRIVEDAT";
+        private String KEY_TEMP_REPORT_DONE = "TEMP_REPORT_DONE";
 
         private String KEY_NFC_RANGECHECK = "NFC_RANGECHECK";
         private String KEY_NFC_TAGADDRESS = "NFC_TAGADDRESS";
@@ -146,6 +178,42 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             int next = currentNumberOfAlarmReports() + 1;
             appSettings.Add(KEY_CURRENTNUMBEROFALARMREPORTS, next + "");
+            appSettings.Save();
+        }
+        private long getCurrentTempAlarmReportId()
+        {
+            if (!appSettings.Contains(KEY_ID_TEMP_ALARMREPORT))
+            {
+                appSettings.Add(KEY_ID_TEMP_ALARMREPORT, "0");
+                appSettings.Save();
+            }
+            return Convert.ToInt64(appSettings[KEY_ID_TEMP_ALARMREPORT] as String);
+        }
+
+        private long getNextTempAlarmReportId()
+        {
+            long nextId = getCurrentTempAlarmReportId() + 1;
+            appSettings.Remove(KEY_ID_TEMP_ALARMREPORT);
+            appSettings.Add(KEY_ID_TEMP_ALARMREPORT, nextId + "");
+            appSettings.Save();
+            return nextId;
+        }
+
+        public int currentNumberOfTempAlarmReports()
+        {
+            if (!appSettings.Contains(KEY_CURRENTNUMBEROFTEMPALARMREPORTS))
+            {
+                appSettings.Add(KEY_CURRENTNUMBEROFTEMPALARMREPORTS, "0");
+                appSettings.Save();
+            }
+            return Convert.ToInt32(appSettings[KEY_CURRENTNUMBEROFTEMPALARMREPORTS] as String);
+        }
+
+        public void addNumberOfTempAlarmReports()
+        {
+            int next = currentNumberOfTempAlarmReports() + 1;
+            appSettings.Remove(KEY_CURRENTNUMBEROFTEMPALARMREPORTS);
+            appSettings.Add(KEY_CURRENTNUMBEROFTEMPALARMREPORTS, next + "");
             appSettings.Save();
         }
 
@@ -304,6 +372,7 @@ namespace GryphonSecurity_v2_1.DataSource
             return alarmReports;
         }
 
+
         public Boolean removeAlarmReports()
         {
             int length = currentNumberOfAlarmReports();
@@ -418,6 +487,149 @@ namespace GryphonSecurity_v2_1.DataSource
                 appSettings.Save();
             }
             return itemsRemoved;
+        }
+        public Boolean createTempAlarmReport(AlarmReport alarmReport)
+        {
+            long id = getNextTempAlarmReportId();
+            try
+            {
+                appSettings.Add(id + KEY_TEMP_REPORT_CUSTOMERNAME, alarmReport.CustomerName + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_ZIPCODE, alarmReport.ZipCode + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_CITY, alarmReport.City + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_PHONENUMBER, alarmReport.Phonenumber + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_DATE, alarmReport.Date + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_TIME, alarmReport.Time + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_ZONE, alarmReport.Zone + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_BURGLARYVANDALISM, alarmReport.BurglaryVandalism + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_WINDOWDOORCLOSED, alarmReport.WindowDoorClosed + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_APPREHENDEDPERSON, alarmReport.ApprehendedPerson + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_STAFFERROR, alarmReport.StaffError + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_NOTHINGTOREPORT, alarmReport.NothingToReport + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_TECHNICALERROR, alarmReport.TechnicalError + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_UNKNOWNREASON, alarmReport.UnknownReason + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_OTHER, alarmReport.Other + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_CANCELDURINGEMERGENCY, alarmReport.CancelDuringEmergency + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_COVERMADE, alarmReport.CoverMade + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_REMARK, alarmReport.CoverMade + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_NAME, alarmReport.Name + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_INSTALLER, alarmReport.Installer + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_CONTROLCENTER, alarmReport.ControlCenter + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_GUARDRADIOEDDATE, alarmReport.GuardRadioedDate + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_GUARDRADIOEDFROM, alarmReport.GuardRadioedFrom + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_GUARDRADIOEDTO, alarmReport.GuardRadioedTo + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_ARRIVEDAT, alarmReport.ArrivedAt + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_DONE, alarmReport.Done + "");
+                appSettings.Save();
+                addNumberOfTempAlarmReports();
+                return true;
+            }
+            catch (IsolatedStorageException i)
+            {
+                Debug.WriteLine("" + i.Message);
+
+                return false;
+            }
+        }
+        public List<AlarmReport> getTempAlarmReports()
+        {
+            List<AlarmReport> alarmReports = new List<AlarmReport>();
+            int length = currentNumberOfTempAlarmReports();
+
+            if (length > 0)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    id = i + 1;
+                    String customerName = appSettings[id + KEY_TEMP_REPORT_CUSTOMERNAME] as String;
+                    long customerNumber = Convert.ToInt64(appSettings[id + KEY_TEMP_REPORT_CUSTOMERNUMBER] as String);
+                    String streetAndHouseNumber = appSettings[id + KEY_TEMP_REPORT_STREETANDHOUSENUMBER] as String;
+                    int zipCode = Convert.ToInt32(appSettings[id + KEY_TEMP_REPORT_ZIPCODE] as String);
+                    String city = appSettings[id + KEY_TEMP_REPORT_CITY] as String;
+                    long phonenumber = Convert.ToInt64(appSettings[id + KEY_TEMP_REPORT_PHONENUMBER] as String);
+                    Debug.WriteLine("date from local storage " + appSettings[id + KEY_TEMP_REPORT_DATE] as String, CultureInfo.InvariantCulture);
+                    DateTime date = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_DATE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    DateTime time = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_TIME] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    String zone = appSettings[id + KEY_TEMP_REPORT_ZONE] as String;
+                    Boolean burglaryVandalism = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_BURGLARYVANDALISM] as String);
+                    Boolean windowDoorClosed = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_WINDOWDOORCLOSED] as String);
+                    Boolean apprehendedPerson = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_APPREHENDEDPERSON] as String);
+                    Boolean staffError = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_STAFFERROR] as String);
+                    Boolean nothingToReport = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_NOTHINGTOREPORT] as String);
+                    Boolean technicalError = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_TECHNICALERROR] as String);
+                    Boolean unknownReason = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_UNKNOWNREASON] as String);
+                    Boolean other = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_OTHER] as String);
+                    Boolean cancelDuringEmergency = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_CANCELDURINGEMERGENCY] as String);
+                    Boolean coverMade = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_COVERMADE] as String);
+                    String remark = appSettings[id + KEY_TEMP_REPORT_REMARK] as String;
+                    String name = appSettings[id + KEY_TEMP_REPORT_NAME] as String;
+                    String installer = appSettings[id + KEY_TEMP_REPORT_INSTALLER] as String;
+                    String controlCenter = appSettings[id + KEY_TEMP_REPORT_CONTROLCENTER] as String;
+                    DateTime guardRadioedDate = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_GUARDRADIOEDDATE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    DateTime guardRadioedFrom = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_GUARDRADIOEDFROM] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    DateTime guardRadioedTo = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_GUARDRADIOEDTO] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    DateTime arrivedAt = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_ARRIVEDAT] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    DateTime done = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_DONE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    alarmReports.Add(new AlarmReport(customerName, customerNumber, streetAndHouseNumber, zipCode, city, phonenumber, date, time, zone, burglaryVandalism,
+                                            windowDoorClosed, apprehendedPerson, staffError, nothingToReport, technicalError, unknownReason, other, cancelDuringEmergency, coverMade,
+                                            remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done));
+                }
+            }
+
+            return alarmReports;
+        }
+
+        public AlarmReport getTempAlarmReport(int id)
+        {
+            
+            int length = currentNumberOfTempAlarmReports();
+            int currentId = 0;
+            if (length > 0)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    currentId = i + 1;
+                    if(currentId == id)
+                    { 
+                        String customerName = appSettings[id + KEY_TEMP_REPORT_CUSTOMERNAME] as String;
+                        long customerNumber = Convert.ToInt64(appSettings[id + KEY_TEMP_REPORT_CUSTOMERNUMBER] as String);
+                        String streetAndHouseNumber = appSettings[id + KEY_TEMP_REPORT_STREETANDHOUSENUMBER] as String;
+                        int zipCode = Convert.ToInt32(appSettings[id + KEY_TEMP_REPORT_ZIPCODE] as String);
+                        String city = appSettings[id + KEY_TEMP_REPORT_CITY] as String;
+                        long phonenumber = Convert.ToInt64(appSettings[id + KEY_TEMP_REPORT_PHONENUMBER] as String);
+                        Debug.WriteLine("date from local storage " + appSettings[id + KEY_TEMP_REPORT_DATE] as String, CultureInfo.InvariantCulture);
+                        DateTime date = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_DATE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                        DateTime time = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_TIME] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                        String zone = appSettings[id + KEY_TEMP_REPORT_ZONE] as String;
+                        Boolean burglaryVandalism = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_BURGLARYVANDALISM] as String);
+                        Boolean windowDoorClosed = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_WINDOWDOORCLOSED] as String);
+                        Boolean apprehendedPerson = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_APPREHENDEDPERSON] as String);
+                        Boolean staffError = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_STAFFERROR] as String);
+                        Boolean nothingToReport = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_NOTHINGTOREPORT] as String);
+                        Boolean technicalError = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_TECHNICALERROR] as String);
+                        Boolean unknownReason = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_UNKNOWNREASON] as String);
+                        Boolean other = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_OTHER] as String);
+                        Boolean cancelDuringEmergency = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_CANCELDURINGEMERGENCY] as String);
+                        Boolean coverMade = Convert.ToBoolean(appSettings[id + KEY_TEMP_REPORT_COVERMADE] as String);
+                        String remark = appSettings[id + KEY_TEMP_REPORT_REMARK] as String;
+                        String name = appSettings[id + KEY_TEMP_REPORT_NAME] as String;
+                        String installer = appSettings[id + KEY_TEMP_REPORT_INSTALLER] as String;
+                        String controlCenter = appSettings[id + KEY_TEMP_REPORT_CONTROLCENTER] as String;
+                        DateTime guardRadioedDate = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_GUARDRADIOEDDATE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                        DateTime guardRadioedFrom = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_GUARDRADIOEDFROM] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                        DateTime guardRadioedTo = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_GUARDRADIOEDTO] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                        DateTime arrivedAt = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_ARRIVEDAT] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                        DateTime done = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_DONE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                        AlarmReport alarmReport = new AlarmReport(customerName, customerNumber, streetAndHouseNumber, zipCode, city, phonenumber, date, time, zone, burglaryVandalism,
+                                                windowDoorClosed, apprehendedPerson, staffError, nothingToReport, technicalError, unknownReason, other, cancelDuringEmergency, coverMade,
+                                                remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done);
+                        return alarmReport;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -72,7 +72,15 @@ namespace GryphonSecurity_v2_1
         {
             return dBFacade.createAlarmReport(alarmReport);
         }
-
+        public Boolean createTempAlarmReport(AlarmReport alarmReport)
+        {
+            Debug.WriteLine("Thomas her er vi");
+            return dBFacade.createTempLocalStorageAlarmReport(alarmReport);
+        }
+        public List<AlarmReport> getLocalStorageTempAlarmReports()
+        {
+            return dBFacade.getLocalStorageTempAlarmReports();
+        }
         private Boolean initializeProximitySample()
         {
             Boolean deviceProxomity = true;

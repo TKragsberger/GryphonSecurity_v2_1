@@ -71,6 +71,7 @@ namespace GryphonSecurity_v2_1.Domain.Entity
             this.arrivedAt = arrivedAt;
             this.done = done;
         }
+        
 
         public String CustomerName
         {

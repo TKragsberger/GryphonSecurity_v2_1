@@ -191,8 +191,28 @@ namespace GryphonSecurity_v2_1
                 textBlockPendingNFCScans.Text = "Pending NFCs: " + nfcs;
                 textBlockPendingAlarmReports.Text = "Pending Alarm Reports: " + alarmReports;
                 Debug.WriteLine("this is pending");
+                tempAlarmReportScroll.Children.Clear();
+                List<AlarmReport> tempAlarmReports = controller.getLocalStorageTempAlarmReports();
+                for (int i = 0; i < tempAlarmReports.Count; i++){
+                    Debug.WriteLine("HEJ MAND");
+                    TextBlock textBlock = new TextBlock();
+                    textBlock.Text = tempAlarmReports[i].CustomerName;
+                    textBlock.Tap += myTextBlock_Tap;
+                    textBlock.FontSize = 22;
+                    
+                    textBlock.Name =""+ (i + 1);
+                    tempAlarmReportScroll.Children.Add(textBlock);
+                }
             }
             
+        }
+        public void myTextBlock_Tap(object sender, System.Windows.Input.GestureEventArgs args)
+        {
+            Debug.WriteLine(""+ args.OriginalSource.ToString());
+            TextBlock textBlock = (TextBlock) args.OriginalSource;
+            Debug.WriteLine("" + textBlock.Name);
+            
+            MessageBox.Show(AppResources.ReportAlarmReportSuccess);
         }
 
         private void sendPendingButton_Click(object sender, RoutedEventArgs e)
@@ -212,6 +232,60 @@ namespace GryphonSecurity_v2_1
                     textBlockPendingAlarmReports.Text = "Pending Alarm Reports: " + 0;
                 }
             }
+        }
+
+        private void buttonGemReport_Click(object sender, RoutedEventArgs e)
+        {
+            String check = "";
+            String customerNameTB = textBoxCustomerName.Text;
+            long customerNumberTB = 0;
+            check = textBoxCustomerNumber.Text;
+            if (!check.Equals(""))
+             customerNumberTB = Convert.ToInt64(textBoxCustomerNumber.Text);
+            String streetAndHouseNumberTB = textBoxStreetAndHouseNumber.Text;
+            int zipCodeTB = 0;
+            check = textBoxZipCode.Text;
+            if (!check.Equals(""))
+                zipCodeTB = Convert.ToInt32(textBoxZipCode.Text);
+            String cityTB = textBoxCity.Text;
+            long phonenumberTB =0;
+            check = textBoxPhonenumber.Text;
+            if (!check.Equals(""))
+                phonenumberTB = Convert.ToInt64(textBoxPhonenumber.Text);
+            DateTime dateTB = (DateTime)textBoxDate.Value;
+            Debug.WriteLine("dateTB "+dateTB);
+            DateTime timeTB = (DateTime)textBoxTime.Value;
+            String zoneTB = textBoxZone.Text;
+            Boolean burglaryVandalismCB = (Boolean)checkBoxBurglaryVandalism.IsChecked;
+            Boolean windowDoorClosedCB = (Boolean)checkBoxWindowDoorClosed.IsChecked;
+            Boolean apprehendedPersonCB = (Boolean)checkBoxApprehendedPerson.IsChecked;
+            Boolean staffErrorCB = (Boolean)checkBoxStaffError.IsChecked;
+            Boolean nothingToReportCB = (Boolean)checkBoxNothingToReport.IsChecked;
+            Boolean technicalErrorCB = (Boolean)checkBoxTechnicalError.IsChecked;
+            Boolean unknownReasonCB = (Boolean)checkBoxUnknownReason.IsChecked;
+            Boolean otherCB = (Boolean)checkBoxOther.IsChecked;
+            Boolean cancelDuringEmergencyCB = (Boolean)checkBoxCancelsDuringEmergency.IsChecked;
+            Boolean coverMadeCB = (Boolean)checkBoxCoverMade.IsChecked;
+            String remarkTB = textBoxRemark.Text;
+            String nameTB = textBoxName.Text;
+            String installerTB = textBoxInstaller.Text;
+            String controlCenterTB = textBoxControlCenter.Text;
+            DateTime guardRadioedDateTB = (DateTime)textBoxGuardRadioedDate.Value;
+            DateTime guardRadioedFromTB = (DateTime)textBoxGuardRadioedFrom.Value;
+            DateTime guardRadioedToTB = (DateTime)textBoxGuardRadioedTo.Value;
+            DateTime arrivedAtTB = (DateTime)textBoxArrivedAt.Value;
+            DateTime doneTB = (DateTime)textBoxDone.Value;
+            if (controller.createTempAlarmReport(new AlarmReport(customerNameTB, customerNumberTB, streetAndHouseNumberTB, zipCodeTB, cityTB, phonenumberTB, dateTB, timeTB, zoneTB, burglaryVandalismCB,
+                                        windowDoorClosedCB, apprehendedPersonCB, staffErrorCB, nothingToReportCB, technicalErrorCB, unknownReasonCB, otherCB, cancelDuringEmergencyCB, coverMadeCB,
+                                        remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, guardRadioedToTB, arrivedAtTB, doneTB)))
+            {
+                MessageBox.Show(AppResources.ReportAlarmReportSuccess);
+            }
+            else
+            {
+                MessageBox.Show(AppResources.ReportAlarmReportFailed);
+            }
+
         }
     }
 }
