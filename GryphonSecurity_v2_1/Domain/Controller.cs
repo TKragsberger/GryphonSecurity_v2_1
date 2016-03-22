@@ -30,6 +30,8 @@ namespace GryphonSecurity_v2_1
         private static Controller instance;
         private Boolean check = false;
 
+
+
         private Controller()
         {
             dBFacade = new DBFacade();
@@ -255,19 +257,24 @@ namespace GryphonSecurity_v2_1
         public Boolean sendPendingNFCs()
         {
             List<List<String>> items = dBFacade.getLocalStorageNFCs();
+            Debug.WriteLine(items.Count);
             foreach (List<String> item in items)
             {
                 double presentLatitude = Convert.ToDouble(item[0]);
+                Debug.WriteLine("Latitude " + presentLatitude);
                 double presentLongitude = Convert.ToDouble(item[1]);
+                Debug.WriteLine("Longitude " + presentLongitude);
                 presentCoordinate = new GeoCoordinate(presentLatitude, presentLongitude);
                 String tagAddress = item[2];
-                calcPosition(tagAddress);
-                if (!check)
-                {
-                    return check;
-                }
+                Debug.WriteLine("tagAddress " + tagAddress);
+                //calcPosition(tagAddress);
+                //if (!check)
+                //{
+                //    return check;
+                //}
             }
-            return check;
+            dBFacade.removeLocalStorageNFCs();
+            return true;
         }
 
         public Boolean sendPendingAlarmReports()

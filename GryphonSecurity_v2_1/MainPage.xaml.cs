@@ -201,6 +201,7 @@ namespace GryphonSecurity_v2_1
             isConnected = controller.checkNetworkConnection();
             if (isConnected)
             {
+                Debug.WriteLine("is connected");
                 if (controller.sendPendingNFCs())
                 {
                     textBlockPendingNFCScans.Text = "Pending NFCs: " + 0;
