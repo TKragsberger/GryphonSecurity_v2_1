@@ -43,15 +43,52 @@ namespace GryphonSecurity_v2_1
 
         private void sendReport_Click(object sender, RoutedEventArgs e)
         {
+            Boolean check = true;
+            if (textBoxCustomerName.Text.Equals("")) {
+                check = false;
+            }
             String customerNameTB = textBoxCustomerName.Text;
-            long customerNumberTB = Convert.ToInt64(textBoxCustomerNumber.Text);
+            long customerNumberTB = 0;
+            if (!textBoxCustomerNumber.Text.Equals(""))
+            {
+            customerNumberTB = Convert.ToInt64(textBoxCustomerNumber.Text);
+            }
+            else
+            {
+                check = false;
+            }
+            if (textBoxStreetAndHouseNumber.Text.Equals(""))
+            {
+                check = false;
+            }
             String streetAndHouseNumberTB = textBoxStreetAndHouseNumber.Text;
-            int zipCodeTB = Convert.ToInt32(textBoxZipCode.Text);
+            int zipCodeTB = 0;
+            if (!textBoxZipCode.Text.Equals(""))
+            {
+                zipCodeTB =Convert.ToInt32(textBoxZipCode.Text);
+            }
+            else
+            {
+                check = false;
+            }
+            if (textBoxCity.Text.Equals(""))
+            {
+                check = false;
+            }
             String cityTB = textBoxCity.Text;
-            long phonenumberTB = Convert.ToInt64(textBoxPhonenumber.Text);
+            long phonenumberTB = 0;
+            if (!textBoxPhonenumber.Text.Equals(""))
+            {
+            phonenumberTB = Convert.ToInt64(textBoxPhonenumber.Text);
+            }
             DateTime dateTB = (DateTime)textBoxDate.Value;
             DateTime timeTB = (DateTime)textBoxTime.Value;
+            if (textBoxZone.Text.Equals(""))
+            {
+                check = false;
+            }
             String zoneTB = textBoxZone.Text;
+
             Boolean burglaryVandalismCB = (Boolean)checkBoxBurglaryVandalism.IsChecked;
             Boolean windowDoorClosedCB = (Boolean)checkBoxWindowDoorClosed.IsChecked;
             Boolean apprehendedPersonCB = (Boolean)checkBoxApprehendedPerson.IsChecked;
@@ -62,24 +99,42 @@ namespace GryphonSecurity_v2_1
             Boolean otherCB = (Boolean)checkBoxOther.IsChecked;
             Boolean cancelDuringEmergencyCB = (Boolean)checkBoxCancelsDuringEmergency.IsChecked;
             Boolean coverMadeCB = (Boolean)checkBoxCoverMade.IsChecked;
+
             String remarkTB = textBoxRemark.Text;
+            if (textBoxName.Text.Equals(""))
+            {
+                check = false;
+            }
             String nameTB = textBoxName.Text;
+            if (textBoxInstaller.Text.Equals(""))
+            {
+                check = false;
+            }
             String installerTB = textBoxInstaller.Text;
+            if (textBoxControlCenter.Text.Equals(""))
+            {
+                check = false;
+            }
             String controlCenterTB = textBoxControlCenter.Text;
             DateTime guardRadioedDateTB = (DateTime)textBoxGuardRadioedDate.Value;
             DateTime guardRadioedFromTB = (DateTime)textBoxGuardRadioedFrom.Value;
             DateTime guardRadioedToTB = (DateTime)textBoxGuardRadioedTo.Value;
             DateTime arrivedAtTB = (DateTime)textBoxArrivedAt.Value;
             DateTime doneTB = (DateTime)textBoxDone.Value;
-            if (controller.createAlarmReport(new AlarmReport(customerNameTB, customerNumberTB, streetAndHouseNumberTB, zipCodeTB, cityTB, phonenumberTB, dateTB, timeTB, zoneTB, burglaryVandalismCB,
-                                        windowDoorClosedCB, apprehendedPersonCB, staffErrorCB, nothingToReportCB, technicalErrorCB, unknownReasonCB, otherCB, cancelDuringEmergencyCB, coverMadeCB,
-                                        remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, guardRadioedToTB, arrivedAtTB, doneTB)))
+            if (check) {
+                if (controller.createAlarmReport(new AlarmReport(customerNameTB, customerNumberTB, streetAndHouseNumberTB, zipCodeTB, cityTB, phonenumberTB, dateTB, timeTB, zoneTB, burglaryVandalismCB,
+                                            windowDoorClosedCB, apprehendedPersonCB, staffErrorCB, nothingToReportCB, technicalErrorCB, unknownReasonCB, otherCB, cancelDuringEmergencyCB, coverMadeCB,
+                                            remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, guardRadioedToTB, arrivedAtTB, doneTB)))
+                {
+                    MessageBox.Show(AppResources.ReportAlarmReportSuccess);
+                }
+                else
+                {
+                    MessageBox.Show(AppResources.ReportAlarmReportFailed);
+                }
+            } else
             {
-                MessageBox.Show(AppResources.ReportAlarmReportSuccess);
-            }
-            else
-            {
-                MessageBox.Show(AppResources.ReportAlarmReportFailed);
+                MessageBox.Show("udfyld felterne");
             }
         }
 
@@ -198,7 +253,8 @@ namespace GryphonSecurity_v2_1
                     TextBlock textBlock = new TextBlock();
                     textBlock.Text = tempAlarmReports[i].CustomerName;
                     textBlock.Tap += myTextBlock_Tap;
-                    textBlock.FontSize = 22;
+                    textBlock.FontSize = 50;
+                    textBlock.Height = 70;
                     
                     textBlock.Name =""+ (i + 1);
                     tempAlarmReportScroll.Children.Add(textBlock);
@@ -208,11 +264,73 @@ namespace GryphonSecurity_v2_1
         }
         public void myTextBlock_Tap(object sender, System.Windows.Input.GestureEventArgs args)
         {
+            
             Debug.WriteLine(""+ args.OriginalSource.ToString());
             TextBlock textBlock = (TextBlock) args.OriginalSource;
-            Debug.WriteLine("" + textBlock.Name);
+            long id = Int64.Parse(textBlock.Name);
+
+            AlarmReport currentAlarmReport = controller.getLocalTempAlarmReport(id);
             
-            MessageBox.Show(AppResources.ReportAlarmReportSuccess);
+            if (controller.removeLocalStorageTempSelectedAlarmReport(id))
+            {
+                fillAlarmReport(currentAlarmReport);
+                pivot.SelectedItem = alarmReport;
+            } else
+            {
+                MessageBox.Show("Error");
+            }
+        }
+        public void fillAlarmReport(AlarmReport alarmReport)
+        {
+            textBoxCustomerName.Text = alarmReport.CustomerName;
+            if (alarmReport.CustomerNumber == 0)
+                textBoxCustomerNumber.Text = "";
+            else 
+            textBoxCustomerNumber.Text =""+ alarmReport.CustomerNumber;
+
+            textBoxStreetAndHouseNumber.Text = alarmReport.StreetAndHouseNumber;
+            if (alarmReport.ZipCode == 0)
+                textBoxZipCode.Text = "";
+            else
+                textBoxZipCode.Text = "" + alarmReport.ZipCode;
+
+            textBoxCity.Text = alarmReport.City;
+            if (alarmReport.Phonenumber == 0)
+                textBoxPhonenumber.Text = "";
+            else
+                textBoxPhonenumber.Text =""+ alarmReport.Phonenumber;
+            textBoxDate.Value = alarmReport.Date;
+            textBoxTime.Value = alarmReport.Time;
+            textBoxZone.Text = alarmReport.Zone +"";
+            if (alarmReport.BurglaryVandalism)
+                checkBoxBurglaryVandalism.IsChecked = true;
+            if (alarmReport.WindowDoorClosed)
+                checkBoxWindowDoorClosed.IsChecked = true;
+            if (alarmReport.ApprehendedPerson)
+            checkBoxApprehendedPerson.IsChecked = true;
+            if (alarmReport.StaffError)
+            checkBoxStaffError.IsChecked = true;
+            if (alarmReport.NothingToReport)
+            checkBoxNothingToReport.IsChecked = true;
+            if (alarmReport.TechnicalError)
+            checkBoxTechnicalError.IsChecked = true;
+            if (alarmReport.UnknownReason)
+            checkBoxUnknownReason.IsChecked = true;
+            if (alarmReport.Other)
+            checkBoxOther.IsChecked = true;
+            if (alarmReport.CancelDuringEmergency)
+            checkBoxCancelsDuringEmergency.IsChecked =true;
+            if (alarmReport.CoverMade)
+            checkBoxCoverMade.IsChecked=true;
+            textBoxRemark.Text = alarmReport.Remark;
+            textBoxName.Text = alarmReport.Name;
+            textBoxInstaller.Text = alarmReport.Installer;
+            textBoxControlCenter.Text = alarmReport.ControlCenter;
+            textBoxGuardRadioedDate.Value = alarmReport.GuardRadioedDate;
+            textBoxGuardRadioedFrom.Value = alarmReport.GuardRadioedFrom;
+            textBoxGuardRadioedTo.Value = alarmReport.GuardRadioedTo;
+            textBoxArrivedAt.Value = alarmReport.ArrivedAt;
+            textBoxDone.Value = alarmReport.Done;
         }
 
         private void sendPendingButton_Click(object sender, RoutedEventArgs e)

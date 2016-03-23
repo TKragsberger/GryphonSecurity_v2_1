@@ -73,6 +73,10 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             return localStorage.getTempAlarmReports();
         }
+        public AlarmReport getLocalTempAlarmReport(long id)
+        {
+           return localStorage.getTempAlarmReport(id);
+        }
 
         public Boolean removeLocalStorageNFCs()
         {
@@ -92,6 +96,11 @@ namespace GryphonSecurity_v2_1.DataSource
         public int getLocalStorageNumberOfAlarmReports()
         {
             return localStorage.currentNumberOfAlarmReports();
+        }
+
+        public Boolean removeLocalStorageTempSelectedAlarmReport(long id)
+        {
+            return localStorage.removeTempAlarmReport(id);
         }
 
     }

@@ -306,7 +306,7 @@ namespace GryphonSecurity_v2_1.DataSource
                 appSettings.Add(id + KEY_REPORT_OTHER, alarmReport.Other);
                 appSettings.Add(id + KEY_REPORT_CANCELDURINGEMERGENCY, alarmReport.CancelDuringEmergency);
                 appSettings.Add(id + KEY_REPORT_COVERMADE, alarmReport.CoverMade);
-                appSettings.Add(id + KEY_REPORT_REMARK, alarmReport.CoverMade);
+                appSettings.Add(id + KEY_REPORT_REMARK, alarmReport.Remark);
                 appSettings.Add(id + KEY_REPORT_NAME, alarmReport.Name);
                 appSettings.Add(id + KEY_REPORT_INSTALLER, alarmReport.Installer);
                 appSettings.Add(id + KEY_REPORT_CONTROLCENTER, alarmReport.ControlCenter);
@@ -324,6 +324,7 @@ namespace GryphonSecurity_v2_1.DataSource
                 return false;
             }
         }
+        
 
         public List<AlarmReport> getAlarmReports()
         {
@@ -493,6 +494,7 @@ namespace GryphonSecurity_v2_1.DataSource
             long id = getNextTempAlarmReportId();
             try
             {
+
                 appSettings.Add(id + KEY_TEMP_REPORT_CUSTOMERNAME, alarmReport.CustomerName + "");
                 appSettings.Add(id + KEY_TEMP_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber + "");
                 appSettings.Add(id + KEY_TEMP_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber + "");
@@ -580,14 +582,14 @@ namespace GryphonSecurity_v2_1.DataSource
             return alarmReports;
         }
 
-        public AlarmReport getTempAlarmReport(int id)
+        public AlarmReport getTempAlarmReport(long id)
         {
             
-            int length = currentNumberOfTempAlarmReports();
-            int currentId = 0;
+            long length = currentNumberOfTempAlarmReports();
+            long currentId;
             if (length > 0)
             {
-                for (int i = 0; i < length; i++)
+                for (long i = 0; i < length; i++)
                 {
                     currentId = i + 1;
                     if(currentId == id)
@@ -630,6 +632,75 @@ namespace GryphonSecurity_v2_1.DataSource
             }
 
             return null;
+        }
+
+        public Boolean removeTempAlarmReport(long id)
+        {
+            int length = currentNumberOfTempAlarmReports();
+            Boolean itemsRemoved = false;
+            List<AlarmReport> alarmReports = getTempAlarmReports();
+            long currentId = 0;
+            if (length > 0)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    Debug.WriteLine("what is i " + i);
+                    currentId = i + 1;
+                    if(id == currentId)
+                    {
+                        Debug.WriteLine("only ones in here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        alarmReports.RemoveAt(i);
+                    }
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_CUSTOMERNAME);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_CUSTOMERNUMBER);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_STREETANDHOUSENUMBER);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_ZIPCODE);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_CITY);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_PHONENUMBER);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_DATE);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_TIME);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_ZONE);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_BURGLARYVANDALISM);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_WINDOWDOORCLOSED);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_APPREHENDEDPERSON);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_STAFFERROR);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_NOTHINGTOREPORT);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_TECHNICALERROR);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_UNKNOWNREASON);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_OTHER);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_CANCELDURINGEMERGENCY);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_COVERMADE);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_REMARK);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_NAME);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_INSTALLER);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_CONTROLCENTER);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_GUARDRADIOEDDATE);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_GUARDRADIOEDFROM);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_GUARDRADIOEDTO);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_ARRIVEDAT);
+                    appSettings.Remove(currentId + KEY_TEMP_REPORT_DONE);
+                }
+
+                appSettings.Remove(KEY_ID_TEMP_ALARMREPORT);
+                appSettings.Remove(KEY_CURRENTNUMBEROFTEMPALARMREPORTS);
+                appSettings.Save();
+                Debug.WriteLine("Remove all Temp alarmReports");
+                itemsRemoved = addRemaningTempAlarmReports(alarmReports);
+            }
+            return itemsRemoved;
+        }
+
+        public Boolean addRemaningTempAlarmReports(List<AlarmReport> alarmReports)
+        {
+            foreach(AlarmReport alarmReport in alarmReports)
+            {
+                if (!createTempAlarmReport(alarmReport))
+                {
+                    return false;
+                }
+            }
+            return true;
+
         }
     }
 }

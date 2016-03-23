@@ -251,6 +251,15 @@ namespace GryphonSecurity_v2_1
                 IsConnected = false;
             return IsConnected;
         }
+        public AlarmReport getLocalTempAlarmReport(long id)
+        {
+            return dBFacade.getLocalTempAlarmReport(id);
+        }
+
+        public Boolean removeLocalStorageTempSelectedAlarmReport(long id)
+        {
+            return dBFacade.removeLocalStorageTempSelectedAlarmReport(id);
+        }
 
         public int getLocalStorageNFCs()
         {
@@ -299,6 +308,7 @@ namespace GryphonSecurity_v2_1
 
             return false;
         }
+        
     }
 }
 

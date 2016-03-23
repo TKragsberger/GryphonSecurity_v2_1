@@ -22,6 +22,13 @@ namespace GryphonSecurity_v2_1.DataSource
         private String KEY_USERNAME = "USERNAME";
         private String KEY_PASSWORD = "PASSWORD";
 
+        private String KEY_ID_NFC = "ID_NFC";
+        private String KEY_ID_ALARMREPORT = "ID_ALARMREPORT";
+
+
+        private String KEY_CURRENTNUMBEROFALARMREPORTS = "CURRENTNUMBEROFALARMREPORTS";
+        private String KEY_CURRENTNUMBEROFNFCS = "CURRENTNUMBEROFNFCS";
+
         private String KEY_REPORT_CUSTOMERNAME = "CUSTOMERNAME";
         private String KEY_REPORT_CUSTOMERNUMBER = "CUSTOMERNUMBER";
         private String KEY_REPORT_STREETANDHOUSENUMBER = "STREETANDHOUSENUMBER";
@@ -117,6 +124,7 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             if (appSettings.Contains(KEY_REPORT_CUSTOMERNAME))
             {
+                
                 appSettings.Remove(KEY_REPORT_CUSTOMERNAME);
                 appSettings.Remove(KEY_REPORT_CUSTOMERNUMBER);
                 appSettings.Remove(KEY_REPORT_STREETANDHOUSENUMBER);
@@ -313,5 +321,105 @@ namespace GryphonSecurity_v2_1.DataSource
                 return null;
             }
         }
+        private long getCurrentNfcId()
+        {
+            Debug.WriteLine(appSettings.Contains(KEY_ID_NFC));
+            if (!appSettings.Contains(KEY_ID_NFC))
+            {
+                Debug.WriteLine("when are we here");
+                appSettings.Add(KEY_ID_NFC, "0");
+                appSettings.Save();
+            }
+            return Convert.ToInt64(appSettings[KEY_ID_NFC] as String);
+        }
+
+        private long getNextNfcId()
+        {
+            try
+            {
+                long test = getCurrentNfcId();
+                Debug.WriteLine(test);
+                long nextId = test + 1;
+                Debug.WriteLine(nextId);
+                appSettings.Remove(KEY_ID_NFC);
+                appSettings.Add(KEY_ID_NFC, nextId + "");
+                appSettings.Save();
+
+                return nextId;
+
+            }
+            catch (IsolatedStorageException)
+            {
+                Debug.WriteLine("error");
+                return 1111111111111111111;
+            }
+
+        }
+
+        public int currentNumberOfNFCs()
+        {
+            if (!appSettings.Contains(KEY_CURRENTNUMBEROFNFCS))
+            {
+                appSettings.Add(KEY_CURRENTNUMBEROFNFCS, "0");
+                appSettings.Save();
+            }
+            return Convert.ToInt32(appSettings[KEY_CURRENTNUMBEROFNFCS] as String);
+        }
+
+        public void addNumberOfNFCs()
+        {
+            try
+            {
+                int next = currentNumberOfNFCs() + 1;
+                if (appSettings.Contains(KEY_CURRENTNUMBEROFNFCS))
+                {
+                    appSettings.Remove(KEY_CURRENTNUMBEROFNFCS);
+                }
+                appSettings.Add(KEY_CURRENTNUMBEROFNFCS, next + "");
+                appSettings.Save();
+
+
+            }
+            catch (IsolatedStorageException)
+            {
+                return;
+            }
+        }
+        private long getCurrentAlarmReportId()
+        {
+            if (!appSettings.Contains(KEY_ID_ALARMREPORT))
+            {
+                appSettings.Add(KEY_ID_ALARMREPORT, "0");
+                appSettings.Save();
+            }
+            return Convert.ToInt64(appSettings[KEY_ID_ALARMREPORT] as String);
+        }
+
+        private long getNextAlarmReportId()
+        {
+            long nextId = getCurrentAlarmReportId() + 1;
+            appSettings.Remove(KEY_ID_ALARMREPORT);
+            appSettings.Add(KEY_ID_ALARMREPORT, nextId + "");
+            appSettings.Save();
+            return nextId;
+        }
+
+        public int currentNumberOfAlarmReports()
+        {
+            if (!appSettings.Contains(KEY_CURRENTNUMBEROFALARMREPORTS))
+            {
+                appSettings.Add(KEY_CURRENTNUMBEROFALARMREPORTS, "0");
+                appSettings.Save();
+            }
+            return Convert.ToInt32(appSettings[KEY_CURRENTNUMBEROFALARMREPORTS] as String);
+        }
+
+        public void addNumberOfAlarmReports()
+        {
+            int next = currentNumberOfAlarmReports() + 1;
+            appSettings.Add(KEY_CURRENTNUMBEROFALARMREPORTS, next + "");
+            appSettings.Save();
+        }
+
     }
 }
