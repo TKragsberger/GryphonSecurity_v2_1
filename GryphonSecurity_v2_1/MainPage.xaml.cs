@@ -41,17 +41,18 @@ namespace GryphonSecurity_v2_1
             BuildLocalizedApplicationBar();
         }
 
-        private void sendReport_Click(object sender, RoutedEventArgs e)
+        public Boolean checkAlarmReport()
         {
             Boolean check = true;
-            if (textBoxCustomerName.Text.Equals("")) {
+            if (textBoxCustomerName.Text.Equals(""))
+            {
                 check = false;
             }
             String customerNameTB = textBoxCustomerName.Text;
             long customerNumberTB = 0;
             if (!textBoxCustomerNumber.Text.Equals(""))
             {
-            customerNumberTB = Convert.ToInt64(textBoxCustomerNumber.Text);
+                customerNumberTB = Convert.ToInt64(textBoxCustomerNumber.Text);
             }
             else
             {
@@ -65,7 +66,7 @@ namespace GryphonSecurity_v2_1
             int zipCodeTB = 0;
             if (!textBoxZipCode.Text.Equals(""))
             {
-                zipCodeTB =Convert.ToInt32(textBoxZipCode.Text);
+                zipCodeTB = Convert.ToInt32(textBoxZipCode.Text);
             }
             else
             {
@@ -79,7 +80,7 @@ namespace GryphonSecurity_v2_1
             long phonenumberTB = 0;
             if (!textBoxPhonenumber.Text.Equals(""))
             {
-            phonenumberTB = Convert.ToInt64(textBoxPhonenumber.Text);
+                phonenumberTB = Convert.ToInt64(textBoxPhonenumber.Text);
             }
             DateTime dateTB = (DateTime)textBoxDate.Value;
             DateTime timeTB = (DateTime)textBoxTime.Value;
@@ -121,18 +122,149 @@ namespace GryphonSecurity_v2_1
             DateTime guardRadioedToTB = (DateTime)textBoxGuardRadioedTo.Value;
             DateTime arrivedAtTB = (DateTime)textBoxArrivedAt.Value;
             DateTime doneTB = (DateTime)textBoxDone.Value;
-            if (check) {
+            if (check)
+            {
                 if (controller.createAlarmReport(new AlarmReport(customerNameTB, customerNumberTB, streetAndHouseNumberTB, zipCodeTB, cityTB, phonenumberTB, dateTB, timeTB, zoneTB, burglaryVandalismCB,
                                             windowDoorClosedCB, apprehendedPersonCB, staffErrorCB, nothingToReportCB, technicalErrorCB, unknownReasonCB, otherCB, cancelDuringEmergencyCB, coverMadeCB,
                                             remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, guardRadioedToTB, arrivedAtTB, doneTB)))
                 {
+                    emptyAlarmReport();
                     MessageBox.Show(AppResources.ReportAlarmReportSuccess);
                 }
                 else
                 {
                     MessageBox.Show(AppResources.ReportAlarmReportFailed);
                 }
-            } else
+            }
+            else
+            {
+                return check;
+            }
+            return check;
+        }
+
+        public void emptyAlarmReport()
+        {
+            
+            textBoxCustomerName.Text = "";
+            textBoxCustomerNumber.Text = "";
+            textBoxStreetAndHouseNumber.Text = "";
+            textBoxZipCode.Text = "";
+            textBoxCity.Text = "";
+            textBoxPhonenumber.Text = "";
+            textBoxZone.Text = "";
+            checkBoxBurglaryVandalism.IsChecked = false;
+            checkBoxWindowDoorClosed.IsChecked = false;
+            checkBoxApprehendedPerson.IsChecked = false;
+            checkBoxStaffError.IsChecked = false;
+            checkBoxNothingToReport.IsChecked = false;
+            checkBoxTechnicalError.IsChecked = false;
+            checkBoxUnknownReason.IsChecked = false;
+            checkBoxOther.IsChecked = false;
+            checkBoxCancelsDuringEmergency.IsChecked = false;
+            checkBoxCoverMade.IsChecked = false;
+            textBoxRemark.Text = "";
+            textBoxInstaller.Text = "";
+            textBoxControlCenter.Text = "";
+        }
+
+        private void sendReport_Click(object sender, RoutedEventArgs e)
+        {
+            //Boolean check = true;
+            //if (textBoxCustomerName.Text.Equals("")) {
+            //    check = false;
+            //}
+            //String customerNameTB = textBoxCustomerName.Text;
+            //long customerNumberTB = 0;
+            //if (!textBoxCustomerNumber.Text.Equals(""))
+            //{
+            //customerNumberTB = Convert.ToInt64(textBoxCustomerNumber.Text);
+            //}
+            //else
+            //{
+            //    check = false;
+            //}
+            //if (textBoxStreetAndHouseNumber.Text.Equals(""))
+            //{
+            //    check = false;
+            //}
+            //String streetAndHouseNumberTB = textBoxStreetAndHouseNumber.Text;
+            //int zipCodeTB = 0;
+            //if (!textBoxZipCode.Text.Equals(""))
+            //{
+            //    zipCodeTB =Convert.ToInt32(textBoxZipCode.Text);
+            //}
+            //else
+            //{
+            //    check = false;
+            //}
+            //if (textBoxCity.Text.Equals(""))
+            //{
+            //    check = false;
+            //}
+            //String cityTB = textBoxCity.Text;
+            //long phonenumberTB = 0;
+            //if (!textBoxPhonenumber.Text.Equals(""))
+            //{
+            //phonenumberTB = Convert.ToInt64(textBoxPhonenumber.Text);
+            //}
+            //DateTime dateTB = (DateTime)textBoxDate.Value;
+            //DateTime timeTB = (DateTime)textBoxTime.Value;
+            //if (textBoxZone.Text.Equals(""))
+            //{
+            //    check = false;
+            //}
+            //String zoneTB = textBoxZone.Text;
+
+            //Boolean burglaryVandalismCB = (Boolean)checkBoxBurglaryVandalism.IsChecked;
+            //Boolean windowDoorClosedCB = (Boolean)checkBoxWindowDoorClosed.IsChecked;
+            //Boolean apprehendedPersonCB = (Boolean)checkBoxApprehendedPerson.IsChecked;
+            //Boolean staffErrorCB = (Boolean)checkBoxStaffError.IsChecked;
+            //Boolean nothingToReportCB = (Boolean)checkBoxNothingToReport.IsChecked;
+            //Boolean technicalErrorCB = (Boolean)checkBoxTechnicalError.IsChecked;
+            //Boolean unknownReasonCB = (Boolean)checkBoxUnknownReason.IsChecked;
+            //Boolean otherCB = (Boolean)checkBoxOther.IsChecked;
+            //Boolean cancelDuringEmergencyCB = (Boolean)checkBoxCancelsDuringEmergency.IsChecked;
+            //Boolean coverMadeCB = (Boolean)checkBoxCoverMade.IsChecked;
+
+            //String remarkTB = textBoxRemark.Text;
+            //if (textBoxName.Text.Equals(""))
+            //{
+            //    check = false;
+            //}
+            //String nameTB = textBoxName.Text;
+            //if (textBoxInstaller.Text.Equals(""))
+            //{
+            //    check = false;
+            //}
+            //String installerTB = textBoxInstaller.Text;
+            //if (textBoxControlCenter.Text.Equals(""))
+            //{
+            //    check = false;
+            //}
+            //String controlCenterTB = textBoxControlCenter.Text;
+            //DateTime guardRadioedDateTB = (DateTime)textBoxGuardRadioedDate.Value;
+            //DateTime guardRadioedFromTB = (DateTime)textBoxGuardRadioedFrom.Value;
+            //DateTime guardRadioedToTB = (DateTime)textBoxGuardRadioedTo.Value;
+            //DateTime arrivedAtTB = (DateTime)textBoxArrivedAt.Value;
+            //DateTime doneTB = (DateTime)textBoxDone.Value;
+            //if (check) {
+            //    if (controller.createAlarmReport(new AlarmReport(customerNameTB, customerNumberTB, streetAndHouseNumberTB, zipCodeTB, cityTB, phonenumberTB, dateTB, timeTB, zoneTB, burglaryVandalismCB,
+            //                                windowDoorClosedCB, apprehendedPersonCB, staffErrorCB, nothingToReportCB, technicalErrorCB, unknownReasonCB, otherCB, cancelDuringEmergencyCB, coverMadeCB,
+            //                                remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, guardRadioedToTB, arrivedAtTB, doneTB)))
+            //    {
+            //        MessageBox.Show(AppResources.ReportAlarmReportSuccess);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show(AppResources.ReportAlarmReportFailed);
+            //    }
+            //} else
+            //{
+            //    MessageBox.Show("udfyld felterne");
+            //}
+            Boolean check = checkAlarmReport();
+            if (!check)
             {
                 MessageBox.Show("udfyld felterne");
             }
@@ -197,6 +329,7 @@ namespace GryphonSecurity_v2_1
 
         private async void gps(String tagAddress, Boolean isConnected)
         {
+            Debug.WriteLine("GPS");
             Boolean check = await controller.onLocationScan(tagAddress, isConnected);
             textBlockTest.Text = tagAddress + check;
         }
@@ -219,6 +352,17 @@ namespace GryphonSecurity_v2_1
             NavigationService.Navigate(new Uri("/RegisterLayout.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        public void updateAlarmReportDateTime()
+        {
+            textBoxDate.Value = DateTime.Now;
+            textBoxTime.Value = DateTime.Now;
+            textBoxGuardRadioedDate.Value = DateTime.Now;
+            textBoxGuardRadioedFrom.Value = DateTime.Now;
+            textBoxGuardRadioedTo.Value = DateTime.Now;
+            textBoxArrivedAt.Value = DateTime.Now;
+            textBoxDone.Value = DateTime.Now;
+        }
+
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -227,6 +371,7 @@ namespace GryphonSecurity_v2_1
                 {
                     deviceId = device.SubscribeForMessage("NDEF", messageReceived);
                     Debug.WriteLine("this is scan");
+                    
               
                 } else if(pivot.SelectedIndex == 1)
                 {
@@ -236,6 +381,10 @@ namespace GryphonSecurity_v2_1
                         textBoxName.Text = user.Firstname + " " + user.Lastname;
                     }
                     device.StopSubscribingForMessage(deviceId);
+                    if (!checkAlarmReport())
+                    {
+                        updateAlarmReportDateTime();
+                    }
                     Debug.WriteLine("this is alarm report");
                 } else if(pivot.SelectedIndex == 2)
                 {
@@ -260,9 +409,9 @@ namespace GryphonSecurity_v2_1
                     }
                 }
             }
-            catch
+            catch(NullReferenceException)
             {
-                MessageBox.Show("NFC slået fra");
+                MessageBox.Show("NFC slået fra genstart app med NFC slået til");
             }
 
         }
@@ -402,6 +551,7 @@ namespace GryphonSecurity_v2_1
                                         remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, guardRadioedToTB, arrivedAtTB, doneTB)))
             {
                 MessageBox.Show(AppResources.ReportAlarmReportSuccess);
+                emptyAlarmReport();
             }
             else
             {

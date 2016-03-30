@@ -82,12 +82,12 @@ namespace GryphonSecurity_v2_1.DataSource
             try
             {
                 Debug.WriteLine("" + user.toString());
-                appSettings.Add(KEY_DUMMY_FIRSTNAME, user.Firstname);
-                appSettings.Add(KEY_DUMMY_LASTNAME, user.Lastname);
-                appSettings.Add(KEY_DUMMY_ADDRESS, user.Address);
-                appSettings.Add(KEY_DUMMY_PHONENUMBER, user.Phonenumber);
-                appSettings.Add(KEY_DUMMY_USERNAME, user.Username);
-                appSettings.Add(KEY_DUMMY_PASSWORD, user.Password);
+                appSettings.Add(KEY_DUMMY_FIRSTNAME, user.Firstname + "");
+                appSettings.Add(KEY_DUMMY_LASTNAME, user.Lastname + "");
+                appSettings.Add(KEY_DUMMY_ADDRESS, user.Address + "");
+                appSettings.Add(KEY_DUMMY_PHONENUMBER, user.Phonenumber + "");
+                appSettings.Add(KEY_DUMMY_USERNAME, user.Username + "");
+                appSettings.Add(KEY_DUMMY_PASSWORD, user.Password + "");
                 appSettings.Save();
                 dummyDBStatus = true;
 
@@ -136,42 +136,43 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             long id = getNextAlarmReportId();
 
-            try
-            {
-                appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNAME, alarmReport.CustomerName);
-                appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber);
-                appSettings.Add(id + KEY_DUMMY_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber);
-                appSettings.Add(id + KEY_DUMMY_REPORT_ZIPCODE, alarmReport.ZipCode);
-                appSettings.Add(id + KEY_DUMMY_REPORT_CITY, alarmReport.City);
-                appSettings.Add(id + KEY_DUMMY_REPORT_PHONENUMBER, alarmReport.Phonenumber);
-                appSettings.Add(id + KEY_DUMMY_REPORT_DATE, alarmReport.Date);
-                appSettings.Add(id + KEY_DUMMY_REPORT_TIME, alarmReport.Time);
-                appSettings.Add(id + KEY_DUMMY_REPORT_ZONE, alarmReport.Zone);
-                appSettings.Add(id + KEY_DUMMY_REPORT_BURGLARYVANDALISM, alarmReport.BurglaryVandalism);
-                appSettings.Add(id + KEY_DUMMY_REPORT_WINDOWDOORCLOSED, alarmReport.WindowDoorClosed);
-                appSettings.Add(id + KEY_DUMMY_REPORT_APPREHENDEDPERSON, alarmReport.ApprehendedPerson);
-                appSettings.Add(id + KEY_DUMMY_REPORT_STAFFERROR, alarmReport.StaffError);
-                appSettings.Add(id + KEY_DUMMY_REPORT_NOTHINGTOREPORT, alarmReport.NothingToReport);
-                appSettings.Add(id + KEY_DUMMY_REPORT_TECHNICALERROR, alarmReport.TechnicalError);
-                appSettings.Add(id + KEY_DUMMY_REPORT_UNKNOWNREASON, alarmReport.UnknownReason);
-                appSettings.Add(id + KEY_DUMMY_REPORT_OTHER, alarmReport.Other);
-                appSettings.Add(id + KEY_DUMMY_REPORT_CANCELDURINGEMERGENCY, alarmReport.CancelDuringEmergency);
-                appSettings.Add(id + KEY_DUMMY_REPORT_COVERMADE, alarmReport.CoverMade);
-                appSettings.Add(id + KEY_DUMMY_REPORT_REMARK, alarmReport.CoverMade);
-                appSettings.Add(id + KEY_DUMMY_REPORT_NAME, alarmReport.Name);
-                appSettings.Add(id + KEY_DUMMY_REPORT_INSTALLER, alarmReport.Installer);
-                appSettings.Add(id + KEY_DUMMY_REPORT_CONTROLCENTER, alarmReport.ControlCenter);
-                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDDATE, alarmReport.GuardRadioedDate);
-                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDFROM, alarmReport.GuardRadioedFrom);
-                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDTO, alarmReport.GuardRadioedTo);
-                appSettings.Add(id + KEY_DUMMY_REPORT_ARRIVEDAT, alarmReport.ArrivedAt);
-                appSettings.Add(id + KEY_DUMMY_REPORT_DONE, alarmReport.Done);
+            //try
+            //{
+                appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNAME, alarmReport.CustomerName + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_ZIPCODE, alarmReport.ZipCode + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_CITY, alarmReport.City + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_PHONENUMBER, alarmReport.Phonenumber + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_DATE, alarmReport.Date + "");
+            Debug.WriteLine("this is time " + alarmReport.Time);
+                appSettings.Add(id + KEY_DUMMY_REPORT_TIME, alarmReport.Time + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_ZONE, alarmReport.Zone + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_BURGLARYVANDALISM, alarmReport.BurglaryVandalism + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_WINDOWDOORCLOSED, alarmReport.WindowDoorClosed + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_APPREHENDEDPERSON, alarmReport.ApprehendedPerson + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_STAFFERROR, alarmReport.StaffError + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_NOTHINGTOREPORT, alarmReport.NothingToReport + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_TECHNICALERROR, alarmReport.TechnicalError + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_UNKNOWNREASON, alarmReport.UnknownReason + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_OTHER, alarmReport.Other + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_CANCELDURINGEMERGENCY, alarmReport.CancelDuringEmergency + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_COVERMADE, alarmReport.CoverMade + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_REMARK, alarmReport.Remark + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_NAME, alarmReport.Name + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_INSTALLER, alarmReport.Installer + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_CONTROLCENTER, alarmReport.ControlCenter + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDDATE, alarmReport.GuardRadioedDate + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDFROM, alarmReport.GuardRadioedFrom + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDTO, alarmReport.GuardRadioedTo + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_ARRIVEDAT, alarmReport.ArrivedAt + "");
+                appSettings.Add(id + KEY_DUMMY_REPORT_DONE, alarmReport.Done + "");
                 appSettings.Save();
                 dummyDBStatus = true;
-            }catch
-            {
-                dummyDBStatus = false;
-            }
+            //}catch
+            //{
+            //    dummyDBStatus = false;
+            //}
             return dummyDBStatus;
         }
 
@@ -245,20 +246,20 @@ namespace GryphonSecurity_v2_1.DataSource
                 {
                     Debug.WriteLine("createAddresses");
                     appSettings.Add(1 + KEY_DUMMY_ADDRESS_NAME, "Lyngby st.");
-                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.505161499999986");
-                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LATITUDE, "55.767944");
+                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LONGTITUDE, 12.505161499999986 + "");
+                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LATITUDE, 55.767944 + "");
                     appSettings.Add(2 + KEY_DUMMY_ADDRESS_NAME, "København hovedbanegård");
-                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.566796599999975");
-                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LATITUDE, "55.6713363");
+                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,566796599999975");
+                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LATITUDE, "55,6713363");
                     appSettings.Add(3 + KEY_DUMMY_ADDRESS_NAME, "Farum st.");
-                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.373533899999984");
-                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LATITUDE, "55.8120275");
+                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,373533899999984");
+                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LATITUDE, "55,8120275");
                     appSettings.Add(4 + KEY_DUMMY_ADDRESS_NAME, "Kokkedal st.");
-                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.502057000000036");
-                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LATITUDE, "55.90348789999999");
+                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,502057000000036");
+                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LATITUDE, "55,90348789999999");
                     appSettings.Add(5 + KEY_DUMMY_ADDRESS_NAME, "Buddinge st.");
-                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.493978999999968");
-                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LATITUDE, "55.7469736");
+                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,493978999999968");
+                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LATITUDE, "55,7469736");
                     appSettings.Save();
                 }
                 return true;
@@ -305,9 +306,9 @@ namespace GryphonSecurity_v2_1.DataSource
             try
             {
 
-                appSettings.Add(id + KEY_DUMMY_NFC_RANGECHECK, nfc.RangeCheck);
-                appSettings.Add(id + KEY_DUMMY_NFC_TAGADDRESS, nfc.TagAddress);
-                appSettings.Add(id + KEY_DUMMY_NFC_TIME, nfc.Time);
+                appSettings.Add(id + KEY_DUMMY_NFC_RANGECHECK, nfc.RangeCheck + "");
+                appSettings.Add(id + KEY_DUMMY_NFC_TAGADDRESS, nfc.TagAddress + "");
+                appSettings.Add(id + KEY_DUMMY_NFC_TIME, nfc.Time + "");
                 
                 appSettings.Save();
                 return true;

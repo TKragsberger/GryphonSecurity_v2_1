@@ -26,7 +26,7 @@ namespace GryphonSecurity_v2_1
         private DBFacade dBFacade;
         private Boolean startup = true;
         private GeoCoordinate presentCoordinate;
-        private GeoCoordinate targetCoordinates;
+        private GeoCoordinate targetCoordinate;
         private static Controller instance;
         private Boolean check = false;
 
@@ -134,8 +134,8 @@ namespace GryphonSecurity_v2_1
                 double latitude = geoposition.Coordinate.Point.Position.Latitude;
                 double longitude = geoposition.Coordinate.Point.Position.Longitude;
                 presentCoordinate = new GeoCoordinate(latitude, longitude);
-                check = calcPosition(tagAddress, presentCoordinate, isConnected);
                 Debug.WriteLine("PresentCoordinate: " + presentCoordinate);
+                check = calcPosition(tagAddress, presentCoordinate, isConnected);
 
             }
             catch (Exception ex)
@@ -158,27 +158,36 @@ namespace GryphonSecurity_v2_1
             Boolean check = false;
             //Geolocator locator = new Geolocator();
             //GeocodeQuery geocodequery = new GeocodeQuery();
+            Debug.WriteLine("calcPosition 1");
             CancellationTokenSource cts = new CancellationTokenSource();
 
             try
             {
+                if (!isConnected)
+                {
+                    dBFacade.createLocalStorageNFCs(presentCoordinate.Latitude, presentCoordinate.Longitude, tagAddress);
+                    return check;
+                }
                 cts.CancelAfter(10000);
                 List<String> tag = dBFacade.getAdress(tagAddress);
-
-                    //geocodequery.GeoCoordinate = new GeoCoordinate(0, 0);
-                    //geocodequery.SearchTerm = tagAddress + "Denmark";
-                    //geocodequery.QueryAsync();
-                    if (!cts.IsCancellationRequested)
-                    {
+                Debug.WriteLine("calcPosition 2");
+                //geocodequery.GeoCoordinate = new GeoCoordinate(0, 0);
+                //geocodequery.SearchTerm = tagAddress + "Denmark";
+                //geocodequery.QueryAsync();
+                if (!cts.IsCancellationRequested)
+                {
+                    Debug.WriteLine("calcPosition 3");
                     address = tag[0]; 
                     longitude = Convert.ToDouble(tag[1]);
                     latitude = Convert.ToDouble(tag[2]);
-                    targetCoordinates = new GeoCoordinate(latitude, longitude);
-                    check = getDistance(presentCoordinate, targetCoordinates, address, isConnected);                   
+                    Debug.WriteLine("calcPosition 5 " + longitude + " " + latitude);
+                    targetCoordinate = new GeoCoordinate(latitude, longitude);
+                    check = getDistance(presentCoordinate, targetCoordinate, address);                   
                 } else
-                    {
-                        getDistance(presentCoordinate, presentCoordinate, tagAddress, isConnected);
-                    }
+                {
+                    Debug.WriteLine("calcPosition 4");
+                    getDistance(presentCoordinate, presentCoordinate, tagAddress);
+                }
                 
             } catch(OperationCanceledException)
             {
@@ -187,24 +196,28 @@ namespace GryphonSecurity_v2_1
             return check;
         }
 
-        public Boolean getDistance(GeoCoordinate presentCoordinate, GeoCoordinate targetCoordinates, String tagAddress, Boolean isConnected)
+        public Boolean getDistance(GeoCoordinate presentCoordinate, GeoCoordinate targetCoordinates, String tagAddress)
         {
             Boolean check = false;
-            if (!presentCoordinate.Equals(targetCoordinates) && !object.ReferenceEquals(targetCoordinates, null) && isConnected)
+            if (!presentCoordinate.Equals(targetCoordinates) && !object.ReferenceEquals(targetCoordinates, null))
             {
+                Debug.WriteLine("getDistance 1");
                 double distance = targetCoordinates.GetDistanceTo(presentCoordinate);
                 Boolean rangeCheck = false;
                 Debug.WriteLine("Distance: " + distance);
                 if (distance > 500)
                 {
+                    Debug.WriteLine("getDistance 2");
                     rangeCheck = false;
                 } else
                 {
+                    Debug.WriteLine("getDistance 3");
                     rangeCheck = true;
                 }
                 check = dBFacade.createNFC(new NFC(rangeCheck, tagAddress, DateTime.Now, dBFacade.getUser()));
             } else
             {
+                Debug.WriteLine("getDistance 4");
                 //TODO gem i tempstorage
                 dBFacade.createLocalStorageNFCs(presentCoordinate.Latitude, presentCoordinate.Longitude, tagAddress);
             }
@@ -256,22 +269,23 @@ namespace GryphonSecurity_v2_1
         public Boolean sendPendingNFCs()
         {
             List<List<String>> tags = dBFacade.getLocalStorageNFCs();
+            check = false;
             foreach (List<String> tag in tags)
             {
                 double presentLatitude = Convert.ToDouble(tag[0]);
                 double presentLongitude = Convert.ToDouble(tag[1]);
+                Debug.WriteLine("id for tag " + tag[2]);
                 List<String> nfcs = dBFacade.getAdress(tag[2]);
-                String tagAddress = nfcs[0]; 
+                String tagAddress = nfcs[0];
+                double targetLongtitude = Convert.ToDouble(nfcs[1]);
+                double targetLatitude = Convert.ToDouble(nfcs[2]);
                 presentCoordinate = new GeoCoordinate(presentLatitude, presentLongitude);
+                targetCoordinate = new GeoCoordinate(targetLatitude, targetLongtitude);
                 Debug.WriteLine("tagAddress " + tagAddress);
-                //calcPosition(tagAddress);
-                //if (!check)
-                //{
-                //    return check;
-                //}
+                check = getDistance(presentCoordinate, targetCoordinate, tagAddress);
             }
             dBFacade.removeLocalStorageNFCs();
-            return true;
+            return check;
         }
 
         public Boolean sendPendingAlarmReports()

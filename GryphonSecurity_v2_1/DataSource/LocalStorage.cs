@@ -286,53 +286,53 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public Boolean createAlarmReport(AlarmReport alarmReport)
         {
-            long id = getNextAlarmReportId();           
-            //try
-            //{
-                Debug.WriteLine("id is " + id);
-                appSettings.Add(id + KEY_REPORT_CUSTOMERNAME, alarmReport.CustomerName);
-                appSettings.Add(id + KEY_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber);
-                appSettings.Add(id + KEY_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber);
-                appSettings.Add(id + KEY_REPORT_ZIPCODE, alarmReport.ZipCode);
-                appSettings.Add(id + KEY_REPORT_CITY, alarmReport.City);
-                appSettings.Add(id + KEY_REPORT_PHONENUMBER, alarmReport.Phonenumber);
-                appSettings.Add(id + KEY_REPORT_DATE, alarmReport.Date);
-                appSettings.Add(id + KEY_REPORT_TIME, alarmReport.Time);
-                appSettings.Add(id + KEY_REPORT_ZONE, alarmReport.Zone);
-                appSettings.Add(id + KEY_REPORT_BURGLARYVANDALISM, alarmReport.BurglaryVandalism);
-                appSettings.Add(id + KEY_REPORT_WINDOWDOORCLOSED, alarmReport.WindowDoorClosed);
-                appSettings.Add(id + KEY_REPORT_APPREHENDEDPERSON, alarmReport.ApprehendedPerson);
-                appSettings.Add(id + KEY_REPORT_STAFFERROR, alarmReport.StaffError);
-                appSettings.Add(id + KEY_REPORT_NOTHINGTOREPORT, alarmReport.NothingToReport);
-                appSettings.Add(id + KEY_REPORT_TECHNICALERROR, alarmReport.TechnicalError);
-                appSettings.Add(id + KEY_REPORT_UNKNOWNREASON, alarmReport.UnknownReason);
-                appSettings.Add(id + KEY_REPORT_OTHER, alarmReport.Other);
-                appSettings.Add(id + KEY_REPORT_CANCELDURINGEMERGENCY, alarmReport.CancelDuringEmergency);
-                appSettings.Add(id + KEY_REPORT_COVERMADE, alarmReport.CoverMade);
-                appSettings.Add(id + KEY_REPORT_REMARK, alarmReport.Remark);
-                appSettings.Add(id + KEY_REPORT_NAME, alarmReport.Name);
-                appSettings.Add(id + KEY_REPORT_INSTALLER, alarmReport.Installer);
-                appSettings.Add(id + KEY_REPORT_CONTROLCENTER, alarmReport.ControlCenter);
-                appSettings.Add(id + KEY_REPORT_GUARDRADIOEDDATE, alarmReport.GuardRadioedDate);
-                appSettings.Add(id + KEY_REPORT_GUARDRADIOEDFROM, alarmReport.GuardRadioedFrom);
-                appSettings.Add(id + KEY_REPORT_GUARDRADIOEDTO, alarmReport.GuardRadioedTo);
-                appSettings.Add(id + KEY_REPORT_ARRIVEDAT, alarmReport.ArrivedAt);
-                appSettings.Add(id + KEY_REPORT_DONE, alarmReport.Done);
+            long id = getNextAlarmReportId();
+            try
+            {
+                Debug.WriteLine("id is " + alarmReport.Date);
+                appSettings.Add(id + KEY_REPORT_CUSTOMERNAME, alarmReport.CustomerName + "");
+                appSettings.Add(id + KEY_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber + "");
+                appSettings.Add(id + KEY_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber + "");
+                appSettings.Add(id + KEY_REPORT_ZIPCODE, alarmReport.ZipCode + "");
+                appSettings.Add(id + KEY_REPORT_CITY, alarmReport.City + "");
+                appSettings.Add(id + KEY_REPORT_PHONENUMBER, alarmReport.Phonenumber + "");
+                appSettings.Add(id + KEY_REPORT_DATE, alarmReport.Date + "");
+                appSettings.Add(id + KEY_REPORT_TIME, alarmReport.Time + "");
+                appSettings.Add(id + KEY_REPORT_ZONE, alarmReport.Zone + "");
+                appSettings.Add(id + KEY_REPORT_BURGLARYVANDALISM, alarmReport.BurglaryVandalism + "");
+                appSettings.Add(id + KEY_REPORT_WINDOWDOORCLOSED, alarmReport.WindowDoorClosed + "");
+                appSettings.Add(id + KEY_REPORT_APPREHENDEDPERSON, alarmReport.ApprehendedPerson + "");
+                appSettings.Add(id + KEY_REPORT_STAFFERROR, alarmReport.StaffError + "");
+                appSettings.Add(id + KEY_REPORT_NOTHINGTOREPORT, alarmReport.NothingToReport + "");
+                appSettings.Add(id + KEY_REPORT_TECHNICALERROR, alarmReport.TechnicalError + "");
+                appSettings.Add(id + KEY_REPORT_UNKNOWNREASON, alarmReport.UnknownReason + "");
+                appSettings.Add(id + KEY_REPORT_OTHER, alarmReport.Other + "");
+                appSettings.Add(id + KEY_REPORT_CANCELDURINGEMERGENCY, alarmReport.CancelDuringEmergency + "");
+                appSettings.Add(id + KEY_REPORT_COVERMADE, alarmReport.CoverMade + "");
+                appSettings.Add(id + KEY_REPORT_REMARK, alarmReport.Remark + "");
+                appSettings.Add(id + KEY_REPORT_NAME, alarmReport.Name + "");
+                appSettings.Add(id + KEY_REPORT_INSTALLER, alarmReport.Installer + "");
+                appSettings.Add(id + KEY_REPORT_CONTROLCENTER, alarmReport.ControlCenter + "");
+                appSettings.Add(id + KEY_REPORT_GUARDRADIOEDDATE, alarmReport.GuardRadioedDate + "");
+                appSettings.Add(id + KEY_REPORT_GUARDRADIOEDFROM, alarmReport.GuardRadioedFrom + "");
+                appSettings.Add(id + KEY_REPORT_GUARDRADIOEDTO, alarmReport.GuardRadioedTo + "");
+                appSettings.Add(id + KEY_REPORT_ARRIVEDAT, alarmReport.ArrivedAt + "");
+                appSettings.Add(id + KEY_REPORT_DONE, alarmReport.Done + "");
                 appSettings.Save();
                 addNumberOfAlarmReports();
                 return true;
-            //}
-            //catch
-            //{
-            //    return false;
-            //}
+            }
+            catch
+            {
+                return false;
+            }
         }
         
         public List<AlarmReport> getAlarmReports()
         {
             List<AlarmReport> alarmReports = new List<AlarmReport>();
             int length = currentNumberOfAlarmReports();
-
+            id = 0;
             if (length > 0)
             {
                 for (int i = 0; i < length; i++)
@@ -416,8 +416,10 @@ namespace GryphonSecurity_v2_1.DataSource
                 }
                 itemsRemoved = true;
                 appSettings.Remove(KEY_ID_ALARMREPORT);
+                appSettings.Remove(KEY_CURRENTNUMBEROFALARMREPORTS);
                 appSettings.Save();
             }
+            Debug.WriteLine(itemsRemoved);
             return itemsRemoved;
         }
 

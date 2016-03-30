@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2014/deployment" AppPlatformVersion="8.1">
   <DefaultLanguage xmlns="" code="en-US" />
+  <Languages xmlns="">
+    <Language code="en-US" />
+    <Language code="da" />
+  </Languages>
   <App xmlns="" ProductID="{9b2194af-2656-46c4-b664-8542265dfc86}" Title="Gryphon Security Pivot" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="GryphonSecurity_v2_1 author" Description="Sample description" SDOptOut="false" BackUpOptOut="false" Publisher="GryphonSecurity_v2_1" PublisherID="{8def4361-2a62-4e9b-9298-d8df2646f750}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
