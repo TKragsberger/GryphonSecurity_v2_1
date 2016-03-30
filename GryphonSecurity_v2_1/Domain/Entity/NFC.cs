@@ -10,12 +10,14 @@ namespace GryphonSecurity_v2_1.Domain.Entity
     {
         private Boolean rangeCheck;
         private String tagAddress;
+        private DateTime time;
         private User user;
 
-        public NFC(Boolean rangeCheck, String tagAddress, User user)
+        public NFC(Boolean rangeCheck, String tagAddress, DateTime time, User user)
         {
             this.rangeCheck = rangeCheck;
             this.tagAddress = tagAddress;
+            this.time = time;
             this.user = user;
         }
 
@@ -42,6 +44,19 @@ namespace GryphonSecurity_v2_1.Domain.Entity
             set
             {
                 tagAddress = value;
+            }
+        }
+
+        public DateTime Time
+        {
+            get
+            {
+                return time;
+            }
+
+            set
+            {
+                time = value;
             }
         }
 

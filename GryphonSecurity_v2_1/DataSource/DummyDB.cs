@@ -15,81 +15,79 @@ namespace GryphonSecurity_v2_1.DataSource
         private static IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
         private Boolean dummyDBStatus = false;
 
-        private String KEY_FIRSTNAME = "FIRSTNAME";
-        private String KEY_LASTNAME = "LASTNAME";
-        private String KEY_ADDRESS = "ADDRESS";
-        private String KEY_PHONENUMBER = "PHONENUMBER";
-        private String KEY_USERNAME = "USERNAME";
-        private String KEY_PASSWORD = "PASSWORD";
+        private String KEY_DUMMY_FIRSTNAME = "DUMMY_FIRSTNAME";
+        private String KEY_DUMMY_LASTNAME = "DUMMY_LASTNAME";
+        private String KEY_DUMMY_ADDRESS = "DUMMY_ADDRESS";
+        private String KEY_DUMMY_PHONENUMBER = "DUMMY_PHONENUMBER";
+        private String KEY_DUMMY_USERNAME = "DUMMY_USERNAME";
+        private String KEY_DUMMY_PASSWORD = "DUMMY_PASSWORD";
 
-        private String KEY_ID_NFC = "ID_NFC";
-        private String KEY_ID_ALARMREPORT = "ID_ALARMREPORT";
+        private String KEY_DUMMY_ID_NFC = "DUMMY_ID_NFC";
+        private String KEY_DUMMY_ID_ALARMREPORT = "DUMMY_ID_ALARMREPORT";
 
+        private String KEY_DUMMY_CURRENTNUMBEROFALARMREPORTS = "DUMMY_CURRENTNUMBEROFALARMREPORTS";
+        private String KEY_DUMMY_CURRENTNUMBEROFNFCS = "DUMMY_CURRENTNUMBEROFNFCS";
 
-        private String KEY_CURRENTNUMBEROFALARMREPORTS = "CURRENTNUMBEROFALARMREPORTS";
-        private String KEY_CURRENTNUMBEROFNFCS = "CURRENTNUMBEROFNFCS";
+        private String KEY_DUMMY_REPORT_CUSTOMERNAME = "DUMMY_CUSTOMERNAME";
+        private String KEY_DUMMY_REPORT_CUSTOMERNUMBER = "DUMMY_CUSTOMERNUMBER";
+        private String KEY_DUMMY_REPORT_STREETANDHOUSENUMBER = "DUMMY_STREETANDHOUSENUMBER";
+        private String KEY_DUMMY_REPORT_ZIPCODE = "DUMMY_ZIPCODE";
+        private String KEY_DUMMY_REPORT_CITY = "DUMMY_CITY";
+        private String KEY_DUMMY_REPORT_PHONENUMBER = "DUMMY_PHONENUMBER";
+        private String KEY_DUMMY_REPORT_DATE = "DUMMY_DATE";
+        private String KEY_DUMMY_REPORT_TIME = "DUMMY_TIME";
+        private String KEY_DUMMY_REPORT_ZONE = "DUMMY_ZONE";
+        private String KEY_DUMMY_REPORT_BURGLARYVANDALISM = "DUMMY_BURGLARYVANDALISM";
+        private String KEY_DUMMY_REPORT_WINDOWDOORCLOSED = "DUMMY_WINDOWDOORCLOSED";
+        private String KEY_DUMMY_REPORT_APPREHENDEDPERSON = "DUMMY_APPREHENDEDPERSON";
+        private String KEY_DUMMY_REPORT_STAFFERROR = "DUMMY_STAFFERROR";
+        private String KEY_DUMMY_REPORT_NOTHINGTOREPORT = "DUMMY_NOTHINGTOREPORT";
+        private String KEY_DUMMY_REPORT_TECHNICALERROR = "DUMMY_TECHNICALERROR";
+        private String KEY_DUMMY_REPORT_UNKNOWNREASON = "DUMMY_UNKNOWNREASON";
+        private String KEY_DUMMY_REPORT_OTHER = "DUMMY_OTHER";
+        private String KEY_DUMMY_REPORT_CANCELDURINGEMERGENCY = "DUMMY_CANCELDURINGEMERGENCY";
+        private String KEY_DUMMY_REPORT_COVERMADE = "DUMMY_COVERMADE";
+        private String KEY_DUMMY_REPORT_REMARK = "DUMMY_REMARK";
+        private String KEY_DUMMY_REPORT_NAME = "DUMMY_NAME";
+        private String KEY_DUMMY_REPORT_INSTALLER = "DUMMY_INSTALLER";
+        private String KEY_DUMMY_REPORT_CONTROLCENTER = "DUMMY_CONTROLCENTER";
+        private String KEY_DUMMY_REPORT_GUARDRADIOEDDATE = "DUMMY_GUARDRADIOEDDATE";
+        private String KEY_DUMMY_REPORT_GUARDRADIOEDFROM = "DUMMY_GUARDRADIOEDFROM";
+        private String KEY_DUMMY_REPORT_GUARDRADIOEDTO = "DUMMY_GUARDRADIOEDTO";
+        private String KEY_DUMMY_REPORT_ARRIVEDAT = "DUMMY_ARRIVEDAT";
+        private String KEY_DUMMY_REPORT_DONE = "DUMMY_DONE";
 
-        private String KEY_REPORT_CUSTOMERNAME = "CUSTOMERNAME";
-        private String KEY_REPORT_CUSTOMERNUMBER = "CUSTOMERNUMBER";
-        private String KEY_REPORT_STREETANDHOUSENUMBER = "STREETANDHOUSENUMBER";
-        private String KEY_REPORT_ZIPCODE = "ZIPCODE";
-        private String KEY_REPORT_CITY = "CITY";
-        private String KEY_REPORT_PHONENUMBER = "PHONENUMBER";
-        private String KEY_REPORT_DATE = "DATE";
-        private String KEY_REPORT_TIME = "TIME";
-        private String KEY_REPORT_ZONE = "ZONE";
-        private String KEY_REPORT_BURGLARYVANDALISM = "BURGLARYVANDALISM";
-        private String KEY_REPORT_WINDOWDOORCLOSED = "WINDOWDOORCLOSED";
-        private String KEY_REPORT_APPREHENDEDPERSON = "APPREHENDEDPERSON";
-        private String KEY_REPORT_STAFFERROR = "STAFFERROR";
-        private String KEY_REPORT_NOTHINGTOREPORT = "NOTHINGTOREPORT";
-        private String KEY_REPORT_TECHNICALERROR = "TECHNICALERROR";
-        private String KEY_REPORT_UNKNOWNREASON = "UNKNOWNREASON";
-        private String KEY_REPORT_OTHER = "OTHER";
-        private String KEY_REPORT_CANCELDURINGEMERGENCY = "CANCELDURINGEMERGENCY";
-        private String KEY_REPORT_COVERMADE = "COVERMADE";
-        private String KEY_REPORT_REMARK = "REMARK";
-        private String KEY_REPORT_NAME = "NAME";
-        private String KEY_REPORT_INSTALLER = "INSTALLER";
-        private String KEY_REPORT_CONTROLCENTER = "CONTROLCENTER";
-        private String KEY_REPORT_GUARDRADIOEDDATE = "GUARDRADIOEDDATE";
-        private String KEY_REPORT_GUARDRADIOEDFROM = "GUARDRADIOEDFROM";
-        private String KEY_REPORT_GUARDRADIOEDTO = "GUARDRADIOEDTO";
-        private String KEY_REPORT_ARRIVEDAT = "ARRIVEDAT";
-        private String KEY_REPORT_DONE = "DONE";
+        private String KEY_DUMMY_NFC_RANGECHECK = "DUMMY_RANGECHECK";
+        private String KEY_DUMMY_NFC_TAGADDRESS = "DUMMY_TAGADDRESS";
+        private String KEY_DUMMY_NFC_TIME = "DUMMY_TIME";
 
-        private String KEY_NFC_RANGECHECK = "RANGECHECK";
-        private String KEY_NFC_TAGADDRESS = "TAGADDRESS";
+        private String KEY_DUMMY_ADDRESS_NAME = "DUMMY_ADDRESS_NAME";
+        private String KEY_DUMMY_ADDRESS_LONGTITUDE = "DUMMY_LONGTITUDE";
+        private String KEY_DUMMY_ADDRESS_LATITUDE = "DUMMY_LATITUDE";
 
-        private String KEY_ADDRESS_ONE = "1";
-        private String KEY_ADDRESS_TWO = "2";
-        private String KEY_ADDRESS_THREE = "3";
-        private String KEY_ADDRESS_FOUR = "4";
-        private String KEY_ADDRESS_FIVE = "5";
-
-        private List<String> addresses = new List<String>();
+        private List<String> address = new List<String>();
 
         public Boolean createUser(User user)
         {
-            if (appSettings.Contains(KEY_FIRSTNAME))
+            if (appSettings.Contains(KEY_DUMMY_FIRSTNAME))
             {
-                appSettings.Remove(KEY_FIRSTNAME);
-                appSettings.Remove(KEY_LASTNAME);
-                appSettings.Remove(KEY_ADDRESS);
-                appSettings.Remove(KEY_PHONENUMBER);
-                appSettings.Remove(KEY_USERNAME);
-                appSettings.Remove(KEY_PASSWORD);
+                appSettings.Remove(KEY_DUMMY_FIRSTNAME);
+                appSettings.Remove(KEY_DUMMY_LASTNAME);
+                appSettings.Remove(KEY_DUMMY_ADDRESS);
+                appSettings.Remove(KEY_DUMMY_PHONENUMBER);
+                appSettings.Remove(KEY_DUMMY_USERNAME);
+                appSettings.Remove(KEY_DUMMY_PASSWORD);
             }
 
             try
             {
                 Debug.WriteLine("" + user.toString());
-                appSettings.Add(KEY_FIRSTNAME, user.Firstname);
-                appSettings.Add(KEY_LASTNAME, user.Lastname);
-                appSettings.Add(KEY_ADDRESS, user.Address);
-                appSettings.Add(KEY_PHONENUMBER, user.Phonenumber);
-                appSettings.Add(KEY_USERNAME, user.Username);
-                appSettings.Add(KEY_PASSWORD, user.Password);
+                appSettings.Add(KEY_DUMMY_FIRSTNAME, user.Firstname);
+                appSettings.Add(KEY_DUMMY_LASTNAME, user.Lastname);
+                appSettings.Add(KEY_DUMMY_ADDRESS, user.Address);
+                appSettings.Add(KEY_DUMMY_PHONENUMBER, user.Phonenumber);
+                appSettings.Add(KEY_DUMMY_USERNAME, user.Username);
+                appSettings.Add(KEY_DUMMY_PASSWORD, user.Password);
                 appSettings.Save();
                 dummyDBStatus = true;
 
@@ -103,14 +101,14 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public User getUser()
         {
-            if (appSettings.Contains(KEY_USERNAME))
+            if (appSettings.Contains(KEY_DUMMY_USERNAME))
             {
-                String firstname = appSettings[KEY_FIRSTNAME] as String;
-                String lastname = appSettings[KEY_LASTNAME] as String;
-                String address = appSettings[KEY_ADDRESS] as String;
-                long phonenumber = Convert.ToInt64(appSettings[KEY_PHONENUMBER] as String);
-                String username = appSettings[KEY_USERNAME] as String;
-                String password = appSettings[KEY_PASSWORD] as String;
+                String firstname = appSettings[KEY_DUMMY_FIRSTNAME] as String;
+                String lastname = appSettings[KEY_DUMMY_LASTNAME] as String;
+                String address = appSettings[KEY_DUMMY_ADDRESS] as String;
+                long phonenumber = Convert.ToInt64(appSettings[KEY_DUMMY_PHONENUMBER] as String);
+                String username = appSettings[KEY_DUMMY_USERNAME] as String;
+                String password = appSettings[KEY_DUMMY_PASSWORD] as String;
                 return new User(firstname, lastname, address, phonenumber, username, password);
             }
             else
@@ -120,70 +118,54 @@ namespace GryphonSecurity_v2_1.DataSource
 
         }
 
+        public Boolean createAlarmReports(List<AlarmReport> alarmReports)
+        {
+            Boolean check = false;
+            foreach(AlarmReport alarmReport in alarmReports)
+            {
+                check = createAlarmReport(alarmReport);
+                if (!check)
+                {
+                    return check;
+                }
+            }
+            return check;
+        }
+
         public Boolean createAlarmReport(AlarmReport alarmReport)
         {
-            if (appSettings.Contains(KEY_REPORT_CUSTOMERNAME))
-            {
-                
-                appSettings.Remove(KEY_REPORT_CUSTOMERNAME);
-                appSettings.Remove(KEY_REPORT_CUSTOMERNUMBER);
-                appSettings.Remove(KEY_REPORT_STREETANDHOUSENUMBER);
-                appSettings.Remove(KEY_REPORT_ZIPCODE);
-                appSettings.Remove(KEY_REPORT_CITY);
-                appSettings.Remove(KEY_REPORT_PHONENUMBER);
-                appSettings.Remove(KEY_REPORT_DATE);
-                appSettings.Remove(KEY_REPORT_TIME);
-                appSettings.Remove(KEY_REPORT_ZONE);
-                appSettings.Remove(KEY_REPORT_BURGLARYVANDALISM);
-                appSettings.Remove(KEY_REPORT_WINDOWDOORCLOSED);
-                appSettings.Remove(KEY_REPORT_APPREHENDEDPERSON);
-                appSettings.Remove(KEY_REPORT_STAFFERROR);
-                appSettings.Remove(KEY_REPORT_NOTHINGTOREPORT);
-                appSettings.Remove(KEY_REPORT_TECHNICALERROR);
-                appSettings.Remove(KEY_REPORT_UNKNOWNREASON);
-                appSettings.Remove(KEY_REPORT_OTHER);
-                appSettings.Remove(KEY_REPORT_CANCELDURINGEMERGENCY);
-                appSettings.Remove(KEY_REPORT_COVERMADE);
-                appSettings.Remove(KEY_REPORT_REMARK);
-                appSettings.Remove(KEY_REPORT_NAME);
-                appSettings.Remove(KEY_REPORT_INSTALLER);
-                appSettings.Remove(KEY_REPORT_CONTROLCENTER);
-                appSettings.Remove(KEY_REPORT_GUARDRADIOEDDATE);
-                appSettings.Remove(KEY_REPORT_GUARDRADIOEDFROM);
-                appSettings.Remove(KEY_REPORT_GUARDRADIOEDTO);
-                appSettings.Remove(KEY_REPORT_ARRIVEDAT);
-                appSettings.Remove(KEY_REPORT_DONE);
-            }
+            long id = getNextAlarmReportId();
+
             try
             {
-                appSettings.Add(KEY_REPORT_CUSTOMERNAME, alarmReport.CustomerName);
-                appSettings.Add(KEY_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber);
-                appSettings.Add(KEY_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber);
-                appSettings.Add(KEY_REPORT_ZIPCODE, alarmReport.ZipCode);
-                appSettings.Add(KEY_REPORT_CITY, alarmReport.City);
-                appSettings.Add(KEY_REPORT_PHONENUMBER, alarmReport.Phonenumber);
-                appSettings.Add(KEY_REPORT_DATE, alarmReport.Date);
-                appSettings.Add(KEY_REPORT_TIME, alarmReport.Time);
-                appSettings.Add(KEY_REPORT_ZONE, alarmReport.Zone);
-                appSettings.Add(KEY_REPORT_BURGLARYVANDALISM, alarmReport.BurglaryVandalism);
-                appSettings.Add(KEY_REPORT_WINDOWDOORCLOSED, alarmReport.WindowDoorClosed);
-                appSettings.Add(KEY_REPORT_APPREHENDEDPERSON, alarmReport.ApprehendedPerson);
-                appSettings.Add(KEY_REPORT_STAFFERROR, alarmReport.StaffError);
-                appSettings.Add(KEY_REPORT_NOTHINGTOREPORT, alarmReport.NothingToReport);
-                appSettings.Add(KEY_REPORT_TECHNICALERROR, alarmReport.TechnicalError);
-                appSettings.Add(KEY_REPORT_UNKNOWNREASON, alarmReport.UnknownReason);
-                appSettings.Add(KEY_REPORT_OTHER, alarmReport.Other);
-                appSettings.Add(KEY_REPORT_CANCELDURINGEMERGENCY, alarmReport.CancelDuringEmergency);
-                appSettings.Add(KEY_REPORT_COVERMADE, alarmReport.CoverMade);
-                appSettings.Add(KEY_REPORT_REMARK, alarmReport.CoverMade);
-                appSettings.Add(KEY_REPORT_NAME, alarmReport.Name);
-                appSettings.Add(KEY_REPORT_INSTALLER, alarmReport.Installer);
-                appSettings.Add(KEY_REPORT_CONTROLCENTER, alarmReport.ControlCenter);
-                appSettings.Add(KEY_REPORT_GUARDRADIOEDDATE, alarmReport.GuardRadioedDate);
-                appSettings.Add(KEY_REPORT_GUARDRADIOEDFROM, alarmReport.GuardRadioedFrom);
-                appSettings.Add(KEY_REPORT_GUARDRADIOEDTO, alarmReport.GuardRadioedTo);
-                appSettings.Add(KEY_REPORT_ARRIVEDAT, alarmReport.ArrivedAt);
-                appSettings.Add(KEY_REPORT_DONE, alarmReport.Done);
+                appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNAME, alarmReport.CustomerName);
+                appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber);
+                appSettings.Add(id + KEY_DUMMY_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber);
+                appSettings.Add(id + KEY_DUMMY_REPORT_ZIPCODE, alarmReport.ZipCode);
+                appSettings.Add(id + KEY_DUMMY_REPORT_CITY, alarmReport.City);
+                appSettings.Add(id + KEY_DUMMY_REPORT_PHONENUMBER, alarmReport.Phonenumber);
+                appSettings.Add(id + KEY_DUMMY_REPORT_DATE, alarmReport.Date);
+                appSettings.Add(id + KEY_DUMMY_REPORT_TIME, alarmReport.Time);
+                appSettings.Add(id + KEY_DUMMY_REPORT_ZONE, alarmReport.Zone);
+                appSettings.Add(id + KEY_DUMMY_REPORT_BURGLARYVANDALISM, alarmReport.BurglaryVandalism);
+                appSettings.Add(id + KEY_DUMMY_REPORT_WINDOWDOORCLOSED, alarmReport.WindowDoorClosed);
+                appSettings.Add(id + KEY_DUMMY_REPORT_APPREHENDEDPERSON, alarmReport.ApprehendedPerson);
+                appSettings.Add(id + KEY_DUMMY_REPORT_STAFFERROR, alarmReport.StaffError);
+                appSettings.Add(id + KEY_DUMMY_REPORT_NOTHINGTOREPORT, alarmReport.NothingToReport);
+                appSettings.Add(id + KEY_DUMMY_REPORT_TECHNICALERROR, alarmReport.TechnicalError);
+                appSettings.Add(id + KEY_DUMMY_REPORT_UNKNOWNREASON, alarmReport.UnknownReason);
+                appSettings.Add(id + KEY_DUMMY_REPORT_OTHER, alarmReport.Other);
+                appSettings.Add(id + KEY_DUMMY_REPORT_CANCELDURINGEMERGENCY, alarmReport.CancelDuringEmergency);
+                appSettings.Add(id + KEY_DUMMY_REPORT_COVERMADE, alarmReport.CoverMade);
+                appSettings.Add(id + KEY_DUMMY_REPORT_REMARK, alarmReport.CoverMade);
+                appSettings.Add(id + KEY_DUMMY_REPORT_NAME, alarmReport.Name);
+                appSettings.Add(id + KEY_DUMMY_REPORT_INSTALLER, alarmReport.Installer);
+                appSettings.Add(id + KEY_DUMMY_REPORT_CONTROLCENTER, alarmReport.ControlCenter);
+                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDDATE, alarmReport.GuardRadioedDate);
+                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDFROM, alarmReport.GuardRadioedFrom);
+                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDTO, alarmReport.GuardRadioedTo);
+                appSettings.Add(id + KEY_DUMMY_REPORT_ARRIVEDAT, alarmReport.ArrivedAt);
+                appSettings.Add(id + KEY_DUMMY_REPORT_DONE, alarmReport.Done);
                 appSettings.Save();
                 dummyDBStatus = true;
             }catch
@@ -192,39 +174,58 @@ namespace GryphonSecurity_v2_1.DataSource
             }
             return dummyDBStatus;
         }
-        
-        public AlarmReport getAlarmReport()
+
+        public List<AlarmReport> getAlarmReports()
         {
-            if (appSettings.Contains(KEY_USERNAME))
+            List<AlarmReport> alarmReports = new List<AlarmReport>();
+            int length = currentNumberOfAlarmReports();
+            long id = 0;
+
+            if (length > 0)
             {
-                String customerName = appSettings[KEY_REPORT_CUSTOMERNAME] as String;
-                long customerNumber = Convert.ToInt64(appSettings[KEY_REPORT_CUSTOMERNUMBER] as String);
-                String streetAndHouseNumber = appSettings[KEY_REPORT_STREETANDHOUSENUMBER] as String;
-                int zipCode = Convert.ToInt32(appSettings[KEY_REPORT_ZIPCODE] as String);
-                String city = appSettings[KEY_REPORT_CITY] as String;
-                long phonenumber = Convert.ToInt64(appSettings[KEY_REPORT_PHONENUMBER] as String);
-                DateTime date = DateTime.Parse(appSettings[KEY_REPORT_DATE] as String, CultureInfo.InvariantCulture);
-                DateTime time = DateTime.Parse(appSettings[KEY_REPORT_TIME] as String, CultureInfo.InvariantCulture);
-                String zone = appSettings[KEY_REPORT_ZONE] as String;
-                Boolean burglaryVandalism = Convert.ToBoolean(appSettings[KEY_REPORT_BURGLARYVANDALISM] as String);
-                Boolean windowDoorClosed = Convert.ToBoolean(appSettings[KEY_REPORT_WINDOWDOORCLOSED] as String);
-                Boolean apprehendedPerson = Convert.ToBoolean(appSettings[KEY_REPORT_APPREHENDEDPERSON] as String);
-                Boolean staffError = Convert.ToBoolean(appSettings[KEY_REPORT_STAFFERROR] as String);
-                Boolean nothingToReport = Convert.ToBoolean(appSettings[KEY_REPORT_NOTHINGTOREPORT] as String);
-                Boolean technicalError = Convert.ToBoolean(appSettings[KEY_REPORT_TECHNICALERROR] as String);
-                Boolean unknownReason = Convert.ToBoolean(appSettings[KEY_REPORT_UNKNOWNREASON] as String);
-                Boolean other = Convert.ToBoolean(appSettings[KEY_REPORT_OTHER] as String);
-                Boolean cancelDuringEmergency = Convert.ToBoolean(appSettings[KEY_REPORT_CANCELDURINGEMERGENCY] as String);
-                Boolean coverMade = Convert.ToBoolean(appSettings[KEY_REPORT_COVERMADE] as String);
-                String remark = appSettings[KEY_REPORT_REMARK] as String;
-                String name = appSettings[KEY_REPORT_NAME] as String;
-                String installer = appSettings[KEY_REPORT_INSTALLER] as String;
-                String controlCenter = appSettings[KEY_REPORT_CONTROLCENTER] as String;
-                DateTime guardRadioedDate = DateTime.Parse(appSettings[KEY_REPORT_GUARDRADIOEDDATE] as String, CultureInfo.InvariantCulture);
-                DateTime guardRadioedFrom = DateTime.Parse(appSettings[KEY_REPORT_GUARDRADIOEDFROM] as String, CultureInfo.InvariantCulture);
-                DateTime guardRadioedTo = DateTime.Parse(appSettings[KEY_REPORT_GUARDRADIOEDTO] as String, CultureInfo.InvariantCulture);
-                DateTime arrivedAt = DateTime.Parse(appSettings[KEY_REPORT_ARRIVEDAT] as String, CultureInfo.InvariantCulture);
-                DateTime done = DateTime.Parse(appSettings[KEY_REPORT_DONE] as String, CultureInfo.InvariantCulture);
+                for (int i = 0; i < length; i++)
+                {
+                    id = i + 1;
+                    AlarmReport alarmReport = getAlarmReport(id);                
+                    alarmReports.Add(alarmReport);
+                }
+            }
+
+            return alarmReports;
+        }
+
+        public AlarmReport getAlarmReport(long id)
+        {
+            if (appSettings.Contains(id + KEY_DUMMY_USERNAME))
+            {
+                String customerName = appSettings[id + KEY_DUMMY_REPORT_CUSTOMERNAME] as String;
+                long customerNumber = Convert.ToInt64(appSettings[id + KEY_DUMMY_REPORT_CUSTOMERNUMBER] as String);
+                String streetAndHouseNumber = appSettings[id + KEY_DUMMY_REPORT_STREETANDHOUSENUMBER] as String;
+                int zipCode = Convert.ToInt32(appSettings[id + KEY_DUMMY_REPORT_ZIPCODE] as String);
+                String city = appSettings[id + KEY_DUMMY_REPORT_CITY] as String;
+                long phonenumber = Convert.ToInt64(appSettings[id + KEY_DUMMY_REPORT_PHONENUMBER] as String);
+                DateTime date = DateTime.Parse(appSettings[id + KEY_DUMMY_REPORT_DATE] as String, CultureInfo.InvariantCulture);
+                DateTime time = DateTime.Parse(appSettings[id + KEY_DUMMY_REPORT_TIME] as String, CultureInfo.InvariantCulture);
+                String zone = appSettings[id + KEY_DUMMY_REPORT_ZONE] as String;
+                Boolean burglaryVandalism = Convert.ToBoolean(appSettings[id + KEY_DUMMY_REPORT_BURGLARYVANDALISM] as String);
+                Boolean windowDoorClosed = Convert.ToBoolean(appSettings[id + KEY_DUMMY_REPORT_WINDOWDOORCLOSED] as String);
+                Boolean apprehendedPerson = Convert.ToBoolean(appSettings[id + KEY_DUMMY_REPORT_APPREHENDEDPERSON] as String);
+                Boolean staffError = Convert.ToBoolean(appSettings[id + KEY_DUMMY_REPORT_STAFFERROR] as String);
+                Boolean nothingToReport = Convert.ToBoolean(appSettings[id + KEY_DUMMY_REPORT_NOTHINGTOREPORT] as String);
+                Boolean technicalError = Convert.ToBoolean(appSettings[id + KEY_DUMMY_REPORT_TECHNICALERROR] as String);
+                Boolean unknownReason = Convert.ToBoolean(appSettings[id + KEY_DUMMY_REPORT_UNKNOWNREASON] as String);
+                Boolean other = Convert.ToBoolean(appSettings[id + KEY_DUMMY_REPORT_OTHER] as String);
+                Boolean cancelDuringEmergency = Convert.ToBoolean(appSettings[id + KEY_DUMMY_REPORT_CANCELDURINGEMERGENCY] as String);
+                Boolean coverMade = Convert.ToBoolean(appSettings[id + KEY_DUMMY_REPORT_COVERMADE] as String);
+                String remark = appSettings[id + KEY_DUMMY_REPORT_REMARK] as String;
+                String name = appSettings[id + KEY_DUMMY_REPORT_NAME] as String;
+                String installer = appSettings[id + KEY_DUMMY_REPORT_INSTALLER] as String;
+                String controlCenter = appSettings[id + KEY_DUMMY_REPORT_CONTROLCENTER] as String;
+                DateTime guardRadioedDate = DateTime.Parse(appSettings[id + KEY_DUMMY_REPORT_GUARDRADIOEDDATE] as String, CultureInfo.InvariantCulture);
+                DateTime guardRadioedFrom = DateTime.Parse(appSettings[id + KEY_DUMMY_REPORT_GUARDRADIOEDFROM] as String, CultureInfo.InvariantCulture);
+                DateTime guardRadioedTo = DateTime.Parse(appSettings[id + KEY_DUMMY_REPORT_GUARDRADIOEDTO] as String, CultureInfo.InvariantCulture);
+                DateTime arrivedAt = DateTime.Parse(appSettings[id + KEY_DUMMY_REPORT_ARRIVEDAT] as String, CultureInfo.InvariantCulture);
+                DateTime done = DateTime.Parse(appSettings[id + KEY_DUMMY_REPORT_DONE] as String, CultureInfo.InvariantCulture);
                 return new AlarmReport(customerName, customerNumber, streetAndHouseNumber, zipCode, city, phonenumber, date, time, zone, burglaryVandalism,
                                         windowDoorClosed, apprehendedPerson, staffError, nothingToReport, technicalError, unknownReason, other, cancelDuringEmergency, coverMade,
                                         remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done);
@@ -237,22 +238,29 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public Boolean createAddresses()
         {
-            if (appSettings.Contains(KEY_ADDRESS_ONE))
-            {
-                appSettings.Remove(KEY_ADDRESS_ONE);
-                appSettings.Remove(KEY_ADDRESS_TWO);
-                appSettings.Remove(KEY_ADDRESS_THREE);
-                appSettings.Remove(KEY_ADDRESS_FOUR);
-                appSettings.Remove(KEY_ADDRESS_FIVE);
-            }
+            
             try
             {
-                appSettings.Add(KEY_ADDRESS_ONE, "Lyngby st.");
-                appSettings.Add(KEY_ADDRESS_TWO, "København hovedbanegård");
-                appSettings.Add(KEY_ADDRESS_THREE, "Farum st.");
-                appSettings.Add(KEY_ADDRESS_FOUR, "Kokkedal st.");
-                appSettings.Add(KEY_ADDRESS_FIVE, "Buddinge st.");
-                appSettings.Save();
+                if (!appSettings.Contains(1 + KEY_DUMMY_ADDRESS_NAME))
+                {
+                    Debug.WriteLine("createAddresses");
+                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_NAME, "Lyngby st.");
+                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.505161499999986");
+                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LATITUDE, "55.767944");
+                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_NAME, "København hovedbanegård");
+                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.566796599999975");
+                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LATITUDE, "55.6713363");
+                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_NAME, "Farum st.");
+                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.373533899999984");
+                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LATITUDE, "55.8120275");
+                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_NAME, "Kokkedal st.");
+                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.502057000000036");
+                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LATITUDE, "55.90348789999999");
+                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_NAME, "Buddinge st.");
+                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.493978999999968");
+                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LATITUDE, "55.7469736");
+                    appSettings.Save();
+                }
                 return true;
             }
             catch (IsolatedStorageException)
@@ -263,38 +271,43 @@ namespace GryphonSecurity_v2_1.DataSource
 
         }
 
-        public String getAddress(String id)
+        public List<String> getAddress(String id)
         {
-            addresses.Add(KEY_ADDRESS_ONE);
-            addresses.Add(KEY_ADDRESS_TWO);
-            addresses.Add(KEY_ADDRESS_THREE);
-            addresses.Add(KEY_ADDRESS_FOUR);
-            addresses.Add(KEY_ADDRESS_FIVE);
-            for (int i = 0; i < addresses.Count; i++)
+            if(appSettings.Contains(id + KEY_DUMMY_ADDRESS_NAME))
             {
-                Debug.WriteLine("what is i " + i);
-                if (addresses[i].Equals(id))
+                address.Add(appSettings[id + KEY_DUMMY_ADDRESS_NAME] as String);
+                address.Add(appSettings[id + KEY_DUMMY_ADDRESS_LONGTITUDE] as String);
+                address.Add(appSettings[id + KEY_DUMMY_ADDRESS_LATITUDE] as String);
+                return address;
+            }
+            
+            return null;
+        }
+
+        public Boolean createNFCs(List<NFC> nfcs)
+        {
+            Boolean check = false;
+            foreach(NFC nfc in nfcs)
+            {
+                check = createNFC(nfc);
+                if (!check)
                 {
-                    Debug.WriteLine("success address found");
-                    return appSettings[addresses[i]] as String;
+                    return check;
                 }
             }
-            return null;
+            return check;
         }
 
         public Boolean createNFC(NFC nfc)
         {
-            if (appSettings.Contains(KEY_NFC_TAGADDRESS))
-            {
-                appSettings.Remove(KEY_NFC_RANGECHECK);
-                appSettings.Remove(KEY_NFC_TAGADDRESS);
-            }
+            long id = getNextNfcId();
 
             try
             {
 
-                appSettings.Add(KEY_NFC_RANGECHECK, nfc.RangeCheck);
-                appSettings.Add(KEY_NFC_TAGADDRESS, nfc.TagAddress);
+                appSettings.Add(id + KEY_DUMMY_NFC_RANGECHECK, nfc.RangeCheck);
+                appSettings.Add(id + KEY_DUMMY_NFC_TAGADDRESS, nfc.TagAddress);
+                appSettings.Add(id + KEY_DUMMY_NFC_TIME, nfc.Time);
                 
                 appSettings.Save();
                 return true;
@@ -307,30 +320,49 @@ namespace GryphonSecurity_v2_1.DataSource
 
         }
 
-        public NFC getNFC()
+        public List<NFC> getNFCs()
         {
-            if (appSettings.Contains(KEY_NFC_TAGADDRESS))
+            List<NFC> nfcs = new List<NFC>();
+            int length = currentNumberOfNFCs();
+            long id = 0;
+            if (length > 0)
             {
-                Boolean rangeCheck =Convert.ToBoolean(appSettings[KEY_NFC_RANGECHECK] as String);
-                String tagAddress = appSettings[KEY_NFC_TAGADDRESS] as String;
+                for (int i = 0; i < length; i++)
+                {
+                    id = i + 1;
+                    NFC nfc = getNFC(id);
+                    nfcs.Add(nfc);
+                }
+            }
+            return nfcs;
+        }
+
+        public NFC getNFC(long id)
+        {
+            if (appSettings.Contains(KEY_DUMMY_NFC_TAGADDRESS))
+            {
+                Boolean rangeCheck =Convert.ToBoolean(appSettings[id + KEY_DUMMY_NFC_RANGECHECK] as String);
+                String tagAddress = appSettings[id + KEY_DUMMY_NFC_TAGADDRESS] as String;
+                DateTime time = DateTime.Parse(appSettings[id + KEY_DUMMY_NFC_TIME] as String, CultureInfo.InvariantCulture);
                 User user = getUser();
-                return new NFC(rangeCheck, tagAddress, user);
+                return new NFC(rangeCheck, tagAddress, time, user);
             }
             else
             { 
                 return null;
             }
         }
+
         private long getCurrentNfcId()
         {
-            Debug.WriteLine(appSettings.Contains(KEY_ID_NFC));
-            if (!appSettings.Contains(KEY_ID_NFC))
+            Debug.WriteLine(appSettings.Contains(KEY_DUMMY_ID_NFC));
+            if (!appSettings.Contains(KEY_DUMMY_ID_NFC))
             {
                 Debug.WriteLine("when are we here");
-                appSettings.Add(KEY_ID_NFC, "0");
+                appSettings.Add(KEY_DUMMY_ID_NFC, "0");
                 appSettings.Save();
             }
-            return Convert.ToInt64(appSettings[KEY_ID_NFC] as String);
+            return Convert.ToInt64(appSettings[KEY_DUMMY_ID_NFC] as String);
         }
 
         private long getNextNfcId()
@@ -341,8 +373,8 @@ namespace GryphonSecurity_v2_1.DataSource
                 Debug.WriteLine(test);
                 long nextId = test + 1;
                 Debug.WriteLine(nextId);
-                appSettings.Remove(KEY_ID_NFC);
-                appSettings.Add(KEY_ID_NFC, nextId + "");
+                appSettings.Remove(KEY_DUMMY_ID_NFC);
+                appSettings.Add(KEY_DUMMY_ID_NFC, nextId + "");
                 appSettings.Save();
 
                 return nextId;
@@ -358,12 +390,12 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public int currentNumberOfNFCs()
         {
-            if (!appSettings.Contains(KEY_CURRENTNUMBEROFNFCS))
+            if (!appSettings.Contains(KEY_DUMMY_CURRENTNUMBEROFNFCS))
             {
-                appSettings.Add(KEY_CURRENTNUMBEROFNFCS, "0");
+                appSettings.Add(KEY_DUMMY_CURRENTNUMBEROFNFCS, "0");
                 appSettings.Save();
             }
-            return Convert.ToInt32(appSettings[KEY_CURRENTNUMBEROFNFCS] as String);
+            return Convert.ToInt32(appSettings[KEY_DUMMY_CURRENTNUMBEROFNFCS] as String);
         }
 
         public void addNumberOfNFCs()
@@ -371,11 +403,11 @@ namespace GryphonSecurity_v2_1.DataSource
             try
             {
                 int next = currentNumberOfNFCs() + 1;
-                if (appSettings.Contains(KEY_CURRENTNUMBEROFNFCS))
+                if (appSettings.Contains(KEY_DUMMY_CURRENTNUMBEROFNFCS))
                 {
-                    appSettings.Remove(KEY_CURRENTNUMBEROFNFCS);
+                    appSettings.Remove(KEY_DUMMY_CURRENTNUMBEROFNFCS);
                 }
-                appSettings.Add(KEY_CURRENTNUMBEROFNFCS, next + "");
+                appSettings.Add(KEY_DUMMY_CURRENTNUMBEROFNFCS, next + "");
                 appSettings.Save();
 
 
@@ -385,39 +417,40 @@ namespace GryphonSecurity_v2_1.DataSource
                 return;
             }
         }
+
         private long getCurrentAlarmReportId()
         {
-            if (!appSettings.Contains(KEY_ID_ALARMREPORT))
+            if (!appSettings.Contains(KEY_DUMMY_ID_ALARMREPORT))
             {
-                appSettings.Add(KEY_ID_ALARMREPORT, "0");
+                appSettings.Add(KEY_DUMMY_ID_ALARMREPORT, "0");
                 appSettings.Save();
             }
-            return Convert.ToInt64(appSettings[KEY_ID_ALARMREPORT] as String);
+            return Convert.ToInt64(appSettings[KEY_DUMMY_ID_ALARMREPORT] as String);
         }
 
         private long getNextAlarmReportId()
         {
             long nextId = getCurrentAlarmReportId() + 1;
-            appSettings.Remove(KEY_ID_ALARMREPORT);
-            appSettings.Add(KEY_ID_ALARMREPORT, nextId + "");
+            appSettings.Remove(KEY_DUMMY_ID_ALARMREPORT);
+            appSettings.Add(KEY_DUMMY_ID_ALARMREPORT, nextId + "");
             appSettings.Save();
             return nextId;
         }
 
         public int currentNumberOfAlarmReports()
         {
-            if (!appSettings.Contains(KEY_CURRENTNUMBEROFALARMREPORTS))
+            if (!appSettings.Contains(KEY_DUMMY_CURRENTNUMBEROFALARMREPORTS))
             {
-                appSettings.Add(KEY_CURRENTNUMBEROFALARMREPORTS, "0");
+                appSettings.Add(KEY_DUMMY_CURRENTNUMBEROFALARMREPORTS, "0");
                 appSettings.Save();
             }
-            return Convert.ToInt32(appSettings[KEY_CURRENTNUMBEROFALARMREPORTS] as String);
+            return Convert.ToInt32(appSettings[KEY_DUMMY_CURRENTNUMBEROFALARMREPORTS] as String);
         }
 
         public void addNumberOfAlarmReports()
         {
             int next = currentNumberOfAlarmReports() + 1;
-            appSettings.Add(KEY_CURRENTNUMBEROFALARMREPORTS, next + "");
+            appSettings.Add(KEY_DUMMY_CURRENTNUMBEROFALARMREPORTS, next + "");
             appSettings.Save();
         }
 

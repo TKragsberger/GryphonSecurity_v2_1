@@ -177,9 +177,11 @@ namespace GryphonSecurity_v2_1.DataSource
         public void addNumberOfAlarmReports()
         {
             int next = currentNumberOfAlarmReports() + 1;
+            appSettings.Remove(KEY_CURRENTNUMBEROFALARMREPORTS);
             appSettings.Add(KEY_CURRENTNUMBEROFALARMREPORTS, next + "");
             appSettings.Save();
         }
+
         private long getCurrentTempAlarmReportId()
         {
             if (!appSettings.Contains(KEY_ID_TEMP_ALARMREPORT))
@@ -285,8 +287,9 @@ namespace GryphonSecurity_v2_1.DataSource
         public Boolean createAlarmReport(AlarmReport alarmReport)
         {
             long id = getNextAlarmReportId();           
-            try
-            {
+            //try
+            //{
+                Debug.WriteLine("id is " + id);
                 appSettings.Add(id + KEY_REPORT_CUSTOMERNAME, alarmReport.CustomerName);
                 appSettings.Add(id + KEY_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber);
                 appSettings.Add(id + KEY_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber);
@@ -318,14 +321,13 @@ namespace GryphonSecurity_v2_1.DataSource
                 appSettings.Save();
                 addNumberOfAlarmReports();
                 return true;
-            }
-            catch
-            {
-                return false;
-            }
+            //}
+            //catch
+            //{
+            //    return false;
+            //}
         }
         
-
         public List<AlarmReport> getAlarmReports()
         {
             List<AlarmReport> alarmReports = new List<AlarmReport>();
@@ -342,8 +344,8 @@ namespace GryphonSecurity_v2_1.DataSource
                     int zipCode = Convert.ToInt32(appSettings[id + KEY_REPORT_ZIPCODE] as String);
                     String city = appSettings[id + KEY_REPORT_CITY] as String;
                     long phonenumber = Convert.ToInt64(appSettings[id + KEY_REPORT_PHONENUMBER] as String);
-                    DateTime date = DateTime.Parse(appSettings[id + KEY_REPORT_DATE] as String, CultureInfo.InvariantCulture);
-                    DateTime time = DateTime.Parse(appSettings[id + KEY_REPORT_TIME] as String, CultureInfo.InvariantCulture);
+                    DateTime date = DateTime.ParseExact(appSettings[id + KEY_REPORT_DATE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    DateTime time = DateTime.ParseExact(appSettings[id + KEY_REPORT_TIME] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                     String zone = appSettings[id + KEY_REPORT_ZONE] as String;
                     Boolean burglaryVandalism = Convert.ToBoolean(appSettings[id + KEY_REPORT_BURGLARYVANDALISM] as String);
                     Boolean windowDoorClosed = Convert.ToBoolean(appSettings[id + KEY_REPORT_WINDOWDOORCLOSED] as String);
@@ -359,11 +361,11 @@ namespace GryphonSecurity_v2_1.DataSource
                     String name = appSettings[id + KEY_REPORT_NAME] as String;
                     String installer = appSettings[id + KEY_REPORT_INSTALLER] as String;
                     String controlCenter = appSettings[id + KEY_REPORT_CONTROLCENTER] as String;
-                    DateTime guardRadioedDate = DateTime.Parse(appSettings[id + KEY_REPORT_GUARDRADIOEDDATE] as String, CultureInfo.InvariantCulture);
-                    DateTime guardRadioedFrom = DateTime.Parse(appSettings[id + KEY_REPORT_GUARDRADIOEDFROM] as String, CultureInfo.InvariantCulture);
-                    DateTime guardRadioedTo = DateTime.Parse(appSettings[id + KEY_REPORT_GUARDRADIOEDTO] as String, CultureInfo.InvariantCulture);
-                    DateTime arrivedAt = DateTime.Parse(appSettings[id + KEY_REPORT_ARRIVEDAT] as String, CultureInfo.InvariantCulture);
-                    DateTime done = DateTime.Parse(appSettings[id + KEY_REPORT_DONE] as String, CultureInfo.InvariantCulture);
+                    DateTime guardRadioedDate = DateTime.ParseExact(appSettings[id + KEY_REPORT_GUARDRADIOEDDATE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    DateTime guardRadioedFrom = DateTime.ParseExact(appSettings[id + KEY_REPORT_GUARDRADIOEDFROM] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    DateTime guardRadioedTo = DateTime.ParseExact(appSettings[id + KEY_REPORT_GUARDRADIOEDTO] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    DateTime arrivedAt = DateTime.ParseExact(appSettings[id + KEY_REPORT_ARRIVEDAT] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    DateTime done = DateTime.ParseExact(appSettings[id + KEY_REPORT_DONE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                     alarmReports.Add(new AlarmReport(customerName, customerNumber, streetAndHouseNumber, zipCode, city, phonenumber, date, time, zone, burglaryVandalism,
                                             windowDoorClosed, apprehendedPerson, staffError, nothingToReport, technicalError, unknownReason, other, cancelDuringEmergency, coverMade,
                                             remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done));
@@ -372,7 +374,6 @@ namespace GryphonSecurity_v2_1.DataSource
 
             return alarmReports;
         }
-
 
         public Boolean removeAlarmReports()
         {
@@ -489,6 +490,7 @@ namespace GryphonSecurity_v2_1.DataSource
             }
             return itemsRemoved;
         }
+
         public Boolean createTempAlarmReport(AlarmReport alarmReport)
         {
             long id = getNextTempAlarmReportId();
@@ -534,6 +536,7 @@ namespace GryphonSecurity_v2_1.DataSource
                 return false;
             }
         }
+
         public List<AlarmReport> getTempAlarmReports()
         {
             List<AlarmReport> alarmReports = new List<AlarmReport>();

@@ -70,7 +70,16 @@ namespace GryphonSecurity_v2_1
 
         public Boolean createAlarmReport(AlarmReport alarmReport)
         {
-            return dBFacade.createAlarmReport(alarmReport);
+            if (checkNetworkConnection())
+            {
+                Debug.WriteLine("DB");
+                return dBFacade.createAlarmReport(alarmReport);
+            } else
+            {
+                Debug.WriteLine("TEMP");
+                return dBFacade.createLocalStorageAlarmReport(alarmReport);
+            }
+
         }
         public Boolean createTempAlarmReport(AlarmReport alarmReport)
         {
@@ -102,48 +111,30 @@ namespace GryphonSecurity_v2_1
             Debug.WriteLine("2: " + buffer.ReadByte());
             int payloadLength = buffer.ReadByte();
             Debug.WriteLine("5: " + buffer.ReadByte());
-            Debug.WriteLine("jaja length: " + payloadLength);
             byte[] payload = new byte[payloadLength];
-            Debug.WriteLine("3: " + payload);
             buffer.ReadBytes(payload);
             byte langLen = (byte)(payload[0] & 0x3f);
-            Debug.WriteLine("LanLeng: " + langLen);
             int textLeng = payload.Length - 1 - langLen;
             byte[] textBuf = new byte[textLeng];
             System.Buffer.BlockCopy(payload, 1 + langLen, textBuf, 0, textLeng);
-            String scanned_message = Encoding.UTF8.GetString(textBuf, 0, textBuf.Length);
-            if (isConnected)
-            {
-                String tagAddress = dBFacade.getAdress(scanned_message);
-                return tagAddress;          
-            } else
-            {
-                return scanned_message;
-            }
+            return Encoding.UTF8.GetString(textBuf, 0, textBuf.Length);
         }
         
-        public async void onLocationScan()
+        public async Task<Boolean> onLocationScan(String tagAddress, Boolean isConnected)
         {
-            //if ((bool)IsolatedStorageSettings.ApplicationSettings["LocationConsent"] != true)
-            //{
-            //    // The user has opted out of Location.
-
-            //}
-
             Geolocator geolocator = new Geolocator();
             geolocator.DesiredAccuracyInMeters = 50;
-            Debug.WriteLine("test 1");
+            Boolean check = false;
             try
             {
-                Debug.WriteLine("test 2");
                 Geoposition geoposition = await geolocator.GetGeopositionAsync(
                     maximumAge: TimeSpan.FromMinutes(5),
                     timeout: TimeSpan.FromSeconds(10)
                     );
-                Debug.WriteLine("test 3");
                 double latitude = geoposition.Coordinate.Point.Position.Latitude;
                 double longitude = geoposition.Coordinate.Point.Position.Longitude;
                 presentCoordinate = new GeoCoordinate(latitude, longitude);
+                check = calcPosition(tagAddress, presentCoordinate, isConnected);
                 Debug.WriteLine("PresentCoordinate: " + presentCoordinate);
 
             }
@@ -156,60 +147,50 @@ namespace GryphonSecurity_v2_1
                 }
             }
 
-
+            return check;
         }
 
-        public void calcPosition(String tagAddress)
+        public Boolean calcPosition(String tagAddress, GeoCoordinate presentCoordinate, Boolean isConnected)
         {
             double latitude = 0d;
             double longitude = 0d;
-            Geolocator locator = new Geolocator();
-            GeocodeQuery geocodequery = new GeocodeQuery();
+            String address;
+            Boolean check = false;
+            //Geolocator locator = new Geolocator();
+            //GeocodeQuery geocodequery = new GeocodeQuery();
             CancellationTokenSource cts = new CancellationTokenSource();
 
             try
             {
                 cts.CancelAfter(10000);
+                List<String> tag = dBFacade.getAdress(tagAddress);
 
-                if (!locator.LocationStatus.Equals(PositionStatus.Disabled))
-                {
-                    geocodequery.GeoCoordinate = new GeoCoordinate(0, 0);
-                    geocodequery.SearchTerm = tagAddress + "Denmark";
-                    geocodequery.QueryAsync();
+                    //geocodequery.GeoCoordinate = new GeoCoordinate(0, 0);
+                    //geocodequery.SearchTerm = tagAddress + "Denmark";
+                    //geocodequery.QueryAsync();
                     if (!cts.IsCancellationRequested)
                     {
-                        geocodequery.QueryCompleted += (sender, args) =>
-                        {
-                            if (!args.Result.Equals(null))
-                            {
-                                Debug.WriteLine("new test");
-                                MapLocation result = args.Result.FirstOrDefault();
-                                latitude = result.GeoCoordinate.Latitude;
-                                Debug.WriteLine("Latitude: " + latitude);
-                                longitude = result.GeoCoordinate.Longitude;
-                                Debug.WriteLine("Longitude: " + longitude);
-                                targetCoordinates = new GeoCoordinate(latitude, longitude);
-                                getDistance(targetCoordinates, tagAddress);
-                            }
-                        };
-                    } else
-                    {
-                        getDistance(presentCoordinate, tagAddress);
-                    }
+                    address = tag[0]; 
+                    longitude = Convert.ToDouble(tag[1]);
+                    latitude = Convert.ToDouble(tag[2]);
+                    targetCoordinates = new GeoCoordinate(latitude, longitude);
+                    check = getDistance(presentCoordinate, targetCoordinates, address, isConnected);                   
                 } else
-                {
-                    MessageBox.Show("Service Geolocation not enabled!", AppResources.ApplicationTitle, MessageBoxButton.OK);
-                    return;
-                }
+                    {
+                        getDistance(presentCoordinate, presentCoordinate, tagAddress, isConnected);
+                    }
+                
             } catch(OperationCanceledException)
             {
                 Debug.WriteLine("cancellation token");
             }
+            return check;
         }
 
-        public void getDistance(GeoCoordinate targetCoordinates, String tagAddress)
+        public Boolean getDistance(GeoCoordinate presentCoordinate, GeoCoordinate targetCoordinates, String tagAddress, Boolean isConnected)
         {
-            if (!presentCoordinate.Equals(targetCoordinates) && !object.ReferenceEquals(targetCoordinates, null))
+            Boolean check = false;
+            if (!presentCoordinate.Equals(targetCoordinates) && !object.ReferenceEquals(targetCoordinates, null) && isConnected)
             {
                 double distance = targetCoordinates.GetDistanceTo(presentCoordinate);
                 Boolean rangeCheck = false;
@@ -221,12 +202,13 @@ namespace GryphonSecurity_v2_1
                 {
                     rangeCheck = true;
                 }
-                check = dBFacade.createNFC(new NFC(rangeCheck, tagAddress, dBFacade.getUser()));
+                check = dBFacade.createNFC(new NFC(rangeCheck, tagAddress, DateTime.Now, dBFacade.getUser()));
             } else
             {
                 //TODO gem i tempstorage
                 dBFacade.createLocalStorageNFCs(presentCoordinate.Latitude, presentCoordinate.Longitude, tagAddress);
             }
+            return check;
 
 
         }
@@ -236,9 +218,9 @@ namespace GryphonSecurity_v2_1
             return dBFacade.createAddresses();
         }
 
-        public NFC getNFC()
+        public NFC getNFC(long id)
         {
-            return dBFacade.getNFC();
+            return dBFacade.getNFC(id);
         }
 
         public bool checkNetworkConnection()
@@ -273,16 +255,14 @@ namespace GryphonSecurity_v2_1
 
         public Boolean sendPendingNFCs()
         {
-            List<List<String>> items = dBFacade.getLocalStorageNFCs();
-            Debug.WriteLine(items.Count);
-            foreach (List<String> item in items)
+            List<List<String>> tags = dBFacade.getLocalStorageNFCs();
+            foreach (List<String> tag in tags)
             {
-                double presentLatitude = Convert.ToDouble(item[0]);
-                Debug.WriteLine("Latitude " + presentLatitude);
-                double presentLongitude = Convert.ToDouble(item[1]);
-                Debug.WriteLine("Longitude " + presentLongitude);
+                double presentLatitude = Convert.ToDouble(tag[0]);
+                double presentLongitude = Convert.ToDouble(tag[1]);
+                List<String> nfcs = dBFacade.getAdress(tag[2]);
+                String tagAddress = nfcs[0]; 
                 presentCoordinate = new GeoCoordinate(presentLatitude, presentLongitude);
-                String tagAddress = item[2];
                 Debug.WriteLine("tagAddress " + tagAddress);
                 //calcPosition(tagAddress);
                 //if (!check)
@@ -296,17 +276,16 @@ namespace GryphonSecurity_v2_1
 
         public Boolean sendPendingAlarmReports()
         {
-            Boolean alarmReportCheck = true;
-
-            //TODO når der er lavet backend så lav metoder der kan modtage en hel list i items i stedet for kun 1 item afgangen
-            //alarmReportCheck = dBFacade.createAlarmReports(alarmReports);
+            Boolean alarmReportCheck = false;
+            List<AlarmReport> alarmReports = dBFacade.getLocalStorageAlarmReports();
+            alarmReportCheck = dBFacade.createAlarmReports(alarmReports);
 
             if (alarmReportCheck)
             {
                 return dBFacade.removeLocalStorageAlarmReports();
             }
 
-            return false;
+            return alarmReportCheck;
         }
         
     }

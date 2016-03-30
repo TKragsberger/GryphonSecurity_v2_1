@@ -140,7 +140,8 @@ namespace GryphonSecurity_v2_1
 
         private void scanButton_Click(object sender, RoutedEventArgs e)
         {
-            NFC nfc = controller.getNFC();
+            long id = 1;
+            NFC nfc = controller.getNFC(id);
             textBlockTest.Text = " Range Check: "+nfc.RangeCheck+"\r\n Tag Address: "+nfc.TagAddress+ "\r\n User Firstname: " + nfc.User.Firstname;
         }        
 
@@ -178,32 +179,26 @@ namespace GryphonSecurity_v2_1
         private void messageReceived(ProximityDevice sender, ProximityMessage message)
         {
             isConnected = controller.checkNetworkConnection();
-            controller.onLocationScan();
-            if (isConnected)
-            {
-                String tagAddress = controller.readDataFromNFCTag(message, isConnected);
+            String tagAddress = controller.readDataFromNFCTag(message, isConnected);
                 for(int i = 0; i < 10; i++)
                 {
                     Debug.WriteLine("hvad starter i på "+i);
                 }
                 Dispatcher.BeginInvoke(() =>
                 {
+                    gps(tagAddress, isConnected);
                     Debug.WriteLine("Tekst: " + tagAddress);
-                    controller.calcPosition(tagAddress);
+                    //controller.calcPosition(tagAddress);
                     System.Threading.Tasks.Task.Delay(10000).Wait();
                     Debug.WriteLine("this should take be shown after 5 sek");
-                    textBlockTest.Text = tagAddress;
-                });
-            } else
-            {
-                String tagId = controller.readDataFromNFCTag(message, isConnected);
-                Dispatcher.BeginInvoke(() =>
-                {
-                    System.Threading.Tasks.Task.Delay(5000).Wait();
-                    textBlockTest.Text = "NFC chip " + tagId + " Scannet \r\nInformation gemt på telefon indtil der er adgang til nettet";
-                    controller.getDistance(null, tagId);
-                });
-            }
+                    //textBlockTest.Text = tagAddress;
+                });         
+        }
+
+        private async void gps(String tagAddress, Boolean isConnected)
+        {
+            Boolean check = await controller.onLocationScan(tagAddress, isConnected);
+            textBlockTest.Text = tagAddress + check;
         }
 
         private void initializeProximitySample()
@@ -226,41 +221,50 @@ namespace GryphonSecurity_v2_1
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(pivot.SelectedIndex == 0)
-            { 
-                deviceId = device.SubscribeForMessage("NDEF", messageReceived);
-                Debug.WriteLine("this is scan");
-            } else if(pivot.SelectedIndex == 1)
+            try
             {
-                User user = controller.getUser();
-                if (user != null)
+                if (pivot.SelectedIndex == 0)
                 {
-                    textBoxName.Text = user.Firstname + " " + user.Lastname;
-                }
-                device.StopSubscribingForMessage(deviceId);
-                Debug.WriteLine("this is alarm report");
-            } else if(pivot.SelectedIndex == 2)
-            {
-                int nfcs = controller.getLocalStorageNFCs();
-                int alarmReports = controller.getLocalStorageAlarmReports();
-                textBlockPendingNFCScans.Text = "Pending NFCs: " + nfcs;
-                textBlockPendingAlarmReports.Text = "Pending Alarm Reports: " + alarmReports;
-                Debug.WriteLine("this is pending");
-                tempAlarmReportScroll.Children.Clear();
-                List<AlarmReport> tempAlarmReports = controller.getLocalStorageTempAlarmReports();
-                for (int i = 0; i < tempAlarmReports.Count; i++){
-                    Debug.WriteLine("HEJ MAND");
-                    TextBlock textBlock = new TextBlock();
-                    textBlock.Text = tempAlarmReports[i].CustomerName;
-                    textBlock.Tap += myTextBlock_Tap;
-                    textBlock.FontSize = 50;
-                    textBlock.Height = 70;
+                    deviceId = device.SubscribeForMessage("NDEF", messageReceived);
+                    Debug.WriteLine("this is scan");
+              
+                } else if(pivot.SelectedIndex == 1)
+                {
+                    User user = controller.getUser();
+                    if (user != null)
+                    {
+                        textBoxName.Text = user.Firstname + " " + user.Lastname;
+                    }
+                    device.StopSubscribingForMessage(deviceId);
+                    Debug.WriteLine("this is alarm report");
+                } else if(pivot.SelectedIndex == 2)
+                {
+                    device.StopSubscribingForMessage(deviceId);
+                    int nfcs = controller.getLocalStorageNFCs();
+                    int alarmReports = controller.getLocalStorageAlarmReports();
+                    textBlockPendingNFCScans.Text = "Pending NFCs: " + nfcs;
+                    textBlockPendingAlarmReports.Text = "Pending Alarm Reports: " + alarmReports;
+                    Debug.WriteLine("this is pending");
+                    tempAlarmReportScroll.Children.Clear();
+                    List<AlarmReport> tempAlarmReports = controller.getLocalStorageTempAlarmReports();
+                    for (int i = 0; i < tempAlarmReports.Count; i++){
+                        Debug.WriteLine("HEJ MAND");
+                        TextBlock textBlock = new TextBlock();
+                        textBlock.Text = tempAlarmReports[i].CustomerName;
+                        textBlock.Tap += myTextBlock_Tap;
+                        textBlock.FontSize = 50;
+                        textBlock.Height = 70;
                     
-                    textBlock.Name =""+ (i + 1);
-                    tempAlarmReportScroll.Children.Add(textBlock);
+                        textBlock.Name =""+ (i + 1);
+                        tempAlarmReportScroll.Children.Add(textBlock);
+                    }
                 }
             }
-            
+            catch
+            {
+                MessageBox.Show("NFC slået fra");
+            }
+
         }
         public void myTextBlock_Tap(object sender, System.Windows.Input.GestureEventArgs args)
         {

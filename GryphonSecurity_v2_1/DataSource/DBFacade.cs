@@ -26,11 +26,18 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             return connection.createAlarmReport(alarmReport);
         }
+
+        public Boolean createAlarmReports(List<AlarmReport> alarmReports)
+        {
+            return connection.createAlarmReports(alarmReports);
+        }
+
         public Boolean createTempLocalStorageAlarmReport(AlarmReport alarmReport)
         {
             return localStorage.createTempAlarmReport(alarmReport);
         }
-        public String getAdress(String id)
+
+        public List<String> getAdress(String id)
         {
             return connection.getAddress(id);
         }
@@ -45,9 +52,14 @@ namespace GryphonSecurity_v2_1.DataSource
             return connection.createNFC(nfc);
         }
 
-        public NFC getNFC()
+        public Boolean createNFCs(List<NFC> nfcs)
         {
-            return connection.getNFC();
+            return connection.createNFCs(nfcs);
+        }
+
+        public NFC getNFC(long id)
+        {
+            return connection.getNFC(id);
         }
 
         public Boolean createLocalStorageNFCs(double presentLatitude, double presentLongitude, String tagAddress)
@@ -55,7 +67,7 @@ namespace GryphonSecurity_v2_1.DataSource
             return localStorage.createNFC(presentLatitude, presentLongitude, tagAddress);
         }
 
-        public Boolean createLocalStorageAlarmReports(AlarmReport alarmReport)
+        public Boolean createLocalStorageAlarmReport(AlarmReport alarmReport)
         {
             return localStorage.createAlarmReport(alarmReport);
         }
@@ -69,10 +81,12 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             return localStorage.getAlarmReports();
         }
+
         public List<AlarmReport> getLocalStorageTempAlarmReports()
         {
             return localStorage.getTempAlarmReports();
         }
+
         public AlarmReport getLocalTempAlarmReport(long id)
         {
            return localStorage.getTempAlarmReport(id);
