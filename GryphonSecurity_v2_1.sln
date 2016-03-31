@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GryphonSecurity_v2_1", "GryphonSecurity_v2_1\GryphonSecurity_v2_1.csproj", "{9B2194AF-2656-46C4-B664-8542265DFC86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp3", "TestApp3\TestApp3.csproj", "{8C406B9D-1FAD-459A-B9BE-B88C1E24B615}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GryphonSecurity_v2_1_UnitTest", "TestApp3\GryphonSecurity_v2_1_UnitTest.csproj", "{8C406B9D-1FAD-459A-B9BE-B88C1E24B615}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
