@@ -3,12 +3,14 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using GryphonSecurity_v2_1.Domain.Entity;
 using GryphonSecurity_v2_1;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GryphonSecurityTest
 {
     [TestClass]
     public class UnitTest1
     {
+       
         Controller instance = Controller.Instance;
         User userTest;
         AlarmReport alarmReportTest;
@@ -72,6 +74,32 @@ namespace GryphonSecurityTest
             }
             Assert.AreSame(expectedResult,actualResult);
 
+        }
+        [TestMethod]
+        public void TestMethodReadDataFromNFCTag()
+        {
+            String expectedResult = null;
+            
+            Boolean isConnected = instance.checkNetworkConnection();
+            String actualResult = instance.readDataFromNFCTag(null, isConnected);
+
+            Assert.AreSame(expectedResult, actualResult);
+        }
+        [TestMethod]
+        public void TestMethodOnLocationScan()
+        {
+            Boolean expectedResult = false;
+            Boolean isConnected = instance.checkNetworkConnection();
+            Task<Boolean> actualResult = instance.onLocationScan("Lyngby St.", isConnected);
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+        [TestMethod]
+        public void TestMethodcalcPosition()
+        {
+            Boolean expectedResult = false;
+            Boolean isConnect = instance.checkNetworkConnection();
+            Boolean actualResult = instance.calcPosition("Lyngby St.", null, isConnect);
+            Assert.AreSame(expectedResult, actualResult);
         }
 
         //These two method does not exsist anymore.
