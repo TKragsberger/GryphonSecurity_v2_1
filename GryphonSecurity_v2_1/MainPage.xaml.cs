@@ -266,7 +266,7 @@ namespace GryphonSecurity_v2_1
             Boolean check = checkAlarmReport();
             if (!check)
             {
-                MessageBox.Show("udfyld felterne");
+                MessageBox.Show(AppResources.ReportFillSpaces);
             }
         }
 
@@ -411,7 +411,7 @@ namespace GryphonSecurity_v2_1
             }
             catch(NullReferenceException)
             {
-                MessageBox.Show("NFC slået fra genstart app med NFC slået til");
+                MessageBox.Show(AppResources.ReportNFCDisabled);
             }
 
         }
@@ -430,7 +430,7 @@ namespace GryphonSecurity_v2_1
                 pivot.SelectedItem = alarmReport;
             } else
             {
-                MessageBox.Show("Error");
+                MessageBox.Show(AppResources.ReportError);
             }
         }
         public void fillAlarmReport(AlarmReport alarmReport)

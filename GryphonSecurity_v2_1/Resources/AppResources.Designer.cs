@@ -142,6 +142,33 @@ namespace GryphonSecurity_v2_1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pending alarmreports: .
+        /// </summary>
+        public static string PendingAlarmReports {
+            get {
+                return ResourceManager.GetString("PendingAlarmReports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending NFC: .
+        /// </summary>
+        public static string PendingNFC {
+            get {
+                return ResourceManager.GetString("PendingNFC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send pending.
+        /// </summary>
+        public static string PendingSendPendingButton {
+            get {
+                return ResourceManager.GetString("PendingSendPendingButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The report was not sent.
         /// </summary>
         public static string ReportAlarmReportFailed {
@@ -268,6 +295,24 @@ namespace GryphonSecurity_v2_1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string ReportError {
+            get {
+                return ResourceManager.GetString("ReportError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fill out the required boxes.
+        /// </summary>
+        public static string ReportFillSpaces {
+            get {
+                return ResourceManager.GetString("ReportFillSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Guard radioed date:.
         /// </summary>
         public static string ReportGuardRadioedDateTB {
@@ -304,6 +349,15 @@ namespace GryphonSecurity_v2_1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NFC disabled, Restart the App with NFC enabled.
+        /// </summary>
+        public static string ReportNFCDisabled {
+            get {
+                return ResourceManager.GetString("ReportNFCDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nothing to report.
         /// </summary>
         public static string ReportNothingToReport {
@@ -336,6 +390,15 @@ namespace GryphonSecurity_v2_1.Resources {
         public static string ReportRemark {
             get {
                 return ResourceManager.GetString("ReportRemark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string ReportSaveReportButton {
+            get {
+                return ResourceManager.GetString("ReportSaveReportButton", resourceCulture);
             }
         }
         
