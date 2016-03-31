@@ -284,4 +284,25 @@
   <data name="UserRegitrationError" xml:space="preserve">
     <value>Error in registration</value>
   </data>
+  <data name="PendingAlarmReports" xml:space="preserve">
+    <value>Pending alarmreports: </value>
+  </data>
+  <data name="PendingNFC" xml:space="preserve">
+    <value>Pending NFC: </value>
+  </data>
+  <data name="PendingSendPendingButton" xml:space="preserve">
+    <value>Send pending</value>
+  </data>
+  <data name="ReportError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ReportFillSpaces" xml:space="preserve">
+    <value>Fill out the required boxes</value>
+  </data>
+  <data name="ReportNFCDisabled" xml:space="preserve">
+    <value>NFC disabled, Restart the App with NFC enabled</value>
+  </data>
+  <data name="ReportSaveReportButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>
