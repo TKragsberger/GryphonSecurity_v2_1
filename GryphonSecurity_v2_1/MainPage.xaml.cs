@@ -33,7 +33,6 @@ namespace GryphonSecurity_v2_1
         public MainPage()
         {
             InitializeComponent();
-            controller.createAddresses();
             initializeProximitySample();
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;            

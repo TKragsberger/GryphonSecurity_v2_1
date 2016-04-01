@@ -65,63 +65,79 @@ namespace GryphonSecurity_v2_1.DataSource
         private String KEY_DUMMY_ADDRESS_LONGTITUDE = "DUMMY_LONGTITUDE";
         private String KEY_DUMMY_ADDRESS_LATITUDE = "DUMMY_LATITUDE";
 
+        private String KEY_DUMMY_CUSTOMER_NAME = "DUMMY_CUSTOMER_NAME";
+        private String KEY_DUMMY_CUSTOMER_NUMBER = "DUMMY_CUSTOMER_NUMBER";
+        private String KEY_DUMMY_CUSTOMER_STREET_AND_HOUSE_NUMBER = "DUMMY_CUSTOMER_STREET_AND_HOUSE_NUMBER";
+        private String KEY_DUMMY_CUSTOMER_ZIP_CODE = "DUMMY_CUSTOMER_ZIP_CODE";
+        private String KEY_DUMMY_CUSTOMER_CITY = "DUMMY_CUSTOMER_CITY";
+        private String KEY_DUMMY_CUSTOMER_PHONENUMBER = "DUMMY_CUSTOMER_PHONENUMBER";
+        private String KEY_DUMMY_CUSTOMER_ZONE = "DUMMY_CUSTOMER_ZONE";
+
         private List<String> address = new List<String>();
 
-        public Boolean createUser(User user)
+        public DummyDB()
         {
-            if (appSettings.Contains(KEY_DUMMY_FIRSTNAME))
-            {
-                appSettings.Remove(KEY_DUMMY_FIRSTNAME);
-                appSettings.Remove(KEY_DUMMY_LASTNAME);
-                appSettings.Remove(KEY_DUMMY_ADDRESS);
-                appSettings.Remove(KEY_DUMMY_PHONENUMBER);
-                appSettings.Remove(KEY_DUMMY_USERNAME);
-                appSettings.Remove(KEY_DUMMY_PASSWORD);
-            }
+            createAddresses();
+            createCustomers();
+            createUser();
+        }
 
+        public void createUser()
+        {
             try
             {
-                Debug.WriteLine("" + user.toString());
-                appSettings.Add(KEY_DUMMY_FIRSTNAME, user.Firstname + "");
-                appSettings.Add(KEY_DUMMY_LASTNAME, user.Lastname + "");
-                appSettings.Add(KEY_DUMMY_ADDRESS, user.Address + "");
-                appSettings.Add(KEY_DUMMY_PHONENUMBER, user.Phonenumber + "");
-                appSettings.Add(KEY_DUMMY_USERNAME, user.Username + "");
-                appSettings.Add(KEY_DUMMY_PASSWORD, user.Password + "");
-                appSettings.Save();
-                dummyDBStatus = true;
-
+                if (!appSettings.Contains(1 + KEY_DUMMY_FIRSTNAME))
+                {
+                    appSettings.Add(1 + KEY_DUMMY_FIRSTNAME, "Thomas");
+                    appSettings.Add(1 + KEY_DUMMY_LASTNAME, "Kragsberger");
+                    appSettings.Add(1 + KEY_DUMMY_ADDRESS, "Farum");
+                    appSettings.Add(1 + KEY_DUMMY_PHONENUMBER, "22708834");
+                    appSettings.Add(1 + KEY_DUMMY_USERNAME, "Ydii");
+                    appSettings.Add(1 + KEY_DUMMY_PASSWORD, "1234");
+                    appSettings.Add(2 + KEY_DUMMY_FIRSTNAME, "Jannik");
+                    appSettings.Add(2 + KEY_DUMMY_LASTNAME, "Vangsgaard");
+                    appSettings.Add(2 + KEY_DUMMY_ADDRESS, "Søborg");
+                    appSettings.Add(2 + KEY_DUMMY_PHONENUMBER, "22250898");
+                    appSettings.Add(2 + KEY_DUMMY_USERNAME, "Jansemand");
+                    appSettings.Add(2 + KEY_DUMMY_PASSWORD, "1234");
+                    appSettings.Add(3 + KEY_DUMMY_FIRSTNAME, "Mike");
+                    appSettings.Add(3 + KEY_DUMMY_LASTNAME, "Heerwagen");
+                    appSettings.Add(3 + KEY_DUMMY_ADDRESS, "Lyngby");
+                    appSettings.Add(3 + KEY_DUMMY_PHONENUMBER, "41836990");
+                    appSettings.Add(3 + KEY_DUMMY_USERNAME, "Masas");
+                    appSettings.Add(3 + KEY_DUMMY_PASSWORD, "1234");
+                    appSettings.Save();
+                }
             }
             catch (IsolatedStorageException)
             {
-                dummyDBStatus = false;
+                Debug.WriteLine("Users did not get saved in dummyDB");
             }
-            return dummyDBStatus;
         }
 
-        public User getUser()
+        public User getUser(long id)
         {
-            if (appSettings.Contains(KEY_DUMMY_USERNAME))
+            if (appSettings.Contains(id + KEY_DUMMY_USERNAME))
             {
-                String firstname = appSettings[KEY_DUMMY_FIRSTNAME] as String;
-                String lastname = appSettings[KEY_DUMMY_LASTNAME] as String;
-                String address = appSettings[KEY_DUMMY_ADDRESS] as String;
-                long phonenumber = Convert.ToInt64(appSettings[KEY_DUMMY_PHONENUMBER] as String);
-                String username = appSettings[KEY_DUMMY_USERNAME] as String;
-                String password = appSettings[KEY_DUMMY_PASSWORD] as String;
+                String firstname = appSettings[id + KEY_DUMMY_FIRSTNAME] as String;
+                String lastname = appSettings[id + KEY_DUMMY_LASTNAME] as String;
+                String address = appSettings[id + KEY_DUMMY_ADDRESS] as String;
+                long phonenumber = Convert.ToInt64(appSettings[id + KEY_DUMMY_PHONENUMBER] as String);
+                String username = appSettings[id + KEY_DUMMY_USERNAME] as String;
+                String password = appSettings[id + KEY_DUMMY_PASSWORD] as String;
                 return new User(firstname, lastname, address, phonenumber, username, password);
             }
             else
             {
                 return null;
             }
-
         }
 
         public Boolean createAlarmReports(List<AlarmReport> alarmReports)
         {
             Boolean check = false;
-            foreach(AlarmReport alarmReport in alarmReports)
+
+            foreach (AlarmReport alarmReport in alarmReports)
             {
                 check = createAlarmReport(alarmReport);
                 if (!check)
@@ -136,43 +152,43 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             long id = getNextAlarmReportId();
 
-            //try
-            //{
-                appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNAME, alarmReport.CustomerName + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_ZIPCODE, alarmReport.ZipCode + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_CITY, alarmReport.City + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_PHONENUMBER, alarmReport.Phonenumber + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_DATE, alarmReport.Date + "");
-            Debug.WriteLine("this is time " + alarmReport.Time);
-                appSettings.Add(id + KEY_DUMMY_REPORT_TIME, alarmReport.Time + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_ZONE, alarmReport.Zone + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_BURGLARYVANDALISM, alarmReport.BurglaryVandalism + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_WINDOWDOORCLOSED, alarmReport.WindowDoorClosed + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_APPREHENDEDPERSON, alarmReport.ApprehendedPerson + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_STAFFERROR, alarmReport.StaffError + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_NOTHINGTOREPORT, alarmReport.NothingToReport + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_TECHNICALERROR, alarmReport.TechnicalError + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_UNKNOWNREASON, alarmReport.UnknownReason + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_OTHER, alarmReport.Other + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_CANCELDURINGEMERGENCY, alarmReport.CancelDuringEmergency + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_COVERMADE, alarmReport.CoverMade + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_REMARK, alarmReport.Remark + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_NAME, alarmReport.Name + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_INSTALLER, alarmReport.Installer + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_CONTROLCENTER, alarmReport.ControlCenter + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDDATE, alarmReport.GuardRadioedDate + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDFROM, alarmReport.GuardRadioedFrom + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDTO, alarmReport.GuardRadioedTo + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_ARRIVEDAT, alarmReport.ArrivedAt + "");
-                appSettings.Add(id + KEY_DUMMY_REPORT_DONE, alarmReport.Done + "");
+            try
+            {
+                appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNAME, alarmReport.CustomerName);
+                appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber);
+                appSettings.Add(id + KEY_DUMMY_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber);
+                appSettings.Add(id + KEY_DUMMY_REPORT_ZIPCODE, alarmReport.ZipCode);
+                appSettings.Add(id + KEY_DUMMY_REPORT_CITY, alarmReport.City);
+                appSettings.Add(id + KEY_DUMMY_REPORT_PHONENUMBER, alarmReport.Phonenumber);
+                appSettings.Add(id + KEY_DUMMY_REPORT_DATE, alarmReport.Date);
+                appSettings.Add(id + KEY_DUMMY_REPORT_TIME, alarmReport.Time);
+                appSettings.Add(id + KEY_DUMMY_REPORT_ZONE, alarmReport.Zone);
+                appSettings.Add(id + KEY_DUMMY_REPORT_BURGLARYVANDALISM, alarmReport.BurglaryVandalism);
+                appSettings.Add(id + KEY_DUMMY_REPORT_WINDOWDOORCLOSED, alarmReport.WindowDoorClosed);
+                appSettings.Add(id + KEY_DUMMY_REPORT_APPREHENDEDPERSON, alarmReport.ApprehendedPerson);
+                appSettings.Add(id + KEY_DUMMY_REPORT_STAFFERROR, alarmReport.StaffError);
+                appSettings.Add(id + KEY_DUMMY_REPORT_NOTHINGTOREPORT, alarmReport.NothingToReport);
+                appSettings.Add(id + KEY_DUMMY_REPORT_TECHNICALERROR, alarmReport.TechnicalError);
+                appSettings.Add(id + KEY_DUMMY_REPORT_UNKNOWNREASON, alarmReport.UnknownReason);
+                appSettings.Add(id + KEY_DUMMY_REPORT_OTHER, alarmReport.Other);
+                appSettings.Add(id + KEY_DUMMY_REPORT_CANCELDURINGEMERGENCY, alarmReport.CancelDuringEmergency);
+                appSettings.Add(id + KEY_DUMMY_REPORT_COVERMADE, alarmReport.CoverMade);
+                appSettings.Add(id + KEY_DUMMY_REPORT_REMARK, alarmReport.CoverMade);
+                appSettings.Add(id + KEY_DUMMY_REPORT_NAME, alarmReport.Name);
+                appSettings.Add(id + KEY_DUMMY_REPORT_INSTALLER, alarmReport.Installer);
+                appSettings.Add(id + KEY_DUMMY_REPORT_CONTROLCENTER, alarmReport.ControlCenter);
+                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDDATE, alarmReport.GuardRadioedDate);
+                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDFROM, alarmReport.GuardRadioedFrom);
+                appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDTO, alarmReport.GuardRadioedTo);
+                appSettings.Add(id + KEY_DUMMY_REPORT_ARRIVEDAT, alarmReport.ArrivedAt);
+                appSettings.Add(id + KEY_DUMMY_REPORT_DONE, alarmReport.Done);
                 appSettings.Save();
                 dummyDBStatus = true;
-            //}catch
-            //{
-            //    dummyDBStatus = false;
-            //}
+            }
+            catch
+            {
+                dummyDBStatus = false;
+            }
             return dummyDBStatus;
         }
 
@@ -187,7 +203,7 @@ namespace GryphonSecurity_v2_1.DataSource
                 for (int i = 0; i < length; i++)
                 {
                     id = i + 1;
-                    AlarmReport alarmReport = getAlarmReport(id);                
+                    AlarmReport alarmReport = getAlarmReport(id);
                     alarmReports.Add(alarmReport);
                 }
             }
@@ -239,27 +255,27 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public Boolean createAddresses()
         {
-            
+
             try
             {
                 if (!appSettings.Contains(1 + KEY_DUMMY_ADDRESS_NAME))
                 {
                     Debug.WriteLine("createAddresses");
                     appSettings.Add(1 + KEY_DUMMY_ADDRESS_NAME, "Lyngby st.");
-                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LONGTITUDE, 12.505161499999986 + "");
-                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LATITUDE, 55.767944 + "");
+                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.505161499999986");
+                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LATITUDE, "55.767944");
                     appSettings.Add(2 + KEY_DUMMY_ADDRESS_NAME, "København hovedbanegård");
-                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,566796599999975");
-                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LATITUDE, "55,6713363");
+                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.566796599999975");
+                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LATITUDE, "55.6713363");
                     appSettings.Add(3 + KEY_DUMMY_ADDRESS_NAME, "Farum st.");
-                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,373533899999984");
-                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LATITUDE, "55,8120275");
+                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.373533899999984");
+                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LATITUDE, "55.8120275");
                     appSettings.Add(4 + KEY_DUMMY_ADDRESS_NAME, "Kokkedal st.");
-                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,502057000000036");
-                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LATITUDE, "55,90348789999999");
+                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.502057000000036");
+                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LATITUDE, "55.90348789999999");
                     appSettings.Add(5 + KEY_DUMMY_ADDRESS_NAME, "Buddinge st.");
-                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,493978999999968");
-                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LATITUDE, "55,7469736");
+                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.493978999999968");
+                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LATITUDE, "55.7469736");
                     appSettings.Save();
                 }
                 return true;
@@ -272,23 +288,75 @@ namespace GryphonSecurity_v2_1.DataSource
 
         }
 
+        public void createCustomers()
+        {
+            try
+            {
+                if (!appSettings.Contains(1 + KEY_DUMMY_CUSTOMER_NAME))
+                {
+                    appSettings.Add(1 + KEY_DUMMY_CUSTOMER_NAME, "Thomas Kragsberger");
+                    appSettings.Add(1 + KEY_DUMMY_CUSTOMER_NUMBER, "1");
+                    appSettings.Add(1 + KEY_DUMMY_CUSTOMER_STREET_AND_HOUSE_NUMBER, "Bybækterrasserne 137 D");
+                    appSettings.Add(1 + KEY_DUMMY_CUSTOMER_ZIP_CODE, "3520");
+                    appSettings.Add(1 + KEY_DUMMY_CUSTOMER_CITY, "Farum");
+                    appSettings.Add(1 + KEY_DUMMY_CUSTOMER_PHONENUMBER, "27708834");
+                    appSettings.Add(1 + KEY_DUMMY_CUSTOMER_ZONE, "ZONE 1");
+                    appSettings.Add(1 + KEY_DUMMY_CUSTOMER_NAME, "Jannik Vangsgaard");
+                    appSettings.Add(2 + KEY_DUMMY_CUSTOMER_NUMBER, "2");
+                    appSettings.Add(2 + KEY_DUMMY_CUSTOMER_STREET_AND_HOUSE_NUMBER, "Hovedgade 40");
+                    appSettings.Add(2 + KEY_DUMMY_CUSTOMER_ZIP_CODE, "2860");
+                    appSettings.Add(2 + KEY_DUMMY_CUSTOMER_CITY, "Søborg");
+                    appSettings.Add(2 + KEY_DUMMY_CUSTOMER_PHONENUMBER, "22250898");
+                    appSettings.Add(2 + KEY_DUMMY_CUSTOMER_ZONE, "ZONE 2");
+                    appSettings.Add(3 + KEY_DUMMY_CUSTOMER_NAME, "Mike Heerwagen");
+                    appSettings.Add(3 + KEY_DUMMY_CUSTOMER_NUMBER, "3");
+                    appSettings.Add(3 + KEY_DUMMY_CUSTOMER_STREET_AND_HOUSE_NUMBER, "Kollegiebakken 9");
+                    appSettings.Add(3 + KEY_DUMMY_CUSTOMER_ZIP_CODE, "2800");
+                    appSettings.Add(3 + KEY_DUMMY_CUSTOMER_CITY, "Lyngby");
+                    appSettings.Add(3 + KEY_DUMMY_CUSTOMER_PHONENUMBER, "41836990");
+                    appSettings.Add(3 + KEY_DUMMY_CUSTOMER_ZONE, "ZONE 3");
+                    appSettings.Save();
+                }
+            }
+            catch (IsolatedStorageException)
+            {
+                Debug.WriteLine("Customers did not get saved in dummyDB");
+            }
+        }
+
+        public Customer getCustomer(long id)
+        {
+            if (appSettings.Contains(id + KEY_DUMMY_CUSTOMER_NUMBER))
+            {
+                String customerName = appSettings[id + KEY_DUMMY_CUSTOMER_NAME] as String;
+                long customerNumber = Convert.ToInt64(appSettings[id + KEY_DUMMY_CUSTOMER_NUMBER] as String);
+                String streetHouseNumber = appSettings[id + KEY_DUMMY_CUSTOMER_STREET_AND_HOUSE_NUMBER] as String;
+                int zipCode = Convert.ToInt32(appSettings[id + KEY_DUMMY_CUSTOMER_ZIP_CODE] as String);
+                String city = appSettings[id + KEY_DUMMY_CUSTOMER_CITY] as String;
+                long phonenumber = Convert.ToInt64(appSettings[id + KEY_DUMMY_CUSTOMER_PHONENUMBER] as String);
+                String zone = appSettings[id + KEY_DUMMY_CUSTOMER_ZONE] as String;
+                return new Customer(customerName, customerNumber, streetHouseNumber, zipCode, city, phonenumber, zone);
+            }
+            return null;
+        }
+
         public List<String> getAddress(String id)
         {
-            if(appSettings.Contains(id + KEY_DUMMY_ADDRESS_NAME))
+            if (appSettings.Contains(id + KEY_DUMMY_ADDRESS_NAME))
             {
                 address.Add(appSettings[id + KEY_DUMMY_ADDRESS_NAME] as String);
                 address.Add(appSettings[id + KEY_DUMMY_ADDRESS_LONGTITUDE] as String);
                 address.Add(appSettings[id + KEY_DUMMY_ADDRESS_LATITUDE] as String);
                 return address;
             }
-            
+
             return null;
         }
 
         public Boolean createNFCs(List<NFC> nfcs)
         {
             Boolean check = false;
-            foreach(NFC nfc in nfcs)
+            foreach (NFC nfc in nfcs)
             {
                 check = createNFC(nfc);
                 if (!check)
@@ -306,10 +374,10 @@ namespace GryphonSecurity_v2_1.DataSource
             try
             {
 
-                appSettings.Add(id + KEY_DUMMY_NFC_RANGECHECK, nfc.RangeCheck + "");
-                appSettings.Add(id + KEY_DUMMY_NFC_TAGADDRESS, nfc.TagAddress + "");
-                appSettings.Add(id + KEY_DUMMY_NFC_TIME, nfc.Time + "");
-                
+                appSettings.Add(id + KEY_DUMMY_NFC_RANGECHECK, nfc.RangeCheck);
+                appSettings.Add(id + KEY_DUMMY_NFC_TAGADDRESS, nfc.TagAddress);
+                appSettings.Add(id + KEY_DUMMY_NFC_TIME, nfc.Time);
+
                 appSettings.Save();
                 return true;
             }
@@ -340,16 +408,16 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public NFC getNFC(long id)
         {
-            if (appSettings.Contains(KEY_DUMMY_NFC_TAGADDRESS))
+            if (appSettings.Contains(id + KEY_DUMMY_NFC_TAGADDRESS))
             {
-                Boolean rangeCheck =Convert.ToBoolean(appSettings[id + KEY_DUMMY_NFC_RANGECHECK] as String);
+                Boolean rangeCheck = Convert.ToBoolean(appSettings[id + KEY_DUMMY_NFC_RANGECHECK] as String);
                 String tagAddress = appSettings[id + KEY_DUMMY_NFC_TAGADDRESS] as String;
                 DateTime time = DateTime.Parse(appSettings[id + KEY_DUMMY_NFC_TIME] as String, CultureInfo.InvariantCulture);
-                User user = getUser();
+                User user = getUser("1");
                 return new NFC(rangeCheck, tagAddress, time, user);
             }
             else
-            { 
+            {
                 return null;
             }
         }

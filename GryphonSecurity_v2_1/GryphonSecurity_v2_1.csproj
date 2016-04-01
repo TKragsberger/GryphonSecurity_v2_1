@@ -15,8 +15,7 @@
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
-    <SupportedCultures>
-    </SupportedCultures>
+    <SupportedCultures>da-DK</SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>GryphonSecurity_v2_1_$(Configuration)_$(Platform).xap</XapFilename>
@@ -100,6 +99,7 @@
     <Compile Include="DataSource\LocalStorage.cs" />
     <Compile Include="Domain\Controller.cs" />
     <Compile Include="Domain\Entity\AlarmReport.cs" />
+    <Compile Include="Domain\Entity\Customer.cs" />
     <Compile Include="Domain\Entity\NFC.cs" />
     <Compile Include="Domain\Entity\User.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -183,6 +183,7 @@
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\AppResources.da-DK.resx" />
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>

@@ -31,12 +31,7 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
                 <toolkit:PhoneTextBox x:Name="textBoxFirstname" HorizontalAlignment="Left" Height="72" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Hint="{Binding Path=LocalizedResources.UserFirstname, Source={StaticResource LocalizedStrings}}" />
-                <toolkit:PhoneTextBox x:Name="textBoxLastName" HorizontalAlignment="Left" Height="72" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Hint="{Binding Path=LocalizedResources.UserLastname, Source={StaticResource LocalizedStrings}}" />
-                <toolkit:PhoneTextBox x:Name="textBoxAddress" HorizontalAlignment="Left" Height="72" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Hint="{Binding Path=LocalizedResources.UserAddress, Source={StaticResource LocalizedStrings}}" />
-                <toolkit:PhoneTextBox x:Name="textBoxPhonenumber" InputScope="Number" HorizontalAlignment="Left" Height="72" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Hint="{Binding Path=LocalizedResources.UserPhonenumber, Source={StaticResource LocalizedStrings}}" />
-                <toolkit:PhoneTextBox x:Name="textBoxUsername" HorizontalAlignment="Left" Height="72" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Hint="{Binding Path=LocalizedResources.Username, Source={StaticResource LocalizedStrings}}" />
-                <toolkit:PhoneTextBox x:Name="textBoxPassword" HorizontalAlignment="Left" Height="72" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Hint="{Binding Path=LocalizedResources.UserPassword, Source={StaticResource LocalizedStrings}}" />
-                <toolkit:PhoneTextBox x:Name="textBoxPasswordConfirm" HorizontalAlignment="Left" Height="72" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Hint="{Binding Path=LocalizedResources.UserPasswordConfirm, Source={StaticResource LocalizedStrings}}" />
+                <Button x:Name="SearchForUserButton" Content="{Binding Path=LocalizedResources.SearchUserRegisterButton, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="67,0,0,0" VerticalAlignment="Top" Width="320" Click="SearchForUserButton_Click"/>
                 <Button x:Name="RegistrerUserButton" Content="{Binding Path=LocalizedResources.UserRegisterButton, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="67,0,0,0" VerticalAlignment="Top" Width="320" Click="RegistrerBrugerButton_Click"/>
             </StackPanel>
         </Grid>

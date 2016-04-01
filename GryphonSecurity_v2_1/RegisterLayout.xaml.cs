@@ -10,6 +10,7 @@ namespace GryphonSecurity_v2_1
     public partial class RegisterLayout : PhoneApplicationPage
     {
         Controller controller = Controller.Instance;
+        User user;
         public RegisterLayout()
         {
             InitializeComponent();
@@ -17,19 +18,10 @@ namespace GryphonSecurity_v2_1
 
         private void RegistrerBrugerButton_Click(object sender, RoutedEventArgs e)
         {
-            String firstname = textBoxFirstname.Text;
-            String lastname = textBoxLastName.Text;
-            String address = textBoxAddress.Text;
-            long phonenumber = Convert.ToInt64(textBoxPhonenumber.Text);
-            String username = textBoxUsername.Text;
-            String password = textBoxPassword.Text;
-            String passwordConfirm = textBoxPasswordConfirm.Text;
-            if (password.Equals(passwordConfirm))
-            {
                 try
                 {
-                    User user = new User(firstname, lastname, address, phonenumber, username, password);
-                    if (controller.createUser(user))
+                    User localUser = new User(user.Firstname, user.Lastname, user.Address, user.Phonenumber, user.Username, user.Password);
+                    if (controller.createUser(localUser))
                     {
                         MessageBox.Show(AppResources.UserCreated);
                         NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
@@ -42,13 +34,16 @@ namespace GryphonSecurity_v2_1
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(AppResources.UserRegitrationError);
+                    MessageBox.Show(AppResources.UserRegistrationError);
                 }
-            }
-            else
-            {
-                MessageBox.Show(AppResources.UserPasswordNotEquel);
-            }
+            
+        }
+
+        private void SearchForUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            long id = Convert.ToInt64(textBoxFirstname.Text);
+            user = controller.getUser(id);
+
         }
     }
 }

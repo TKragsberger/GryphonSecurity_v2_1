@@ -17,9 +17,19 @@ namespace GryphonSecurity_v2_1.DataSource
             return localStorage.createUser(user);
         }
 
-        public User getUser()
+        public User getUser(long id)
+        {
+            return connection.getUser(id);
+        }
+
+        public User getLocalStorageUser()
         {
             return localStorage.getUser();
+        }
+
+        public Customer getCustomer(long id)
+        {
+            return connection.getCustomer(id);
         }
 
         public Boolean createAlarmReport(AlarmReport alarmReport)
@@ -40,11 +50,6 @@ namespace GryphonSecurity_v2_1.DataSource
         public List<String> getAdress(String id)
         {
             return connection.getAddress(id);
-        }
-
-        public Boolean createAddresses()
-        {
-            return connection.createAddresses();
         }
 
         public Boolean createNFC(NFC nfc)

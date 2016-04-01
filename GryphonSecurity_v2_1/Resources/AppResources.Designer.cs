@@ -493,6 +493,15 @@ namespace GryphonSecurity_v2_1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search for user.
+        /// </summary>
+        public static string SearchUserRegisterButton {
+            get {
+                return ResourceManager.GetString("SearchUserRegisterButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string UserAddress {
@@ -612,9 +621,9 @@ namespace GryphonSecurity_v2_1.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Error in registration.
         /// </summary>
-        public static string UserRegitrationError {
+        public static string UserRegistrationError {
             get {
-                return ResourceManager.GetString("UserRegitrationError", resourceCulture);
+                return ResourceManager.GetString("UserRegistrationError", resourceCulture);
             }
         }
     }

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppBarButtonText" xml:space="preserve">
-    <value>Register</value>
+    <value>Registere</value>
   </data>
   <data name="AppBarMenuItemText" xml:space="preserve">
     <value>About</value>
@@ -126,186 +126,162 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Gryphon Security</value>
   </data>
-  <data name="LayoutTitleAlarmReport" xml:space="preserve">
-    <value>Alarm Report</value>
-  </data>
-  <data name="LayoutTitleLogin" xml:space="preserve">
-    <value>Login</value>
-  </data>
   <data name="LayoutTitleNavigation" xml:space="preserve">
     <value>Navigation</value>
   </data>
-  <data name="LayoutTitleRegister" xml:space="preserve">
-    <value>Register</value>
-  </data>
   <data name="LayoutTitleScanNFC" xml:space="preserve">
     <value>Scan NFC</value>
-  </data>
-  <data name="LoginError" xml:space="preserve">
-    <value>There was an error when tryed to login</value>
-  </data>
-  <data name="ReportAlarmReportFailed" xml:space="preserve">
-    <value>The report was not sent</value>
-  </data>
-  <data name="ReportAlarmReportSuccess" xml:space="preserve">
-    <value>The report was sent </value>
-  </data>
-  <data name="ReportApprehendedPerson" xml:space="preserve">
-    <value>Apprehended person</value>
-  </data>
-  <data name="ReportArrivedAtTB" xml:space="preserve">
-    <value>Arrived at:</value>
-  </data>
-  <data name="ReportBurglaryVandalism" xml:space="preserve">
-    <value>Burglary vandalism</value>
-  </data>
-  <data name="ReportCancelsDuringEmergency" xml:space="preserve">
-    <value>Cancel during emergency</value>
-  </data>
-  <data name="ReportCity" xml:space="preserve">
-    <value>City</value>
-  </data>
-  <data name="ReportControlCenter" xml:space="preserve">
-    <value>Control center</value>
-  </data>
-  <data name="ReportCoverMade" xml:space="preserve">
-    <value>Cover made</value>
-  </data>
-  <data name="ReportCustomerName" xml:space="preserve">
-    <value>Customer name</value>
-  </data>
-  <data name="ReportCustomerNameTB" xml:space="preserve">
-    <value>Customer name:</value>
-  </data>
-  <data name="ReportCustomerNumber" xml:space="preserve">
-    <value>Customer number</value>
-  </data>
-  <data name="ReportDateTB" xml:space="preserve">
-    <value>Date:</value>
-  </data>
-  <data name="ReportDoneTB" xml:space="preserve">
-    <value>Done:</value>
-  </data>
-  <data name="ReportGuardRadioedDateTB" xml:space="preserve">
-    <value>Guard radioed date:</value>
-  </data>
-  <data name="ReportGuardRadioedFromTB" xml:space="preserve">
-    <value>Guard radioed from:</value>
-  </data>
-  <data name="ReportGuardRadioedToTB" xml:space="preserve">
-    <value>Guard radioed to:</value>
-  </data>
-  <data name="ReportInstaller" xml:space="preserve">
-    <value>Installer</value>
-  </data>
-  <data name="ReportNothingToReport" xml:space="preserve">
-    <value>Nothing to report</value>
-  </data>
-  <data name="ReportOther" xml:space="preserve">
-    <value>Other</value>
-  </data>
-  <data name="ReportPhonenumber" xml:space="preserve">
-    <value>Phonenumber</value>
-  </data>
-  <data name="ReportRemark" xml:space="preserve">
-    <value>Remark</value>
-  </data>
-  <data name="ReportSendReportButton" xml:space="preserve">
-    <value>Send report</value>
-  </data>
-  <data name="ReportStaffError" xml:space="preserve">
-    <value>Staff error</value>
-  </data>
-  <data name="ReportStreetAndHouseNumber" xml:space="preserve">
-    <value>Street and house number</value>
-  </data>
-  <data name="ReportTechnicalError" xml:space="preserve">
-    <value>Technical error</value>
-  </data>
-  <data name="ReportUnknownReason" xml:space="preserve">
-    <value>Unknown reason</value>
-  </data>
-  <data name="ReportWindowDoorClosed" xml:space="preserve">
-    <value>Window door closed</value>
-  </data>
-  <data name="ReportZipCode" xml:space="preserve">
-    <value>Zip code</value>
-  </data>
-  <data name="ReportZone" xml:space="preserve">
-    <value>Zone</value>
   </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
     <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
-    <value>en-US</value>
+    <value>da-DK</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
-  <data name="UserAddress" xml:space="preserve">
-    <value>Address</value>
-  </data>
-  <data name="UserCreated" xml:space="preserve">
-    <value>User created</value>
-  </data>
-  <data name="UserFirstname" xml:space="preserve">
-    <value>Firstname</value>
-  </data>
-  <data name="UserLastname" xml:space="preserve">
-    <value>Lastname</value>
-  </data>
-  <data name="UserLoginButton" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="Username" xml:space="preserve">
-    <value>Username</value>
-  </data>
-  <data name="UsernamePasswordError" xml:space="preserve">
-    <value>Username or password is wrong</value>
-  </data>
-  <data name="UserNotCreated" xml:space="preserve">
-    <value>User not created</value>
-  </data>
-  <data name="UserPassword" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="UserPasswordConfirm" xml:space="preserve">
-    <value>Confirm Password</value>
-  </data>
-  <data name="UserPasswordNotEquel" xml:space="preserve">
-    <value>Passwords was not the same</value>
-  </data>
-  <data name="UserPhonenumber" xml:space="preserve">
-    <value>Phonenumber</value>
-  </data>
-  <data name="UserRegisterButton" xml:space="preserve">
-    <value>Register</value>
-  </data>
-  <data name="UserRegistrationError" xml:space="preserve">
-    <value>Error in registration</value>
-  </data>
   <data name="PendingAlarmReports" xml:space="preserve">
-    <value>Pending alarmreports: </value>
+    <value>Afventende Alarmrapporter</value>
   </data>
   <data name="PendingNFC" xml:space="preserve">
-    <value>Pending NFC: </value>
+    <value>Afventende NFC: </value>
   </data>
   <data name="PendingSendPendingButton" xml:space="preserve">
-    <value>Send pending</value>
+    <value>Send</value>
   </data>
   <data name="ReportError" xml:space="preserve">
-    <value>Error</value>
+    <value>Fejl</value>
   </data>
   <data name="ReportFillSpaces" xml:space="preserve">
-    <value>Fill out the required boxes</value>
+    <value>Udfyld de manglende felter</value>
   </data>
   <data name="ReportNFCDisabled" xml:space="preserve">
-    <value>NFC disabled, Restart the App with NFC enabled</value>
+    <value>NFC slået fra, genstart appen med NFC slået til</value>
+  </data>
+  <data name="LayoutTitleAlarmReport" xml:space="preserve">
+    <value>Alarmrapport</value>
+  </data>
+  <data name="LayoutTitleLogin" xml:space="preserve">
+    <value>Log ind</value>
+  </data>
+  <data name="LayoutTitleRegister" xml:space="preserve">
+    <value>Registrer</value>
+  </data>
+  <data name="ReportAlarmReportFailed" xml:space="preserve">
+    <value>Rapporten blev ikke sendt</value>
+  </data>
+  <data name="ReportAlarmReportSuccess" xml:space="preserve">
+    <value>Rapporten blev sendt</value>
+  </data>
+  <data name="ReportApprehendedPerson" xml:space="preserve">
+    <value>Antruffen Person</value>
+  </data>
+  <data name="ReportArrivedAtTB" xml:space="preserve">
+    <value>Var fremme:</value>
+  </data>
+  <data name="ReportBurglaryVandalism" xml:space="preserve">
+    <value>Indbrud hærværk</value>
+  </data>
+  <data name="ReportCancelsDuringEmergency" xml:space="preserve">
+    <value>Afmeldt under udrykning</value>
+  </data>
+  <data name="ReportCity" xml:space="preserve">
+    <value>By</value>
+  </data>
+  <data name="ReportControlCenter" xml:space="preserve">
+    <value>Kontrolcentral</value>
+  </data>
+  <data name="ReportCoverMade" xml:space="preserve">
+    <value>Afdækning foretaget</value>
+  </data>
+  <data name="ReportCustomerName" xml:space="preserve">
+    <value>Kundenavn</value>
+  </data>
+  <data name="ReportCustomerNameTB" xml:space="preserve">
+    <value>Kundenavn:</value>
+  </data>
+  <data name="ReportCustomerNumber" xml:space="preserve">
+    <value>Kundenummer</value>
+  </data>
+  <data name="ReportDateTB" xml:space="preserve">
+    <value>Dato:</value>
+  </data>
+  <data name="ReportDoneTB" xml:space="preserve">
+    <value>Færdig:</value>
+  </data>
+  <data name="ReportGuardRadioedDateTB" xml:space="preserve">
+    <value>Vagt rekviveret den:</value>
+  </data>
+  <data name="ReportGuardRadioedFromTB" xml:space="preserve">
+    <value>Vagt rekviveret fra:</value>
+  </data>
+  <data name="ReportGuardRadioedToTB" xml:space="preserve">
+    <value>Vagt rekviveret til:</value>
+  </data>
+  <data name="ReportInstaller" xml:space="preserve">
+    <value>Installatør</value>
+  </data>
+  <data name="ReportNothingToReport" xml:space="preserve">
+    <value>Intet at bemærke</value>
+  </data>
+  <data name="ReportOther" xml:space="preserve">
+    <value>Andet</value>
+  </data>
+  <data name="ReportPhonenumber" xml:space="preserve">
+    <value>Telefonnummer</value>
+  </data>
+  <data name="ReportRemark" xml:space="preserve">
+    <value>Bemærkning</value>
+  </data>
+  <data name="ReportSendReportButton" xml:space="preserve">
+    <value>Send Rapport</value>
+  </data>
+  <data name="ReportStaffError" xml:space="preserve">
+    <value>Personalefejl</value>
+  </data>
+  <data name="ReportStreetAndHouseNumber" xml:space="preserve">
+    <value>Gade og husnummer</value>
+  </data>
+  <data name="ReportTechnicalError" xml:space="preserve">
+    <value>Teknisk fejl</value>
+  </data>
+  <data name="ReportUnknownReason" xml:space="preserve">
+    <value>Ukendt årsag</value>
+  </data>
+  <data name="ReportWindowDoorClosed" xml:space="preserve">
+    <value>Vindue dør lukket</value>
+  </data>
+  <data name="ReportZipCode" xml:space="preserve">
+    <value>Postnummer</value>
+  </data>
+  <data name="ReportZone" xml:space="preserve">
+    <value>Zone</value>
+  </data>
+  <data name="UserCreated" xml:space="preserve">
+    <value>Bruger oprettet</value>
+  </data>
+  <data name="UserFirstname" xml:space="preserve">
+    <value>Fornavn</value>
+  </data>
+  <data name="UserLastname" xml:space="preserve">
+    <value>Efternavn</value>
+  </data>
+  <data name="UserNotCreated" xml:space="preserve">
+    <value>Bruger blev ikke oprettet</value>
+  </data>
+  <data name="UserPhonenumber" xml:space="preserve">
+    <value>Telefonnummer</value>
+  </data>
+  <data name="UserRegisterButton" xml:space="preserve">
+    <value>Registrere</value>
+  </data>
+  <data name="UserRegistrationError" xml:space="preserve">
+    <value>Fejl i registrering</value>
   </data>
   <data name="ReportSaveReportButton" xml:space="preserve">
-    <value>Save</value>
+    <value>Gem</value>
   </data>
   <data name="SearchUserRegisterButton" xml:space="preserve">
-    <value>Search for user</value>
+    <value>Søg</value>
   </data>
 </root>

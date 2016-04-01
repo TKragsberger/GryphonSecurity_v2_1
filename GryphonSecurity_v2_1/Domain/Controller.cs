@@ -65,7 +65,7 @@ namespace GryphonSecurity_v2_1
 
         public User getUser()
         {
-            return dBFacade.getUser();
+            return dBFacade.getLocalStorageUser();
         }
 
         public Boolean createAlarmReport(AlarmReport alarmReport)
@@ -214,7 +214,7 @@ namespace GryphonSecurity_v2_1
                     Debug.WriteLine("getDistance 3");
                     rangeCheck = true;
                 }
-                check = dBFacade.createNFC(new NFC(rangeCheck, tagAddress, DateTime.Now, dBFacade.getUser()));
+                check = dBFacade.createNFC(new NFC(rangeCheck, tagAddress, DateTime.Now, dBFacade.getLocalStorageUser()));
             } else
             {
                 Debug.WriteLine("getDistance 4");
@@ -224,11 +224,6 @@ namespace GryphonSecurity_v2_1
             return check;
 
 
-        }
-
-        public Boolean createAddresses()
-        {
-            return dBFacade.createAddresses();
         }
 
         public NFC getNFC(long id)
@@ -300,6 +295,11 @@ namespace GryphonSecurity_v2_1
             }
 
             return alarmReportCheck;
+        }
+
+        public User getUser(long id)
+        {
+            return dBFacade.getUser(id);
         }
         
     }
