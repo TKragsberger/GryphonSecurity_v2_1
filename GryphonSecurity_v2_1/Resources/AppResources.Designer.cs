@@ -268,6 +268,15 @@ namespace GryphonSecurity_v2_1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customer not found.
+        /// </summary>
+        public static string ReportCustomerNotFound {
+            get {
+                return ResourceManager.GetString("ReportCustomerNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer number.
         /// </summary>
         public static string ReportCustomerNumber {
@@ -403,6 +412,15 @@ namespace GryphonSecurity_v2_1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string ReportSearchForCustomer {
+            get {
+                return ResourceManager.GetString("ReportSearchForCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Send report.
         /// </summary>
         public static string ReportSendReportButton {
@@ -493,6 +511,33 @@ namespace GryphonSecurity_v2_1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ready to scan NFC tag.
+        /// </summary>
+        public static string ScanNFCReady {
+            get {
+                return ResourceManager.GetString("ScanNFCReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time of scan.
+        /// </summary>
+        public static string ScanNFCScanTime {
+            get {
+                return ResourceManager.GetString("ScanNFCScanTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tag address.
+        /// </summary>
+        public static string ScanNFCTagAddress {
+            get {
+                return ResourceManager.GetString("ScanNFCTagAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search for user.
         /// </summary>
         public static string SearchUserRegisterButton {
@@ -525,6 +570,15 @@ namespace GryphonSecurity_v2_1.Resources {
         public static string UserFirstname {
             get {
                 return ResourceManager.GetString("UserFirstname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        public static string UserId {
+            get {
+                return ResourceManager.GetString("UserId", resourceCulture);
             }
         }
         
@@ -570,6 +624,15 @@ namespace GryphonSecurity_v2_1.Resources {
         public static string UserNotCreated {
             get {
                 return ResourceManager.GetString("UserNotCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User not found, wrong id.
+        /// </summary>
+        public static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
             }
         }
         

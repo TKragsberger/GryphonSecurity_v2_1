@@ -13,7 +13,6 @@ namespace GryphonSecurity_v2_1.DataSource
     public class LocalStorage
     {
         private static IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
-
         private long id = 0;
 
         private String KEY_FIRSTNAME = "FIRSTNAME";
@@ -28,9 +27,9 @@ namespace GryphonSecurity_v2_1.DataSource
         private String KEY_ID_TEMP_ALARMREPORT = "ID_TEMP_ALARMREPORT";
         
 
-        private String KEY_CURRENTNUMBEROFALARMREPORTS = "CURRENTNUMBEROFALARMREPORTS";
-        private String KEY_CURRENTNUMBEROFNFCS = "CURRENTNUMBEROFNFCS";
-        private String KEY_CURRENTNUMBEROFTEMPALARMREPORTS = "CURRENTNUMBEROFTEMPALARMREPORTS";
+        private String KEY_CURRENTNUMBER_OF_ALARMREPORTS = "CURRENTNUMBER_OF_ALARMREPORTS";
+        private String KEY_CURRENTNUMBER_OF_NFCS = "CURRENTNUMBER_OF_NFCS";
+        private String KEY_CURRENTNUMBER_OF_TEMP_ALARMREPORTS = "CURRENTNUMBER_OF_TEMP_ALARMREPORTS";
 
         private String KEY_REPORT_CUSTOMERNAME = "REPORT_CUSTOMERNAME";
         private String KEY_REPORT_CUSTOMERNUMBER = "REPORT_CUSTOMERNUMBER";
@@ -90,7 +89,6 @@ namespace GryphonSecurity_v2_1.DataSource
         private String KEY_TEMP_REPORT_ARRIVEDAT = "TEMP_REPORT_ARRIVEDAT";
         private String KEY_TEMP_REPORT_DONE = "TEMP_REPORT_DONE";
 
-        private String KEY_NFC_RANGECHECK = "NFC_RANGECHECK";
         private String KEY_NFC_TAGADDRESS = "NFC_TAGADDRESS";
         private String KEY_NFC_PRESENTLATITUDE = "NFC_PRESENTLATITUDE";
         private String KEY_NFC_PRESENTLONGITUDE = "NFC_PRESENTLONGITUDE";
@@ -109,7 +107,6 @@ namespace GryphonSecurity_v2_1.DataSource
 
             try
             {
-                Debug.WriteLine("" + user.toString());
                 appSettings.Add(KEY_FIRSTNAME, user.Firstname);
                 appSettings.Add(KEY_LASTNAME, user.Lastname);
                 appSettings.Add(KEY_ADDRESS, user.Address);
@@ -142,7 +139,6 @@ namespace GryphonSecurity_v2_1.DataSource
             {
                 return null;
             }
-
         }
 
         private long getCurrentAlarmReportId()
@@ -166,19 +162,19 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public int currentNumberOfAlarmReports()
         {
-            if (!appSettings.Contains(KEY_CURRENTNUMBEROFALARMREPORTS))
+            if (!appSettings.Contains(KEY_CURRENTNUMBER_OF_ALARMREPORTS))
             {
-                appSettings.Add(KEY_CURRENTNUMBEROFALARMREPORTS, "0");
+                appSettings.Add(KEY_CURRENTNUMBER_OF_ALARMREPORTS, "0");
                 appSettings.Save();
             }
-            return Convert.ToInt32(appSettings[KEY_CURRENTNUMBEROFALARMREPORTS] as String);
+            return Convert.ToInt32(appSettings[KEY_CURRENTNUMBER_OF_ALARMREPORTS] as String);
         }
 
         public void addNumberOfAlarmReports()
         {
             int next = currentNumberOfAlarmReports() + 1;
-            appSettings.Remove(KEY_CURRENTNUMBEROFALARMREPORTS);
-            appSettings.Add(KEY_CURRENTNUMBEROFALARMREPORTS, next + "");
+            appSettings.Remove(KEY_CURRENTNUMBER_OF_ALARMREPORTS);
+            appSettings.Add(KEY_CURRENTNUMBER_OF_ALARMREPORTS, next + "");
             appSettings.Save();
         }
 
@@ -203,28 +199,26 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public int currentNumberOfTempAlarmReports()
         {
-            if (!appSettings.Contains(KEY_CURRENTNUMBEROFTEMPALARMREPORTS))
+            if (!appSettings.Contains(KEY_CURRENTNUMBER_OF_TEMP_ALARMREPORTS))
             {
-                appSettings.Add(KEY_CURRENTNUMBEROFTEMPALARMREPORTS, "0");
+                appSettings.Add(KEY_CURRENTNUMBER_OF_TEMP_ALARMREPORTS, "0");
                 appSettings.Save();
             }
-            return Convert.ToInt32(appSettings[KEY_CURRENTNUMBEROFTEMPALARMREPORTS] as String);
+            return Convert.ToInt32(appSettings[KEY_CURRENTNUMBER_OF_TEMP_ALARMREPORTS] as String);
         }
 
         public void addNumberOfTempAlarmReports()
         {
             int next = currentNumberOfTempAlarmReports() + 1;
-            appSettings.Remove(KEY_CURRENTNUMBEROFTEMPALARMREPORTS);
-            appSettings.Add(KEY_CURRENTNUMBEROFTEMPALARMREPORTS, next + "");
+            appSettings.Remove(KEY_CURRENTNUMBER_OF_TEMP_ALARMREPORTS);
+            appSettings.Add(KEY_CURRENTNUMBER_OF_TEMP_ALARMREPORTS, next + "");
             appSettings.Save();
         }
 
         private long getCurrentNfcId()
         {
-            Debug.WriteLine(appSettings.Contains(KEY_ID_NFC));
             if (!appSettings.Contains(KEY_ID_NFC))
             {
-                Debug.WriteLine("when are we here");
                 appSettings.Add(KEY_ID_NFC, "0");
                 appSettings.Save();
             }
@@ -256,12 +250,12 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public int currentNumberOfNFCs()
         {
-            if (!appSettings.Contains(KEY_CURRENTNUMBEROFNFCS))
+            if (!appSettings.Contains(KEY_CURRENTNUMBER_OF_NFCS))
             {
-                appSettings.Add(KEY_CURRENTNUMBEROFNFCS, "0");
+                appSettings.Add(KEY_CURRENTNUMBER_OF_NFCS, "0");
                 appSettings.Save();
             }
-            return Convert.ToInt32(appSettings[KEY_CURRENTNUMBEROFNFCS] as String);
+            return Convert.ToInt32(appSettings[KEY_CURRENTNUMBER_OF_NFCS] as String);
         }
 
         public void addNumberOfNFCs()
@@ -269,14 +263,12 @@ namespace GryphonSecurity_v2_1.DataSource
             try
             {
                 int next = currentNumberOfNFCs() + 1;
-                if (appSettings.Contains(KEY_CURRENTNUMBEROFNFCS))
+                if (appSettings.Contains(KEY_CURRENTNUMBER_OF_NFCS))
                 {
-                    appSettings.Remove(KEY_CURRENTNUMBEROFNFCS);
+                    appSettings.Remove(KEY_CURRENTNUMBER_OF_NFCS);
                 }
-                appSettings.Add(KEY_CURRENTNUMBEROFNFCS, next + "");
+                appSettings.Add(KEY_CURRENTNUMBER_OF_NFCS, next + "");
                 appSettings.Save();
-
-
             }
             catch (IsolatedStorageException)
             {
@@ -289,7 +281,6 @@ namespace GryphonSecurity_v2_1.DataSource
             long id = getNextAlarmReportId();
             try
             {
-                Debug.WriteLine("id is " + alarmReport.Date);
                 appSettings.Add(id + KEY_REPORT_CUSTOMERNAME, alarmReport.CustomerName + "");
                 appSettings.Add(id + KEY_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber + "");
                 appSettings.Add(id + KEY_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber + "");
@@ -416,7 +407,7 @@ namespace GryphonSecurity_v2_1.DataSource
                 }
                 itemsRemoved = true;
                 appSettings.Remove(KEY_ID_ALARMREPORT);
-                appSettings.Remove(KEY_CURRENTNUMBEROFALARMREPORTS);
+                appSettings.Remove(KEY_CURRENTNUMBER_OF_ALARMREPORTS);
                 appSettings.Save();
             }
             Debug.WriteLine(itemsRemoved);
@@ -426,12 +417,8 @@ namespace GryphonSecurity_v2_1.DataSource
         public Boolean createNFC(double presentLatitude, double presentLongitude, String tagAddress)
         {
             long NFCId = getNextNfcId();
-            Debug.WriteLine("this is create nfc local storage");
             try
             {
-
-                //appSettings.Add(id + KEY_NFC_RANGECHECK, nfc.RangeCheck);
-                Debug.WriteLine(NFCId);
                 appSettings.Add(NFCId + KEY_NFC_PRESENTLATITUDE, presentLatitude + "");
                 appSettings.Add(NFCId + KEY_NFC_PRESENTLONGITUDE, presentLongitude + "");
                 appSettings.Add(NFCId + KEY_NFC_TAGADDRESS, tagAddress);
@@ -445,7 +432,6 @@ namespace GryphonSecurity_v2_1.DataSource
                 Debug.WriteLine("Addresses did not get saved in dummyDB");
                 return false;
             }
-
         }
 
         public List<List<String>> getNFCs()
@@ -472,7 +458,6 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public Boolean removeNFCs()
         {
-            Debug.WriteLine("removeNFCs invoked");
             int length = currentNumberOfNFCs();
             Boolean itemsRemoved = false;
             Debug.WriteLine(length);
@@ -487,7 +472,7 @@ namespace GryphonSecurity_v2_1.DataSource
                 }
                 itemsRemoved = true;
                 appSettings.Remove(KEY_ID_NFC);
-                appSettings.Remove(KEY_CURRENTNUMBEROFNFCS);
+                appSettings.Remove(KEY_CURRENTNUMBER_OF_NFCS);
                 appSettings.Save();
             }
             return itemsRemoved;
@@ -498,7 +483,6 @@ namespace GryphonSecurity_v2_1.DataSource
             long id = getNextTempAlarmReportId();
             try
             {
-
                 appSettings.Add(id + KEY_TEMP_REPORT_CUSTOMERNAME, alarmReport.CustomerName + "");
                 appSettings.Add(id + KEY_TEMP_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber + "");
                 appSettings.Add(id + KEY_TEMP_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber + "");
@@ -518,7 +502,7 @@ namespace GryphonSecurity_v2_1.DataSource
                 appSettings.Add(id + KEY_TEMP_REPORT_OTHER, alarmReport.Other + "");
                 appSettings.Add(id + KEY_TEMP_REPORT_CANCELDURINGEMERGENCY, alarmReport.CancelDuringEmergency + "");
                 appSettings.Add(id + KEY_TEMP_REPORT_COVERMADE, alarmReport.CoverMade + "");
-                appSettings.Add(id + KEY_TEMP_REPORT_REMARK, alarmReport.CoverMade + "");
+                appSettings.Add(id + KEY_TEMP_REPORT_REMARK, alarmReport.Remark + "");
                 appSettings.Add(id + KEY_TEMP_REPORT_NAME, alarmReport.Name + "");
                 appSettings.Add(id + KEY_TEMP_REPORT_INSTALLER, alarmReport.Installer + "");
                 appSettings.Add(id + KEY_TEMP_REPORT_CONTROLCENTER, alarmReport.ControlCenter + "");
@@ -555,7 +539,6 @@ namespace GryphonSecurity_v2_1.DataSource
                     int zipCode = Convert.ToInt32(appSettings[id + KEY_TEMP_REPORT_ZIPCODE] as String);
                     String city = appSettings[id + KEY_TEMP_REPORT_CITY] as String;
                     long phonenumber = Convert.ToInt64(appSettings[id + KEY_TEMP_REPORT_PHONENUMBER] as String);
-                    Debug.WriteLine("date from local storage " + appSettings[id + KEY_TEMP_REPORT_DATE] as String, CultureInfo.InvariantCulture);
                     DateTime date = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_DATE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                     DateTime time = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_TIME] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                     String zone = appSettings[id + KEY_TEMP_REPORT_ZONE] as String;
@@ -605,7 +588,6 @@ namespace GryphonSecurity_v2_1.DataSource
                         int zipCode = Convert.ToInt32(appSettings[id + KEY_TEMP_REPORT_ZIPCODE] as String);
                         String city = appSettings[id + KEY_TEMP_REPORT_CITY] as String;
                         long phonenumber = Convert.ToInt64(appSettings[id + KEY_TEMP_REPORT_PHONENUMBER] as String);
-                        Debug.WriteLine("date from local storage " + appSettings[id + KEY_TEMP_REPORT_DATE] as String, CultureInfo.InvariantCulture);
                         DateTime date = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_DATE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                         DateTime time = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_TIME] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                         String zone = appSettings[id + KEY_TEMP_REPORT_ZONE] as String;
@@ -649,11 +631,9 @@ namespace GryphonSecurity_v2_1.DataSource
             {
                 for (int i = 0; i < length; i++)
                 {
-                    Debug.WriteLine("what is i " + i);
                     currentId = i + 1;
                     if(id == currentId)
                     {
-                        Debug.WriteLine("only ones in here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         alarmReports.RemoveAt(i);
                     }
                     appSettings.Remove(currentId + KEY_TEMP_REPORT_CUSTOMERNAME);
@@ -687,9 +667,8 @@ namespace GryphonSecurity_v2_1.DataSource
                 }
 
                 appSettings.Remove(KEY_ID_TEMP_ALARMREPORT);
-                appSettings.Remove(KEY_CURRENTNUMBEROFTEMPALARMREPORTS);
+                appSettings.Remove(KEY_CURRENTNUMBER_OF_TEMP_ALARMREPORTS);
                 appSettings.Save();
-                Debug.WriteLine("Remove all Temp alarmReports");
                 itemsRemoved = addRemaningTempAlarmReports(alarmReports);
             }
             return itemsRemoved;
@@ -705,7 +684,6 @@ namespace GryphonSecurity_v2_1.DataSource
                 }
             }
             return true;
-
         }
     }
 }

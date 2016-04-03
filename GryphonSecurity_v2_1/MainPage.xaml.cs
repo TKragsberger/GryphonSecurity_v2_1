@@ -169,99 +169,6 @@ namespace GryphonSecurity_v2_1
 
         private void sendReport_Click(object sender, RoutedEventArgs e)
         {
-            //Boolean check = true;
-            //if (textBoxCustomerName.Text.Equals("")) {
-            //    check = false;
-            //}
-            //String customerNameTB = textBoxCustomerName.Text;
-            //long customerNumberTB = 0;
-            //if (!textBoxCustomerNumber.Text.Equals(""))
-            //{
-            //customerNumberTB = Convert.ToInt64(textBoxCustomerNumber.Text);
-            //}
-            //else
-            //{
-            //    check = false;
-            //}
-            //if (textBoxStreetAndHouseNumber.Text.Equals(""))
-            //{
-            //    check = false;
-            //}
-            //String streetAndHouseNumberTB = textBoxStreetAndHouseNumber.Text;
-            //int zipCodeTB = 0;
-            //if (!textBoxZipCode.Text.Equals(""))
-            //{
-            //    zipCodeTB =Convert.ToInt32(textBoxZipCode.Text);
-            //}
-            //else
-            //{
-            //    check = false;
-            //}
-            //if (textBoxCity.Text.Equals(""))
-            //{
-            //    check = false;
-            //}
-            //String cityTB = textBoxCity.Text;
-            //long phonenumberTB = 0;
-            //if (!textBoxPhonenumber.Text.Equals(""))
-            //{
-            //phonenumberTB = Convert.ToInt64(textBoxPhonenumber.Text);
-            //}
-            //DateTime dateTB = (DateTime)textBoxDate.Value;
-            //DateTime timeTB = (DateTime)textBoxTime.Value;
-            //if (textBoxZone.Text.Equals(""))
-            //{
-            //    check = false;
-            //}
-            //String zoneTB = textBoxZone.Text;
-
-            //Boolean burglaryVandalismCB = (Boolean)checkBoxBurglaryVandalism.IsChecked;
-            //Boolean windowDoorClosedCB = (Boolean)checkBoxWindowDoorClosed.IsChecked;
-            //Boolean apprehendedPersonCB = (Boolean)checkBoxApprehendedPerson.IsChecked;
-            //Boolean staffErrorCB = (Boolean)checkBoxStaffError.IsChecked;
-            //Boolean nothingToReportCB = (Boolean)checkBoxNothingToReport.IsChecked;
-            //Boolean technicalErrorCB = (Boolean)checkBoxTechnicalError.IsChecked;
-            //Boolean unknownReasonCB = (Boolean)checkBoxUnknownReason.IsChecked;
-            //Boolean otherCB = (Boolean)checkBoxOther.IsChecked;
-            //Boolean cancelDuringEmergencyCB = (Boolean)checkBoxCancelsDuringEmergency.IsChecked;
-            //Boolean coverMadeCB = (Boolean)checkBoxCoverMade.IsChecked;
-
-            //String remarkTB = textBoxRemark.Text;
-            //if (textBoxName.Text.Equals(""))
-            //{
-            //    check = false;
-            //}
-            //String nameTB = textBoxName.Text;
-            //if (textBoxInstaller.Text.Equals(""))
-            //{
-            //    check = false;
-            //}
-            //String installerTB = textBoxInstaller.Text;
-            //if (textBoxControlCenter.Text.Equals(""))
-            //{
-            //    check = false;
-            //}
-            //String controlCenterTB = textBoxControlCenter.Text;
-            //DateTime guardRadioedDateTB = (DateTime)textBoxGuardRadioedDate.Value;
-            //DateTime guardRadioedFromTB = (DateTime)textBoxGuardRadioedFrom.Value;
-            //DateTime guardRadioedToTB = (DateTime)textBoxGuardRadioedTo.Value;
-            //DateTime arrivedAtTB = (DateTime)textBoxArrivedAt.Value;
-            //DateTime doneTB = (DateTime)textBoxDone.Value;
-            //if (check) {
-            //    if (controller.createAlarmReport(new AlarmReport(customerNameTB, customerNumberTB, streetAndHouseNumberTB, zipCodeTB, cityTB, phonenumberTB, dateTB, timeTB, zoneTB, burglaryVandalismCB,
-            //                                windowDoorClosedCB, apprehendedPersonCB, staffErrorCB, nothingToReportCB, technicalErrorCB, unknownReasonCB, otherCB, cancelDuringEmergencyCB, coverMadeCB,
-            //                                remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, guardRadioedToTB, arrivedAtTB, doneTB)))
-            //    {
-            //        MessageBox.Show(AppResources.ReportAlarmReportSuccess);
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show(AppResources.ReportAlarmReportFailed);
-            //    }
-            //} else
-            //{
-            //    MessageBox.Show("udfyld felterne");
-            //}
             Boolean check = checkAlarmReport();
             if (!check)
             {
@@ -273,7 +180,7 @@ namespace GryphonSecurity_v2_1
         {
             long id = 1;
             NFC nfc = controller.getNFC(id);
-            textBlockTest.Text = " Range Check: "+nfc.RangeCheck+"\r\n Tag Address: "+nfc.TagAddress+ "\r\n User Firstname: " + nfc.User.Firstname;
+            textBlockNFCScanInformation.Text = AppResources.ScanNFCTagAddress + ": " + nfc.TagAddress + "\r\n " + AppResources.ScanNFCScanTime + ": " + nfc.Time;
         }        
 
         // Load data for the ViewModel Items
@@ -311,26 +218,16 @@ namespace GryphonSecurity_v2_1
         {
             isConnected = controller.checkNetworkConnection();
             String tagAddress = controller.readDataFromNFCTag(message, isConnected);
-                for(int i = 0; i < 10; i++)
-                {
-                    Debug.WriteLine("hvad starter i på "+i);
-                }
                 Dispatcher.BeginInvoke(() =>
                 {
                     gps(tagAddress, isConnected);
-                    Debug.WriteLine("Tekst: " + tagAddress);
-                    //controller.calcPosition(tagAddress);
-                    System.Threading.Tasks.Task.Delay(10000).Wait();
-                    Debug.WriteLine("this should take be shown after 5 sek");
-                    //textBlockTest.Text = tagAddress;
                 });         
         }
 
         private async void gps(String tagAddress, Boolean isConnected)
         {
-            Debug.WriteLine("GPS");
-            Boolean check = await controller.onLocationScan(tagAddress, isConnected);
-            textBlockTest.Text = tagAddress + check;
+            String address = await controller.onLocationScan(tagAddress, isConnected);
+            textBlockNFCScanInformation.Text = AppResources.ScanNFCTagAddress + ": " + address + "\r\n" + AppResources.ScanNFCScanTime + ": " + DateTime.Now;
         }
 
         private void initializeProximitySample()
@@ -369,9 +266,6 @@ namespace GryphonSecurity_v2_1
                 if (pivot.SelectedIndex == 0)
                 {
                     deviceId = device.SubscribeForMessage("NDEF", messageReceived);
-                    Debug.WriteLine("this is scan");
-                    
-              
                 } else if(pivot.SelectedIndex == 1)
                 {
                     User user = controller.getUser();
@@ -384,7 +278,6 @@ namespace GryphonSecurity_v2_1
                     {
                         updateAlarmReportDateTime();
                     }
-                    Debug.WriteLine("this is alarm report");
                 } else if(pivot.SelectedIndex == 2)
                 {
                     device.StopSubscribingForMessage(deviceId);
@@ -392,16 +285,13 @@ namespace GryphonSecurity_v2_1
                     int alarmReports = controller.getLocalStorageAlarmReports();
                     textBlockPendingNFCScans.Text = "Pending NFCs: " + nfcs;
                     textBlockPendingAlarmReports.Text = "Pending Alarm Reports: " + alarmReports;
-                    Debug.WriteLine("this is pending");
                     tempAlarmReportScroll.Children.Clear();
                     List<AlarmReport> tempAlarmReports = controller.getLocalStorageTempAlarmReports();
                     for (int i = 0; i < tempAlarmReports.Count; i++){
-                        Debug.WriteLine("HEJ MAND");
                         TextBlock textBlock = new TextBlock();
-                        textBlock.Text = tempAlarmReports[i].CustomerName;
+                        textBlock.Text = tempAlarmReports[i].CustomerName + "\r\n" + tempAlarmReports[i].CustomerNumber + "\r\n" + tempAlarmReports[i].Time;
                         textBlock.Tap += myTextBlock_Tap;
-                        textBlock.FontSize = 50;
-                        textBlock.Height = 70;
+                        textBlock.FontSize = 25;
                     
                         textBlock.Name =""+ (i + 1);
                         tempAlarmReportScroll.Children.Add(textBlock);
@@ -487,11 +377,9 @@ namespace GryphonSecurity_v2_1
 
         private void sendPendingButton_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("Pending button pushed");
             isConnected = controller.checkNetworkConnection();
             if (isConnected)
             {
-                Debug.WriteLine("is connected");
                 if (controller.sendPendingNFCs())
                 {
                     textBlockPendingNFCScans.Text = "Pending NFCs: " + 0;
@@ -523,7 +411,6 @@ namespace GryphonSecurity_v2_1
             if (!check.Equals(""))
                 phonenumberTB = Convert.ToInt64(textBoxPhonenumber.Text);
             DateTime dateTB = (DateTime)textBoxDate.Value;
-            Debug.WriteLine("dateTB "+dateTB);
             DateTime timeTB = (DateTime)textBoxTime.Value;
             String zoneTB = textBoxZone.Text;
             Boolean burglaryVandalismCB = (Boolean)checkBoxBurglaryVandalism.IsChecked;
@@ -545,9 +432,11 @@ namespace GryphonSecurity_v2_1
             DateTime guardRadioedToTB = (DateTime)textBoxGuardRadioedTo.Value;
             DateTime arrivedAtTB = (DateTime)textBoxArrivedAt.Value;
             DateTime doneTB = (DateTime)textBoxDone.Value;
-            if (controller.createTempAlarmReport(new AlarmReport(customerNameTB, customerNumberTB, streetAndHouseNumberTB, zipCodeTB, cityTB, phonenumberTB, dateTB, timeTB, zoneTB, burglaryVandalismCB,
-                                        windowDoorClosedCB, apprehendedPersonCB, staffErrorCB, nothingToReportCB, technicalErrorCB, unknownReasonCB, otherCB, cancelDuringEmergencyCB, coverMadeCB,
-                                        remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, guardRadioedToTB, arrivedAtTB, doneTB)))
+            if (controller.createTempAlarmReport(new AlarmReport(customerNameTB, customerNumberTB, streetAndHouseNumberTB, zipCodeTB, cityTB, 
+                                        phonenumberTB, dateTB, timeTB, zoneTB, burglaryVandalismCB, windowDoorClosedCB, apprehendedPersonCB, 
+                                        staffErrorCB, nothingToReportCB, technicalErrorCB, unknownReasonCB, otherCB, cancelDuringEmergencyCB, 
+                                        coverMadeCB, remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, 
+                                        guardRadioedToTB, arrivedAtTB, doneTB)))
             {
                 MessageBox.Show(AppResources.ReportAlarmReportSuccess);
                 emptyAlarmReport();
@@ -557,6 +446,24 @@ namespace GryphonSecurity_v2_1
                 MessageBox.Show(AppResources.ReportAlarmReportFailed);
             }
 
+        }
+
+        private void searchForCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            long customerNumber = Convert.ToInt64(textBoxCustomerNumber.Text);
+            Customer customer = controller.getCustomer(customerNumber);
+            if (!object.ReferenceEquals(customer, null))
+            {
+                textBoxCustomerName.Text = customer.CustomerName;
+                textBoxStreetAndHouseNumber.Text = customer.StreetHouseNumber;
+                textBoxZipCode.Text = customer.ZipCode + "";
+                textBoxCity.Text = customer.City;
+                textBoxPhonenumber.Text = customer.Phonenumber + "";
+                textBoxZone.Text = customer.Zone;
+            } else
+            {
+                MessageBox.Show(AppResources.ReportCustomerNotFound);
+            }
         }
     }
 }

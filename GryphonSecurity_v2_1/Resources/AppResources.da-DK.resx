@@ -284,4 +284,25 @@
   <data name="SearchUserRegisterButton" xml:space="preserve">
     <value>Søg</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Bruger blev ikke funder, forkert id</value>
+  </data>
+  <data name="ReportCustomerNotFound" xml:space="preserve">
+    <value>Kunde blev ikke fundet</value>
+  </data>
+  <data name="ReportSearchForCustomer" xml:space="preserve">
+    <value>Søg</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="ScanNFCReady" xml:space="preserve">
+    <value>Klar til at scanne NFC tag</value>
+  </data>
+  <data name="ScanNFCScanTime" xml:space="preserve">
+    <value>Tidspunkt NFC blev scannet</value>
+  </data>
+  <data name="ScanNFCTagAddress" xml:space="preserve">
+    <value>Tag adresse</value>
+  </data>
 </root>

@@ -30,8 +30,6 @@ namespace GryphonSecurity_v2_1
         private static Controller instance;
         private Boolean check = false;
 
-
-
         private Controller()
         {
             dBFacade = new DBFacade();
@@ -83,7 +81,6 @@ namespace GryphonSecurity_v2_1
         }
         public Boolean createTempAlarmReport(AlarmReport alarmReport)
         {
-            Debug.WriteLine("Thomas her er vi");
             return dBFacade.createTempLocalStorageAlarmReport(alarmReport);
         }
         public List<AlarmReport> getLocalStorageTempAlarmReports()
@@ -120,11 +117,11 @@ namespace GryphonSecurity_v2_1
             return Encoding.UTF8.GetString(textBuf, 0, textBuf.Length);
         }
         
-        public async Task<Boolean> onLocationScan(String tagAddress, Boolean isConnected)
+        public async Task<String> onLocationScan(String tagAddress, Boolean isConnected)
         {
             Geolocator geolocator = new Geolocator();
             geolocator.DesiredAccuracyInMeters = 50;
-            Boolean check = false;
+            String address = tagAddress;
             try
             {
                 Geoposition geoposition = await geolocator.GetGeopositionAsync(
@@ -134,8 +131,7 @@ namespace GryphonSecurity_v2_1
                 double latitude = geoposition.Coordinate.Point.Position.Latitude;
                 double longitude = geoposition.Coordinate.Point.Position.Longitude;
                 presentCoordinate = new GeoCoordinate(latitude, longitude);
-                Debug.WriteLine("PresentCoordinate: " + presentCoordinate);
-                check = calcPosition(tagAddress, presentCoordinate, isConnected);
+                address = calcPosition(tagAddress, presentCoordinate, isConnected);
 
             }
             catch (Exception ex)
@@ -147,18 +143,15 @@ namespace GryphonSecurity_v2_1
                 }
             }
 
-            return check;
+            return address;
         }
 
-        public Boolean calcPosition(String tagAddress, GeoCoordinate presentCoordinate, Boolean isConnected)
+        public String calcPosition(String tagAddress, GeoCoordinate presentCoordinate, Boolean isConnected)
         {
             double latitude = 0d;
             double longitude = 0d;
-            String address;
+            String address = tagAddress;
             Boolean check = false;
-            //Geolocator locator = new Geolocator();
-            //GeocodeQuery geocodequery = new GeocodeQuery();
-            Debug.WriteLine("calcPosition 1");
             CancellationTokenSource cts = new CancellationTokenSource();
 
             try
@@ -166,26 +159,19 @@ namespace GryphonSecurity_v2_1
                 if (!isConnected)
                 {
                     dBFacade.createLocalStorageNFCs(presentCoordinate.Latitude, presentCoordinate.Longitude, tagAddress);
-                    return check;
+                    return tagAddress;
                 }
                 cts.CancelAfter(10000);
                 List<String> tag = dBFacade.getAdress(tagAddress);
-                Debug.WriteLine("calcPosition 2");
-                //geocodequery.GeoCoordinate = new GeoCoordinate(0, 0);
-                //geocodequery.SearchTerm = tagAddress + "Denmark";
-                //geocodequery.QueryAsync();
                 if (!cts.IsCancellationRequested)
                 {
-                    Debug.WriteLine("calcPosition 3");
-                    address = tag[0]; 
-                    longitude = Convert.ToDouble(tag[1]);
-                    latitude = Convert.ToDouble(tag[2]);
-                    Debug.WriteLine("calcPosition 5 " + longitude + " " + latitude);
+                    address = tag[0];
+                    longitude =(Double) Convert.ToDecimal(tag[1]);
+                    latitude =(Double) Convert.ToDecimal(tag[2]);
                     targetCoordinate = new GeoCoordinate(latitude, longitude);
-                    check = getDistance(presentCoordinate, targetCoordinate, address);                   
+                    check = getDistance(presentCoordinate, targetCoordinate, address);            
                 } else
                 {
-                    Debug.WriteLine("calcPosition 4");
                     getDistance(presentCoordinate, presentCoordinate, tagAddress);
                 }
                 
@@ -193,32 +179,26 @@ namespace GryphonSecurity_v2_1
             {
                 Debug.WriteLine("cancellation token");
             }
-            return check;
+            return address;
         }
 
         public Boolean getDistance(GeoCoordinate presentCoordinate, GeoCoordinate targetCoordinates, String tagAddress)
         {
             Boolean check = false;
-            if (!presentCoordinate.Equals(targetCoordinates) && !object.ReferenceEquals(targetCoordinates, null))
+            if (!presentCoordinate.Latitude.Equals(targetCoordinates.Latitude))
             {
-                Debug.WriteLine("getDistance 1");
                 double distance = targetCoordinates.GetDistanceTo(presentCoordinate);
                 Boolean rangeCheck = false;
-                Debug.WriteLine("Distance: " + distance);
                 if (distance > 500)
                 {
-                    Debug.WriteLine("getDistance 2");
                     rangeCheck = false;
                 } else
                 {
-                    Debug.WriteLine("getDistance 3");
                     rangeCheck = true;
                 }
                 check = dBFacade.createNFC(new NFC(rangeCheck, tagAddress, DateTime.Now, dBFacade.getLocalStorageUser()));
             } else
             {
-                Debug.WriteLine("getDistance 4");
-                //TODO gem i tempstorage
                 dBFacade.createLocalStorageNFCs(presentCoordinate.Latitude, presentCoordinate.Longitude, tagAddress);
             }
             return check;
@@ -241,6 +221,7 @@ namespace GryphonSecurity_v2_1
                 IsConnected = false;
             return IsConnected;
         }
+
         public AlarmReport getLocalTempAlarmReport(long id)
         {
             return dBFacade.getLocalTempAlarmReport(id);
@@ -301,7 +282,11 @@ namespace GryphonSecurity_v2_1
         {
             return dBFacade.getUser(id);
         }
-        
+
+        public Customer getCustomer(long id)
+        {
+            return dBFacade.getCustomer(id);
+        }     
     }
 }
 

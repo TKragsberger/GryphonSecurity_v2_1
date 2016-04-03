@@ -22,8 +22,8 @@
         <phone:Pivot x:Name="pivot" SelectionChanged="Pivot_SelectionChanged" Title="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}">
             <phone:PivotItem x:Name="scan" Header="{Binding Path=LocalizedResources.LayoutTitleScanNFC, Source={StaticResource LocalizedStrings}}">
                 <StackPanel Margin="0,0,0,17">
-                    <TextBlock x:Name="textBlockTest" HorizontalAlignment="Center"  TextWrapping="Wrap" Margin="0,200,0,0" Text="Ready to scan nfc" VerticalAlignment="Top"/>
-                    <Button x:Name="scanButton" Content="Button" HorizontalAlignment="Left" Margin="155,50,0,0" VerticalAlignment="Top" Click="scanButton_Click"/>
+                    <TextBlock x:Name="textBlockScanReady" HorizontalAlignment="Center"  TextWrapping="Wrap" Margin="0,200,0,0" Text="{Binding Path=LocalizedResources.ScanNFCReady, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textBlockNFCScanInformation"/>
                 </StackPanel>
             </phone:PivotItem>
             
@@ -33,6 +33,7 @@
                         <TextBlock Margin="28,0,0,0" Text="{Binding Path=LocalizedResources.ReportCustomerNameTB, Source={StaticResource LocalizedStrings}}"/>
                         <toolkit:PhoneTextBox x:Name="textBoxCustomerName" Hint="{Binding Path=LocalizedResources.ReportCustomerName, Source={StaticResource LocalizedStrings}}" Height="72" Margin="14,0,14,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"/>
                         <toolkit:PhoneTextBox x:Name="textBoxCustomerNumber" InputScope="Number" Hint="{Binding Path=LocalizedResources.ReportCustomerNumber, Source={StaticResource LocalizedStrings}}" Height="72" Margin="14,0,14,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                        <Button x:Name="searchForCustomerButton" Content="{Binding Path=LocalizedResources.ReportSearchForCustomer, Source={StaticResource LocalizedStrings}}" Height="72" Margin="14,0,14,0" Grid.Row="1" VerticalAlignment="Top" Click="searchForCustomerButton_Click"/>
                         <toolkit:PhoneTextBox x:Name="textBoxStreetAndHouseNumber" Hint="{Binding Path=LocalizedResources.ReportStreetAndHouseNumber, Source={StaticResource LocalizedStrings}}" Height="72" Margin="14,0,14,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"/>
                         <toolkit:PhoneTextBox x:Name="textBoxZipCode" InputScope="Number" Hint="{Binding Path=LocalizedResources.ReportZipCode, Source={StaticResource LocalizedStrings}}" Height="72" Margin="14,0,14,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"/>
                         <toolkit:PhoneTextBox x:Name="textBoxCity" Hint="{Binding Path=LocalizedResources.ReportCity, Source={StaticResource LocalizedStrings}}" Height="72" Margin="14,0,14,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"/>
@@ -74,10 +75,10 @@
             <phone:PivotItem x:Name="pending" Header="Pending">
                 <ScrollViewer>
                     <StackPanel Margin="0,0,0,17">
-                        <TextBlock x:Name="textBlockPendingNFCScans" HorizontalAlignment="left"  TextWrapping="Wrap" Margin="100,20,0,0" Text="{Binding Path=LocalizedResources.PendingNFC, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
-                        <TextBlock x:Name="textBlockPendingAlarmReports" HorizontalAlignment="left"  TextWrapping="Wrap" Margin="100,10,0,0" Text="{Binding Path=LocalizedResources.PendingAlarmReports, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
-                        <Button x:Name="sendPendingButton" Content="{Binding Path=LocalizedResources.PendingSendPendingButton, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="155,50,0,0" VerticalAlignment="Top" Click="sendPendingButton_Click"/>
-                        <StackPanel x:Name="tempAlarmReportScroll" Margin="100,0,0,0"></StackPanel>
+                        <TextBlock x:Name="textBlockPendingNFCScans" HorizontalAlignment="left"  TextWrapping="Wrap" Margin="28,0,28,0" Grid.Row="1" Text="{Binding Path=LocalizedResources.PendingNFC, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
+                        <TextBlock x:Name="textBlockPendingAlarmReports" HorizontalAlignment="left"  TextWrapping="Wrap" Margin="28,0,28,0" Grid.Row="1" Text="{Binding Path=LocalizedResources.PendingAlarmReports, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
+                        <Button x:Name="sendPendingButton" Content="{Binding Path=LocalizedResources.PendingSendPendingButton, Source={StaticResource LocalizedStrings}}" Grid.Row="1" Margin="14,0,14,0" VerticalAlignment="Top" Click="sendPendingButton_Click"/>
+                        <StackPanel x:Name="tempAlarmReportScroll" Margin="28,0,28,0"></StackPanel>
                     </StackPanel>
                 </ScrollViewer>
                 

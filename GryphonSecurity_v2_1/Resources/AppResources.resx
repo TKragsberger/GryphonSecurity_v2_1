@@ -308,4 +308,25 @@
   <data name="SearchUserRegisterButton" xml:space="preserve">
     <value>Search for user</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User not found, wrong id</value>
+  </data>
+  <data name="ReportCustomerNotFound" xml:space="preserve">
+    <value>Customer not found</value>
+  </data>
+  <data name="ReportSearchForCustomer" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="ScanNFCReady" xml:space="preserve">
+    <value>Ready to scan NFC tag</value>
+  </data>
+  <data name="ScanNFCScanTime" xml:space="preserve">
+    <value>Time of scan</value>
+  </data>
+  <data name="ScanNFCTagAddress" xml:space="preserve">
+    <value>Tag address</value>
+  </data>
 </root>

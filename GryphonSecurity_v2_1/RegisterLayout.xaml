@@ -30,7 +30,11 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <toolkit:PhoneTextBox x:Name="textBoxFirstname" HorizontalAlignment="Left" Height="72" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Hint="{Binding Path=LocalizedResources.UserFirstname, Source={StaticResource LocalizedStrings}}" />
+                <toolkit:PhoneTextBox x:Name="textBoxUserId" InputScope="Number" HorizontalAlignment="Left" Height="72" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Hint="{Binding Path=LocalizedResources.UserId, Source={StaticResource LocalizedStrings}}" />
+                <TextBlock x:Name="Firstname" HorizontalAlignment="Left" Margin="67,0,0,0" VerticalAlignment="Top" Width="320"/>
+                <TextBlock x:Name="Lastname" HorizontalAlignment="Left" Margin="67,0,0,0" VerticalAlignment="Top" Width="320" />
+                <TextBlock x:Name="Address" HorizontalAlignment="Left" Margin="67,0,0,0" VerticalAlignment="Top" Width="320"/>
+                <TextBlock x:Name="Phonenumber" HorizontalAlignment="Left" Margin="67,0,0,0" VerticalAlignment="Top" Width="320"/>
                 <Button x:Name="SearchForUserButton" Content="{Binding Path=LocalizedResources.SearchUserRegisterButton, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="67,0,0,0" VerticalAlignment="Top" Width="320" Click="SearchForUserButton_Click"/>
                 <Button x:Name="RegistrerUserButton" Content="{Binding Path=LocalizedResources.UserRegisterButton, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="67,0,0,0" VerticalAlignment="Top" Width="320" Click="RegistrerBrugerButton_Click"/>
             </StackPanel>

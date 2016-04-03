@@ -10,7 +10,7 @@ namespace GryphonSecurityTest
     [TestClass]
     public class UnitTest1
     {
-       
+
         Controller instance = Controller.Instance;
         User userTest;
         AlarmReport alarmReportTest;
@@ -51,7 +51,7 @@ namespace GryphonSecurityTest
             //Setting up alarm report object.
             setupAlarmReport("Test");
             //This is the method we are testing. If we have no internet Connection it need to save it on local storage.
-           Boolean actualResult = instance.createTempAlarmReport(alarmReportTest);
+            Boolean actualResult = instance.createTempAlarmReport(alarmReportTest);
             Assert.AreEqual(true, actualResult);
         }
         [TestMethod]
@@ -68,18 +68,19 @@ namespace GryphonSecurityTest
 
             String actualResult = "";
             //we are looking for the alarm report with the name "Test1"
-            foreach (AlarmReport alarmReport in alarmReports){
+            foreach (AlarmReport alarmReport in alarmReports)
+            {
                 if (alarmReport.CustomerName.Equals("Test1"))
                     actualResult = alarmReport.CustomerName;
             }
-            Assert.AreSame(expectedResult,actualResult);
+            Assert.AreSame(expectedResult, actualResult);
 
         }
         [TestMethod]
         public void TestMethodReadDataFromNFCTag()
         {
             String expectedResult = null;
-            
+
             Boolean isConnected = instance.checkNetworkConnection();
             String actualResult = instance.readDataFromNFCTag(null, isConnected);
 
@@ -90,7 +91,7 @@ namespace GryphonSecurityTest
         {
             Boolean expectedResult = false;
             Boolean isConnected = instance.checkNetworkConnection();
-            Task<Boolean> actualResult = instance.onLocationScan("Lyngby St.", isConnected);
+            Task<String> actualResult = instance.onLocationScan("Lyngby St.", isConnected);
             Assert.AreEqual(expectedResult, actualResult);
         }
         [TestMethod]
@@ -98,7 +99,7 @@ namespace GryphonSecurityTest
         {
             Boolean expectedResult = false;
             Boolean isConnect = instance.checkNetworkConnection();
-            Boolean actualResult = instance.calcPosition("Lyngby St.", null, isConnect);
+            String actualResult = instance.calcPosition("Lyngby St.", null, isConnect);
             Assert.AreSame(expectedResult, actualResult);
         }
 

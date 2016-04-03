@@ -25,12 +25,12 @@ namespace GryphonSecurity_v2_1.DataSource
         private String KEY_DUMMY_ID_NFC = "DUMMY_ID_NFC";
         private String KEY_DUMMY_ID_ALARMREPORT = "DUMMY_ID_ALARMREPORT";
 
-        private String KEY_DUMMY_CURRENTNUMBEROFALARMREPORTS = "DUMMY_CURRENTNUMBEROFALARMREPORTS";
-        private String KEY_DUMMY_CURRENTNUMBEROFNFCS = "DUMMY_CURRENTNUMBEROFNFCS";
+        private String KEY_DUMMY_CURRENTNUMBER_OF_ALARMREPORTS = "DUMMY_CURRENTNUMBER_OF_ALARMREPORTS";
+        private String KEY_DUMMY_CURRENTNUMBER_OF_NFCS = "DUMMY_CURRENTNUMBER_OF_NFCS";
 
         private String KEY_DUMMY_REPORT_CUSTOMERNAME = "DUMMY_CUSTOMERNAME";
         private String KEY_DUMMY_REPORT_CUSTOMERNUMBER = "DUMMY_CUSTOMERNUMBER";
-        private String KEY_DUMMY_REPORT_STREETANDHOUSENUMBER = "DUMMY_STREETANDHOUSENUMBER";
+        private String KEY_DUMMY_REPORT_STREET_AND_HOUSENUMBER = "DUMMY_STREET_AND_HOUSENUMBER";
         private String KEY_DUMMY_REPORT_ZIPCODE = "DUMMY_ZIPCODE";
         private String KEY_DUMMY_REPORT_CITY = "DUMMY_CITY";
         private String KEY_DUMMY_REPORT_PHONENUMBER = "DUMMY_PHONENUMBER";
@@ -156,7 +156,7 @@ namespace GryphonSecurity_v2_1.DataSource
             {
                 appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNAME, alarmReport.CustomerName);
                 appSettings.Add(id + KEY_DUMMY_REPORT_CUSTOMERNUMBER, alarmReport.CustomerNumber);
-                appSettings.Add(id + KEY_DUMMY_REPORT_STREETANDHOUSENUMBER, alarmReport.StreetAndHouseNumber);
+                appSettings.Add(id + KEY_DUMMY_REPORT_STREET_AND_HOUSENUMBER, alarmReport.StreetAndHouseNumber);
                 appSettings.Add(id + KEY_DUMMY_REPORT_ZIPCODE, alarmReport.ZipCode);
                 appSettings.Add(id + KEY_DUMMY_REPORT_CITY, alarmReport.City);
                 appSettings.Add(id + KEY_DUMMY_REPORT_PHONENUMBER, alarmReport.Phonenumber);
@@ -217,7 +217,7 @@ namespace GryphonSecurity_v2_1.DataSource
             {
                 String customerName = appSettings[id + KEY_DUMMY_REPORT_CUSTOMERNAME] as String;
                 long customerNumber = Convert.ToInt64(appSettings[id + KEY_DUMMY_REPORT_CUSTOMERNUMBER] as String);
-                String streetAndHouseNumber = appSettings[id + KEY_DUMMY_REPORT_STREETANDHOUSENUMBER] as String;
+                String streetAndHouseNumber = appSettings[id + KEY_DUMMY_REPORT_STREET_AND_HOUSENUMBER] as String;
                 int zipCode = Convert.ToInt32(appSettings[id + KEY_DUMMY_REPORT_ZIPCODE] as String);
                 String city = appSettings[id + KEY_DUMMY_REPORT_CITY] as String;
                 long phonenumber = Convert.ToInt64(appSettings[id + KEY_DUMMY_REPORT_PHONENUMBER] as String);
@@ -260,22 +260,21 @@ namespace GryphonSecurity_v2_1.DataSource
             {
                 if (!appSettings.Contains(1 + KEY_DUMMY_ADDRESS_NAME))
                 {
-                    Debug.WriteLine("createAddresses");
                     appSettings.Add(1 + KEY_DUMMY_ADDRESS_NAME, "Lyngby st.");
-                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.505161499999986");
-                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LATITUDE, "55.767944");
+                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,505161499999986");
+                    appSettings.Add(1 + KEY_DUMMY_ADDRESS_LATITUDE, "55,767944");
                     appSettings.Add(2 + KEY_DUMMY_ADDRESS_NAME, "København hovedbanegård");
-                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.566796599999975");
-                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LATITUDE, "55.6713363");
+                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,566796599999975");
+                    appSettings.Add(2 + KEY_DUMMY_ADDRESS_LATITUDE, "55,6713363");
                     appSettings.Add(3 + KEY_DUMMY_ADDRESS_NAME, "Farum st.");
-                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.373533899999984");
-                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LATITUDE, "55.8120275");
+                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,373533899999984");
+                    appSettings.Add(3 + KEY_DUMMY_ADDRESS_LATITUDE, "55,8120275");
                     appSettings.Add(4 + KEY_DUMMY_ADDRESS_NAME, "Kokkedal st.");
-                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.502057000000036");
-                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LATITUDE, "55.90348789999999");
+                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,502057000000036");
+                    appSettings.Add(4 + KEY_DUMMY_ADDRESS_LATITUDE, "55,90348789999999");
                     appSettings.Add(5 + KEY_DUMMY_ADDRESS_NAME, "Buddinge st.");
-                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12.493978999999968");
-                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LATITUDE, "55.7469736");
+                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LONGTITUDE, "12,493978999999968");
+                    appSettings.Add(5 + KEY_DUMMY_ADDRESS_LATITUDE, "55,7469736");
                     appSettings.Save();
                 }
                 return true;
@@ -301,7 +300,7 @@ namespace GryphonSecurity_v2_1.DataSource
                     appSettings.Add(1 + KEY_DUMMY_CUSTOMER_CITY, "Farum");
                     appSettings.Add(1 + KEY_DUMMY_CUSTOMER_PHONENUMBER, "27708834");
                     appSettings.Add(1 + KEY_DUMMY_CUSTOMER_ZONE, "ZONE 1");
-                    appSettings.Add(1 + KEY_DUMMY_CUSTOMER_NAME, "Jannik Vangsgaard");
+                    appSettings.Add(2 + KEY_DUMMY_CUSTOMER_NAME, "Jannik Vangsgaard");
                     appSettings.Add(2 + KEY_DUMMY_CUSTOMER_NUMBER, "2");
                     appSettings.Add(2 + KEY_DUMMY_CUSTOMER_STREET_AND_HOUSE_NUMBER, "Hovedgade 40");
                     appSettings.Add(2 + KEY_DUMMY_CUSTOMER_ZIP_CODE, "2860");
@@ -373,7 +372,6 @@ namespace GryphonSecurity_v2_1.DataSource
 
             try
             {
-
                 appSettings.Add(id + KEY_DUMMY_NFC_RANGECHECK, nfc.RangeCheck);
                 appSettings.Add(id + KEY_DUMMY_NFC_TAGADDRESS, nfc.TagAddress);
                 appSettings.Add(id + KEY_DUMMY_NFC_TIME, nfc.Time);
@@ -413,7 +411,7 @@ namespace GryphonSecurity_v2_1.DataSource
                 Boolean rangeCheck = Convert.ToBoolean(appSettings[id + KEY_DUMMY_NFC_RANGECHECK] as String);
                 String tagAddress = appSettings[id + KEY_DUMMY_NFC_TAGADDRESS] as String;
                 DateTime time = DateTime.Parse(appSettings[id + KEY_DUMMY_NFC_TIME] as String, CultureInfo.InvariantCulture);
-                User user = getUser("1");
+                User user = getUser(1);
                 return new NFC(rangeCheck, tagAddress, time, user);
             }
             else
@@ -427,7 +425,6 @@ namespace GryphonSecurity_v2_1.DataSource
             Debug.WriteLine(appSettings.Contains(KEY_DUMMY_ID_NFC));
             if (!appSettings.Contains(KEY_DUMMY_ID_NFC))
             {
-                Debug.WriteLine("when are we here");
                 appSettings.Add(KEY_DUMMY_ID_NFC, "0");
                 appSettings.Save();
             }
@@ -447,7 +444,6 @@ namespace GryphonSecurity_v2_1.DataSource
                 appSettings.Save();
 
                 return nextId;
-
             }
             catch (IsolatedStorageException)
             {
@@ -459,12 +455,12 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public int currentNumberOfNFCs()
         {
-            if (!appSettings.Contains(KEY_DUMMY_CURRENTNUMBEROFNFCS))
+            if (!appSettings.Contains(KEY_DUMMY_CURRENTNUMBER_OF_NFCS))
             {
-                appSettings.Add(KEY_DUMMY_CURRENTNUMBEROFNFCS, "0");
+                appSettings.Add(KEY_DUMMY_CURRENTNUMBER_OF_NFCS, "0");
                 appSettings.Save();
             }
-            return Convert.ToInt32(appSettings[KEY_DUMMY_CURRENTNUMBEROFNFCS] as String);
+            return Convert.ToInt32(appSettings[KEY_DUMMY_CURRENTNUMBER_OF_NFCS] as String);
         }
 
         public void addNumberOfNFCs()
@@ -472,14 +468,12 @@ namespace GryphonSecurity_v2_1.DataSource
             try
             {
                 int next = currentNumberOfNFCs() + 1;
-                if (appSettings.Contains(KEY_DUMMY_CURRENTNUMBEROFNFCS))
+                if (appSettings.Contains(KEY_DUMMY_CURRENTNUMBER_OF_NFCS))
                 {
-                    appSettings.Remove(KEY_DUMMY_CURRENTNUMBEROFNFCS);
+                    appSettings.Remove(KEY_DUMMY_CURRENTNUMBER_OF_NFCS);
                 }
-                appSettings.Add(KEY_DUMMY_CURRENTNUMBEROFNFCS, next + "");
+                appSettings.Add(KEY_DUMMY_CURRENTNUMBER_OF_NFCS, next + "");
                 appSettings.Save();
-
-
             }
             catch (IsolatedStorageException)
             {
@@ -508,18 +502,18 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public int currentNumberOfAlarmReports()
         {
-            if (!appSettings.Contains(KEY_DUMMY_CURRENTNUMBEROFALARMREPORTS))
+            if (!appSettings.Contains(KEY_DUMMY_CURRENTNUMBER_OF_ALARMREPORTS))
             {
-                appSettings.Add(KEY_DUMMY_CURRENTNUMBEROFALARMREPORTS, "0");
+                appSettings.Add(KEY_DUMMY_CURRENTNUMBER_OF_ALARMREPORTS, "0");
                 appSettings.Save();
             }
-            return Convert.ToInt32(appSettings[KEY_DUMMY_CURRENTNUMBEROFALARMREPORTS] as String);
+            return Convert.ToInt32(appSettings[KEY_DUMMY_CURRENTNUMBER_OF_ALARMREPORTS] as String);
         }
 
         public void addNumberOfAlarmReports()
         {
             int next = currentNumberOfAlarmReports() + 1;
-            appSettings.Add(KEY_DUMMY_CURRENTNUMBEROFALARMREPORTS, next + "");
+            appSettings.Add(KEY_DUMMY_CURRENTNUMBER_OF_ALARMREPORTS, next + "");
             appSettings.Save();
         }
 
