@@ -36,11 +36,12 @@ namespace GryphonSecurity_v2_1.Domain.Entity
         DateTime guardRadioedTo;
         DateTime arrivedAt;
         DateTime done;
+        User user;
 
         public AlarmReport(string customerName, long customerNumber, String streetAndHouseNumber, int zipCode, String city, long phonenumber, DateTime date, DateTime time, String zone,
                 Boolean burglaryVandalism, Boolean windowDoorClosed, Boolean apprehendedPerson, Boolean staffError, Boolean nothingToReport, Boolean technicalError, Boolean unknownReason,
                 Boolean other, Boolean cancelDuringEmergency, Boolean coverMade, String remark, String name, String installer, String controlCenter, DateTime guardRadioedDate,
-                DateTime guardRadioedFrom, DateTime guardRadioedTo, DateTime arrivedAt, DateTime done)
+                DateTime guardRadioedFrom, DateTime guardRadioedTo, DateTime arrivedAt, DateTime done, User user)
         {
             this.customerName = customerName;
             this.customerNumber = customerNumber;
@@ -70,6 +71,7 @@ namespace GryphonSecurity_v2_1.Domain.Entity
             this.guardRadioedTo = guardRadioedTo;
             this.arrivedAt = arrivedAt;
             this.done = done;
+            this.user = user;
         }
         
 
@@ -239,6 +241,12 @@ namespace GryphonSecurity_v2_1.Domain.Entity
         {
             get { return done; }
             set { done = value; }
+        }
+
+        public User User
+        {
+            get { return user; }
+            set { user = value; }
         }
     }
 }

@@ -361,7 +361,7 @@ namespace GryphonSecurity_v2_1.DataSource
                     DateTime done = DateTime.ParseExact(appSettings[id + KEY_REPORT_DONE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                     alarmReports.Add(new AlarmReport(customerName, customerNumber, streetAndHouseNumber, zipCode, city, phonenumber, date, time, zone, burglaryVandalism,
                                             windowDoorClosed, apprehendedPerson, staffError, nothingToReport, technicalError, unknownReason, other, cancelDuringEmergency, coverMade,
-                                            remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done));
+                                            remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done, getUser()));
                 }
             }
 
@@ -563,7 +563,7 @@ namespace GryphonSecurity_v2_1.DataSource
                     DateTime done = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_DONE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                     alarmReports.Add(new AlarmReport(customerName, customerNumber, streetAndHouseNumber, zipCode, city, phonenumber, date, time, zone, burglaryVandalism,
                                             windowDoorClosed, apprehendedPerson, staffError, nothingToReport, technicalError, unknownReason, other, cancelDuringEmergency, coverMade,
-                                            remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done));
+                                            remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done, getUser()));
                 }
             }
 
@@ -612,7 +612,7 @@ namespace GryphonSecurity_v2_1.DataSource
                         DateTime done = DateTime.ParseExact(appSettings[id + KEY_TEMP_REPORT_DONE] as String, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                         AlarmReport alarmReport = new AlarmReport(customerName, customerNumber, streetAndHouseNumber, zipCode, city, phonenumber, date, time, zone, burglaryVandalism,
                                                 windowDoorClosed, apprehendedPerson, staffError, nothingToReport, technicalError, unknownReason, other, cancelDuringEmergency, coverMade,
-                                                remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done);
+                                                remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done, getUser());
                         return alarmReport;
                     }
                 }

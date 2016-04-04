@@ -12,7 +12,7 @@ namespace GryphonSecurityTest
     {
 
         Controller control = Controller.Instance;
-        User userTest;
+        User userTest = new User(1000, "firstnameTest", "lastnameTest", "addressTest", 12345678, "usernameTest", "passwordTest");
         AlarmReport alarmReportTest;
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace GryphonSecurityTest
         public void TestMethodCreateUser()
         {
             //creating a user, this is the method we are testing. It returns a boolean if it can save the user.
-            control.createUser(userTest = new User(1000, "firstnameTest", "lastnameTest", "addressTest", 12345678, "usernameTest", "passwordTest"));
+            control.createUser(userTest);
             User expectedResult = userTest;
             //Testing if they are both the same, its testing if the created user is saved.
             Assert.AreSame(expectedResult, control.getUser());
@@ -154,7 +154,7 @@ namespace GryphonSecurityTest
             alarmReportTest = new AlarmReport(name, 1234567123, "streetAndHouseNumberTest", 1234, "cityTest", 12345678, dateTest,
                 timeTest, "zoneTest", false, false, false, false, false, false, false, false, false, false, "remarkTest",
                 "nameTest", "installerTest", "controlCenterTest", guardRadioedDateTest, guardRadioedFromTest, guardRadioedToTest,
-                arrivedAtTest, doneTest);
+                arrivedAtTest, doneTest, userTest);
         }
 
 

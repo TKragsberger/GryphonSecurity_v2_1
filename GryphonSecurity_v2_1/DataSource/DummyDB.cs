@@ -28,34 +28,35 @@ namespace GryphonSecurity_v2_1.DataSource
         private String KEY_DUMMY_CURRENTNUMBER_OF_ALARMREPORTS = "DUMMY_CURRENTNUMBER_OF_ALARMREPORTS";
         private String KEY_DUMMY_CURRENTNUMBER_OF_NFCS = "DUMMY_CURRENTNUMBER_OF_NFCS";
 
-        private String KEY_DUMMY_REPORT_CUSTOMERNAME = "DUMMY_CUSTOMERNAME";
-        private String KEY_DUMMY_REPORT_CUSTOMERNUMBER = "DUMMY_CUSTOMERNUMBER";
-        private String KEY_DUMMY_REPORT_STREET_AND_HOUSENUMBER = "DUMMY_STREET_AND_HOUSENUMBER";
-        private String KEY_DUMMY_REPORT_ZIPCODE = "DUMMY_ZIPCODE";
-        private String KEY_DUMMY_REPORT_CITY = "DUMMY_CITY";
-        private String KEY_DUMMY_REPORT_PHONENUMBER = "DUMMY_PHONENUMBER";
-        private String KEY_DUMMY_REPORT_DATE = "DUMMY_DATE";
-        private String KEY_DUMMY_REPORT_TIME = "DUMMY_TIME";
-        private String KEY_DUMMY_REPORT_ZONE = "DUMMY_ZONE";
-        private String KEY_DUMMY_REPORT_BURGLARYVANDALISM = "DUMMY_BURGLARYVANDALISM";
-        private String KEY_DUMMY_REPORT_WINDOWDOORCLOSED = "DUMMY_WINDOWDOORCLOSED";
-        private String KEY_DUMMY_REPORT_APPREHENDEDPERSON = "DUMMY_APPREHENDEDPERSON";
-        private String KEY_DUMMY_REPORT_STAFFERROR = "DUMMY_STAFFERROR";
-        private String KEY_DUMMY_REPORT_NOTHINGTOREPORT = "DUMMY_NOTHINGTOREPORT";
-        private String KEY_DUMMY_REPORT_TECHNICALERROR = "DUMMY_TECHNICALERROR";
-        private String KEY_DUMMY_REPORT_UNKNOWNREASON = "DUMMY_UNKNOWNREASON";
-        private String KEY_DUMMY_REPORT_OTHER = "DUMMY_OTHER";
-        private String KEY_DUMMY_REPORT_CANCELDURINGEMERGENCY = "DUMMY_CANCELDURINGEMERGENCY";
-        private String KEY_DUMMY_REPORT_COVERMADE = "DUMMY_COVERMADE";
-        private String KEY_DUMMY_REPORT_REMARK = "DUMMY_REMARK";
-        private String KEY_DUMMY_REPORT_NAME = "DUMMY_NAME";
-        private String KEY_DUMMY_REPORT_INSTALLER = "DUMMY_INSTALLER";
-        private String KEY_DUMMY_REPORT_CONTROLCENTER = "DUMMY_CONTROLCENTER";
-        private String KEY_DUMMY_REPORT_GUARDRADIOEDDATE = "DUMMY_GUARDRADIOEDDATE";
-        private String KEY_DUMMY_REPORT_GUARDRADIOEDFROM = "DUMMY_GUARDRADIOEDFROM";
-        private String KEY_DUMMY_REPORT_GUARDRADIOEDTO = "DUMMY_GUARDRADIOEDTO";
-        private String KEY_DUMMY_REPORT_ARRIVEDAT = "DUMMY_ARRIVEDAT";
-        private String KEY_DUMMY_REPORT_DONE = "DUMMY_DONE";
+        private String KEY_DUMMY_REPORT_CUSTOMERNAME = "DUMMY_REPORT_CUSTOMERNAME";
+        private String KEY_DUMMY_REPORT_CUSTOMERNUMBER = "DUMMY_REPORT_CUSTOMERNUMBER";
+        private String KEY_DUMMY_REPORT_STREET_AND_HOUSENUMBER = "DUMMY_REPORT_STREET_AND_HOUSENUMBER";
+        private String KEY_DUMMY_REPORT_ZIPCODE = "DUMMY_REPORT_ZIPCODE";
+        private String KEY_DUMMY_REPORT_CITY = "DUMMY_REPORT_CITY";
+        private String KEY_DUMMY_REPORT_PHONENUMBER = "DUMMY_REPORT_PHONENUMBER";
+        private String KEY_DUMMY_REPORT_DATE = "DUMMY_REPORT_DATE";
+        private String KEY_DUMMY_REPORT_TIME = "DUMMY_REPORT_TIME";
+        private String KEY_DUMMY_REPORT_ZONE = "DUMMY_REPORT_ZONE";
+        private String KEY_DUMMY_REPORT_BURGLARYVANDALISM = "DUMMY_REPORT_BURGLARYVANDALISM";
+        private String KEY_DUMMY_REPORT_WINDOWDOORCLOSED = "DUMMY_REPORT_WINDOWDOORCLOSED";
+        private String KEY_DUMMY_REPORT_APPREHENDEDPERSON = "DUMMY_REPORT_APPREHENDEDPERSON";
+        private String KEY_DUMMY_REPORT_STAFFERROR = "DUMMY_REPORT_STAFFERROR";
+        private String KEY_DUMMY_REPORT_NOTHINGTOREPORT = "DUMMY_REPORT_NOTHINGTOREPORT";
+        private String KEY_DUMMY_REPORT_TECHNICALERROR = "DUMMY_REPORT_TECHNICALERROR";
+        private String KEY_DUMMY_REPORT_UNKNOWNREASON = "DUMMY_REPORT_UNKNOWNREASON";
+        private String KEY_DUMMY_REPORT_OTHER = "DUMMY_REPORT_OTHER";
+        private String KEY_DUMMY_REPORT_CANCELDURINGEMERGENCY = "DUMMY_REPORT_CANCELDURINGEMERGENCY";
+        private String KEY_DUMMY_REPORT_COVERMADE = "DUMMY_REPORT_COVERMADE";
+        private String KEY_DUMMY_REPORT_REMARK = "DUMMY_REPORT_REMARK";
+        private String KEY_DUMMY_REPORT_NAME = "DUMMY_REPORT_NAME";
+        private String KEY_DUMMY_REPORT_INSTALLER = "DUMMY_REPORT_INSTALLER";
+        private String KEY_DUMMY_REPORT_CONTROLCENTER = "DUMMY_REPORT_CONTROLCENTER";
+        private String KEY_DUMMY_REPORT_GUARDRADIOEDDATE = "DUMMY_REPORT_GUARDRADIOEDDATE";
+        private String KEY_DUMMY_REPORT_GUARDRADIOEDFROM = "DUMMY_REPORT_GUARDRADIOEDFROM";
+        private String KEY_DUMMY_REPORT_GUARDRADIOEDTO = "DUMMY_REPORT_GUARDRADIOEDTO";
+        private String KEY_DUMMY_REPORT_ARRIVEDAT = "DUMMY_REPORT_ARRIVEDAT";
+        private String KEY_DUMMY_REPORT_DONE = "DUMMY_REPORT_DONE";
+        private String KEY_DUMMY_REPORT_USER_ID = "DUMMY_REPORT_USER_ID";
 
         private String KEY_DUMMY_NFC_USER_ID = "DUMMY_USER_ID";
         private String KEY_DUMMY_NFC_RANGECHECK = "DUMMY_RANGECHECK";
@@ -183,6 +184,7 @@ namespace GryphonSecurity_v2_1.DataSource
                 appSettings.Add(id + KEY_DUMMY_REPORT_GUARDRADIOEDTO, alarmReport.GuardRadioedTo);
                 appSettings.Add(id + KEY_DUMMY_REPORT_ARRIVEDAT, alarmReport.ArrivedAt);
                 appSettings.Add(id + KEY_DUMMY_REPORT_DONE, alarmReport.Done);
+                appSettings.Add(id + KEY_DUMMY_REPORT_USER_ID, alarmReport.User.Id);
                 appSettings.Save();
                 dummyDBStatus = true;
             }
@@ -244,9 +246,10 @@ namespace GryphonSecurity_v2_1.DataSource
                 DateTime guardRadioedTo = DateTime.Parse(appSettings[id + KEY_DUMMY_REPORT_GUARDRADIOEDTO] as String, CultureInfo.InvariantCulture);
                 DateTime arrivedAt = DateTime.Parse(appSettings[id + KEY_DUMMY_REPORT_ARRIVEDAT] as String, CultureInfo.InvariantCulture);
                 DateTime done = DateTime.Parse(appSettings[id + KEY_DUMMY_REPORT_DONE] as String, CultureInfo.InvariantCulture);
+                User user = getUser(Convert.ToInt64(appSettings[id + KEY_DUMMY_REPORT_USER_ID] as String));
                 return new AlarmReport(customerName, customerNumber, streetAndHouseNumber, zipCode, city, phonenumber, date, time, zone, burglaryVandalism,
                                         windowDoorClosed, apprehendedPerson, staffError, nothingToReport, technicalError, unknownReason, other, cancelDuringEmergency, coverMade,
-                                        remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done);
+                                        remark, name, installer, controlCenter, guardRadioedDate, guardRadioedFrom, guardRadioedTo, arrivedAt, done, user);
             }
             else
             {

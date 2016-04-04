@@ -178,6 +178,24 @@ namespace GryphonSecurity_v2_1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alarm report did not get saved on phone.
+        /// </summary>
+        public static string ReportAlarmReportLocalStorageFailed {
+            get {
+                return ResourceManager.GetString("ReportAlarmReportLocalStorageFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alarm report did get saved on phone.
+        /// </summary>
+        public static string ReportAlarmReportLocalStorageSuccess {
+            get {
+                return ResourceManager.GetString("ReportAlarmReportLocalStorageSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The report was sent .
         /// </summary>
         public static string ReportAlarmReportSuccess {

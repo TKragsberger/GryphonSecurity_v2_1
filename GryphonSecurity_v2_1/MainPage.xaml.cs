@@ -125,7 +125,7 @@ namespace GryphonSecurity_v2_1
             {
                 if (controller.createAlarmReport(new AlarmReport(customerNameTB, customerNumberTB, streetAndHouseNumberTB, zipCodeTB, cityTB, phonenumberTB, dateTB, timeTB, zoneTB, burglaryVandalismCB,
                                             windowDoorClosedCB, apprehendedPersonCB, staffErrorCB, nothingToReportCB, technicalErrorCB, unknownReasonCB, otherCB, cancelDuringEmergencyCB, coverMadeCB,
-                                            remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, guardRadioedToTB, arrivedAtTB, doneTB)))
+                                            remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, guardRadioedToTB, arrivedAtTB, doneTB, controller.getUser())))
                 {
                     emptyAlarmReport();
                     MessageBox.Show(AppResources.ReportAlarmReportSuccess);
@@ -434,14 +434,14 @@ namespace GryphonSecurity_v2_1
                                         phonenumberTB, dateTB, timeTB, zoneTB, burglaryVandalismCB, windowDoorClosedCB, apprehendedPersonCB, 
                                         staffErrorCB, nothingToReportCB, technicalErrorCB, unknownReasonCB, otherCB, cancelDuringEmergencyCB, 
                                         coverMadeCB, remarkTB, nameTB, installerTB, controlCenterTB, guardRadioedDateTB, guardRadioedFromTB, 
-                                        guardRadioedToTB, arrivedAtTB, doneTB)))
+                                        guardRadioedToTB, arrivedAtTB, doneTB, controller.getUser())))
             {
-                MessageBox.Show(AppResources.ReportAlarmReportSuccess);
+                MessageBox.Show(AppResources.ReportAlarmReportLocalStorageSuccess);
                 emptyAlarmReport();
             }
             else
             {
-                MessageBox.Show(AppResources.ReportAlarmReportFailed);
+                MessageBox.Show(AppResources.ReportAlarmReportLocalStorageFailed);
             }
 
         }

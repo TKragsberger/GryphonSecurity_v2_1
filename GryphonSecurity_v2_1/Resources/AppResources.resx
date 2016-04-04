@@ -329,6 +329,12 @@
   <data name="ScanNFCTagAddress" xml:space="preserve">
     <value>Tag address</value>
   </data>
+  <data name="ReportAlarmReportLocalStorageFailed" xml:space="preserve">
+    <value>Alarm report did not get saved on phone</value>
+  </data>
+  <data name="ReportAlarmReportLocalStorageSuccess" xml:space="preserve">
+    <value>Alarm report did get saved on phone</value>
+  </data>
   <data name="ScanNFCTempStorage" xml:space="preserve">
     <value>NFC scan saved on phone</value>
   </data>
