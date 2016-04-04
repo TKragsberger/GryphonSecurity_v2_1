@@ -57,6 +57,7 @@ namespace GryphonSecurity_v2_1.DataSource
         private String KEY_DUMMY_REPORT_ARRIVEDAT = "DUMMY_ARRIVEDAT";
         private String KEY_DUMMY_REPORT_DONE = "DUMMY_DONE";
 
+        private String KEY_DUMMY_NFC_USER_ID = "DUMMY_USER_ID";
         private String KEY_DUMMY_NFC_RANGECHECK = "DUMMY_RANGECHECK";
         private String KEY_DUMMY_NFC_TAGADDRESS = "DUMMY_TAGADDRESS";
         private String KEY_DUMMY_NFC_TIME = "DUMMY_TIME";
@@ -125,7 +126,7 @@ namespace GryphonSecurity_v2_1.DataSource
                 long phonenumber = Convert.ToInt64(appSettings[id + KEY_DUMMY_PHONENUMBER] as String);
                 String username = appSettings[id + KEY_DUMMY_USERNAME] as String;
                 String password = appSettings[id + KEY_DUMMY_PASSWORD] as String;
-                return new User(firstname, lastname, address, phonenumber, username, password);
+                return new User(id, firstname, lastname, address, phonenumber, username, password);
             }
             else
             {
@@ -372,6 +373,7 @@ namespace GryphonSecurity_v2_1.DataSource
 
             try
             {
+                appSettings.Add(id + KEY_DUMMY_NFC_USER_ID, nfc.User.Id);
                 appSettings.Add(id + KEY_DUMMY_NFC_RANGECHECK, nfc.RangeCheck);
                 appSettings.Add(id + KEY_DUMMY_NFC_TAGADDRESS, nfc.TagAddress);
                 appSettings.Add(id + KEY_DUMMY_NFC_TIME, nfc.Time);
@@ -408,10 +410,11 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             if (appSettings.Contains(id + KEY_DUMMY_NFC_TAGADDRESS))
             {
+                long userId = Convert.ToInt64(appSettings[id + KEY_DUMMY_NFC_USER_ID] as String);
                 Boolean rangeCheck = Convert.ToBoolean(appSettings[id + KEY_DUMMY_NFC_RANGECHECK] as String);
                 String tagAddress = appSettings[id + KEY_DUMMY_NFC_TAGADDRESS] as String;
                 DateTime time = DateTime.Parse(appSettings[id + KEY_DUMMY_NFC_TIME] as String, CultureInfo.InvariantCulture);
-                User user = getUser(1);
+                User user = getUser(userId);
                 return new NFC(rangeCheck, tagAddress, time, user);
             }
             else
@@ -422,7 +425,6 @@ namespace GryphonSecurity_v2_1.DataSource
 
         private long getCurrentNfcId()
         {
-            Debug.WriteLine(appSettings.Contains(KEY_DUMMY_ID_NFC));
             if (!appSettings.Contains(KEY_DUMMY_ID_NFC))
             {
                 appSettings.Add(KEY_DUMMY_ID_NFC, "0");
@@ -436,9 +438,7 @@ namespace GryphonSecurity_v2_1.DataSource
             try
             {
                 long test = getCurrentNfcId();
-                Debug.WriteLine(test);
                 long nextId = test + 1;
-                Debug.WriteLine(nextId);
                 appSettings.Remove(KEY_DUMMY_ID_NFC);
                 appSettings.Add(KEY_DUMMY_ID_NFC, nextId + "");
                 appSettings.Save();

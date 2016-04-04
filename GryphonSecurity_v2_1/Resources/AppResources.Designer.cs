@@ -538,6 +538,15 @@ namespace GryphonSecurity_v2_1.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NFC scan saved on phone.
+        /// </summary>
+        public static string ScanNFCTempStorage {
+            get {
+                return ResourceManager.GetString("ScanNFCTempStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search for user.
         /// </summary>
         public static string SearchUserRegisterButton {

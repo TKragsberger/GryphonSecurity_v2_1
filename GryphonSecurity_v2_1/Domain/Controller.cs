@@ -206,11 +206,6 @@ namespace GryphonSecurity_v2_1
 
         }
 
-        public NFC getNFC(long id)
-        {
-            return dBFacade.getNFC(id);
-        }
-
         public bool checkNetworkConnection()
         {
             NetworkInterfaceType ni = NetworkInterface.NetworkInterfaceType;
@@ -250,14 +245,12 @@ namespace GryphonSecurity_v2_1
             {
                 double presentLatitude = Convert.ToDouble(tag[0]);
                 double presentLongitude = Convert.ToDouble(tag[1]);
-                Debug.WriteLine("id for tag " + tag[2]);
                 List<String> nfcs = dBFacade.getAdress(tag[2]);
                 String tagAddress = nfcs[0];
                 double targetLongtitude = Convert.ToDouble(nfcs[1]);
                 double targetLatitude = Convert.ToDouble(nfcs[2]);
                 presentCoordinate = new GeoCoordinate(presentLatitude, presentLongitude);
                 targetCoordinate = new GeoCoordinate(targetLatitude, targetLongtitude);
-                Debug.WriteLine("tagAddress " + tagAddress);
                 check = getDistance(presentCoordinate, targetCoordinate, tagAddress);
             }
             dBFacade.removeLocalStorageNFCs();

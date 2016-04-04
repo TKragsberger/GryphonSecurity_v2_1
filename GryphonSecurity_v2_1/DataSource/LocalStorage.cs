@@ -15,12 +15,13 @@ namespace GryphonSecurity_v2_1.DataSource
         private static IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
         private long id = 0;
 
-        private String KEY_FIRSTNAME = "FIRSTNAME";
-        private String KEY_LASTNAME = "LASTNAME";
-        private String KEY_ADDRESS = "ADDRESS";
-        private String KEY_PHONENUMBER = "PHONENUMBER";
-        private String KEY_USERNAME = "USERNAME";
-        private String KEY_PASSWORD = "PASSWORD";
+        private String KEY_USER_ID = "USER_ID";
+        private String KEY_USER_FIRSTNAME = "USER_FIRSTNAME";
+        private String KEY_USER_LASTNAME = "USER_LASTNAME";
+        private String KEY_USER_ADDRESS = "USER_ADDRESS";
+        private String KEY_USER_PHONENUMBER = "USER_PHONENUMBER";
+        private String KEY_USER_USERNAME = "USER_USERNAME";
+        private String KEY_USER_PASSWORD = "USER_PASSWORD";
 
         private String KEY_ID_NFC = "ID_NFC";
         private String KEY_ID_ALARMREPORT = "ID_ALARMREPORT";
@@ -95,24 +96,26 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public Boolean createUser(User user)
         {
-            if (appSettings.Contains(KEY_FIRSTNAME))
+            if (appSettings.Contains(KEY_USER_FIRSTNAME))
             {
-                appSettings.Remove(KEY_FIRSTNAME);
-                appSettings.Remove(KEY_LASTNAME);
-                appSettings.Remove(KEY_ADDRESS);
-                appSettings.Remove(KEY_PHONENUMBER);
-                appSettings.Remove(KEY_USERNAME);
-                appSettings.Remove(KEY_PASSWORD);
+                appSettings.Remove(KEY_USER_ID);
+                appSettings.Remove(KEY_USER_FIRSTNAME);
+                appSettings.Remove(KEY_USER_LASTNAME);
+                appSettings.Remove(KEY_USER_ADDRESS);
+                appSettings.Remove(KEY_USER_PHONENUMBER);
+                appSettings.Remove(KEY_USER_USERNAME);
+                appSettings.Remove(KEY_USER_PASSWORD);
             }
 
             try
             {
-                appSettings.Add(KEY_FIRSTNAME, user.Firstname);
-                appSettings.Add(KEY_LASTNAME, user.Lastname);
-                appSettings.Add(KEY_ADDRESS, user.Address);
-                appSettings.Add(KEY_PHONENUMBER, user.Phonenumber);
-                appSettings.Add(KEY_USERNAME, user.Username);
-                appSettings.Add(KEY_PASSWORD, user.Password);
+                appSettings.Add(KEY_USER_ID, user.Id);
+                appSettings.Add(KEY_USER_FIRSTNAME, user.Firstname);
+                appSettings.Add(KEY_USER_LASTNAME, user.Lastname);
+                appSettings.Add(KEY_USER_ADDRESS, user.Address);
+                appSettings.Add(KEY_USER_PHONENUMBER, user.Phonenumber);
+                appSettings.Add(KEY_USER_USERNAME, user.Username);
+                appSettings.Add(KEY_USER_PASSWORD, user.Password);
                 appSettings.Save();
                 return true;
 
@@ -125,15 +128,16 @@ namespace GryphonSecurity_v2_1.DataSource
 
         public User getUser()
         {
-            if (appSettings.Contains(KEY_USERNAME))
+            if (appSettings.Contains(KEY_USER_USERNAME))
             {
-                String firstname = appSettings[KEY_FIRSTNAME] as String;
-                String lastname = appSettings[KEY_LASTNAME] as String;
-                String address = appSettings[KEY_ADDRESS] as String;
-                long phonenumber = Convert.ToInt64(appSettings[KEY_PHONENUMBER] as String);
-                String username = appSettings[KEY_USERNAME] as String;
-                String password = appSettings[KEY_PASSWORD] as String;
-                return new User(firstname, lastname, address, phonenumber, username, password);
+                long id = Convert.ToInt64(appSettings[KEY_USER_ID as String]);
+                String firstname = appSettings[KEY_USER_FIRSTNAME] as String;
+                String lastname = appSettings[KEY_USER_LASTNAME] as String;
+                String address = appSettings[KEY_USER_ADDRESS] as String;
+                long phonenumber = Convert.ToInt64(appSettings[KEY_USER_PHONENUMBER] as String);
+                String username = appSettings[KEY_USER_USERNAME] as String;
+                String password = appSettings[KEY_USER_PASSWORD] as String;
+                return new User(id, firstname, lastname, address, phonenumber, username, password);
             }
             else
             {
@@ -230,9 +234,7 @@ namespace GryphonSecurity_v2_1.DataSource
             try
             {
                 long test = getCurrentNfcId();
-                Debug.WriteLine(test);
                 long nextId = test + 1;
-                Debug.WriteLine(nextId);
                 appSettings.Remove(KEY_ID_NFC);
                 appSettings.Add(KEY_ID_NFC, nextId+"");
                 appSettings.Save();
@@ -410,7 +412,6 @@ namespace GryphonSecurity_v2_1.DataSource
                 appSettings.Remove(KEY_CURRENTNUMBER_OF_ALARMREPORTS);
                 appSettings.Save();
             }
-            Debug.WriteLine(itemsRemoved);
             return itemsRemoved;
         }
 
@@ -460,7 +461,6 @@ namespace GryphonSecurity_v2_1.DataSource
         {
             int length = currentNumberOfNFCs();
             Boolean itemsRemoved = false;
-            Debug.WriteLine(length);
             if (length > 0)
             {
                 for (int i = 0; i < length; i++)

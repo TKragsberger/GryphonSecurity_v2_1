@@ -20,7 +20,7 @@ namespace GryphonSecurity_v2_1
         {
                 try
                 {
-                    User localUser = new User(user.Firstname, user.Lastname, user.Address, user.Phonenumber, user.Username, user.Password);
+                    User localUser = new User(user.Id, user.Firstname, user.Lastname, user.Address, user.Phonenumber, user.Username, user.Password);
                     if (controller.createUser(localUser))
                     {
                         MessageBox.Show(AppResources.UserCreated);

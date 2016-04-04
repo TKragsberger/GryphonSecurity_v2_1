@@ -174,14 +174,7 @@ namespace GryphonSecurity_v2_1
             {
                 MessageBox.Show(AppResources.ReportFillSpaces);
             }
-        }
-
-        private void scanButton_Click(object sender, RoutedEventArgs e)
-        {
-            long id = 1;
-            NFC nfc = controller.getNFC(id);
-            textBlockNFCScanInformation.Text = AppResources.ScanNFCTagAddress + ": " + nfc.TagAddress + "\r\n " + AppResources.ScanNFCScanTime + ": " + nfc.Time;
-        }        
+        }  
 
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -227,7 +220,14 @@ namespace GryphonSecurity_v2_1
         private async void gps(String tagAddress, Boolean isConnected)
         {
             String address = await controller.onLocationScan(tagAddress, isConnected);
-            textBlockNFCScanInformation.Text = AppResources.ScanNFCTagAddress + ": " + address + "\r\n" + AppResources.ScanNFCScanTime + ": " + DateTime.Now;
+            long number;
+            if(!Int64.TryParse(address, out number))
+            {
+                textBlockNFCScanInformation.Text = AppResources.ScanNFCTagAddress + ": " + address + "\r\n" + AppResources.ScanNFCScanTime + ": " + DateTime.Now;
+            } else
+            {
+                textBlockNFCScanInformation.Text = AppResources.ScanNFCTagAddress + ": " + address + "\r\n" + AppResources.ScanNFCScanTime + ": " + DateTime.Now + "\r\n" + AppResources.ScanNFCTempStorage;
+            }
         }
 
         private void initializeProximitySample()
@@ -306,8 +306,6 @@ namespace GryphonSecurity_v2_1
         }
         public void myTextBlock_Tap(object sender, System.Windows.Input.GestureEventArgs args)
         {
-            
-            Debug.WriteLine(""+ args.OriginalSource.ToString());
             TextBlock textBlock = (TextBlock) args.OriginalSource;
             long id = Int64.Parse(textBlock.Name);
 

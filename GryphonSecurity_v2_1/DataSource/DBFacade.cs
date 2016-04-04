@@ -62,11 +62,6 @@ namespace GryphonSecurity_v2_1.DataSource
             return connection.createNFCs(nfcs);
         }
 
-        public NFC getNFC(long id)
-        {
-            return connection.getNFC(id);
-        }
-
         public Boolean createLocalStorageNFCs(double presentLatitude, double presentLongitude, String tagAddress)
         {
             return localStorage.createNFC(presentLatitude, presentLongitude, tagAddress);

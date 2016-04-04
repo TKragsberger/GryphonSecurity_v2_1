@@ -305,4 +305,7 @@
   <data name="ScanNFCTagAddress" xml:space="preserve">
     <value>Tag adresse</value>
   </data>
+  <data name="ScanNFCTempStorage" xml:space="preserve">
+    <value>NFC scan gemt på telefon</value>
+  </data>
 </root>

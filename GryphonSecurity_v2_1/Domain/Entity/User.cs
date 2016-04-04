@@ -8,6 +8,7 @@ namespace GryphonSecurity_v2_1.Domain.Entity
 {
     public class User
     {
+        private long id;
         private String firstname;
         private String lastname;
         private String address;
@@ -15,14 +16,23 @@ namespace GryphonSecurity_v2_1.Domain.Entity
         private String username;
         private String password;
 
-        public User(String firstname, String lastname, String address, long phonenumber, String username, String password)
+        public User(long id, String firstname, String lastname, String address, long phonenumber, String username, String password)
         {
+            this.id = id;
             this.firstname = firstname;
             this.lastname = lastname;
             this.address = address;
             this.phonenumber = phonenumber;
             this.username = username;
             this.password = password;
+        }
+
+        public long Id
+        {
+            get
+            {
+                return id;
+            }
         }
 
         public string Firstname
