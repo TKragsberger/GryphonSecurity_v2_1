@@ -7,14 +7,14 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using TestApp3.Resources;
+using GryphonSecurityUnitTest.Resources;
 using System.Threading;
 using Microsoft.VisualStudio.TestPlatform.Core;
 using vstest_executionengine_platformbridge;
 using Microsoft.VisualStudio.TestPlatform.TestExecutor;
 using System.Reflection;
 
-namespace TestApp3
+namespace GryphonSecurityUnitTest
 {
     public partial class MainPage : PhoneApplicationPage
     {

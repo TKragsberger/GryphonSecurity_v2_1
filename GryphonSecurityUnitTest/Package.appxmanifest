@@ -4,15 +4,15 @@
          xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest"
          xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
 
-  <Identity Name="ca5e48a5-ddd3-4012-bac6-a0e70488d541"
+  <Identity Name="6e77c95c-7ae8-407c-86fa-756ec095098b"
             Publisher="CN=Thomas"
             Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="8c406b9d-1fad-459a-b9be-b88c1e24b615"
-                    PhonePublisherId="03e01374-3c7e-477d-8b3d-6442f76852d4"/>
+  <mp:PhoneIdentity PhoneProductId="c1d51fa3-12d3-4ebe-a3dc-82732f099b14"
+                    PhonePublisherId="9c91a3da-c98c-4356-ad64-1b6387574fcd"/>
 
   <Properties>
-    <DisplayName>TestApp3</DisplayName>
+    <DisplayName>GryphonSecurityUnitTest</DisplayName>
     <PublisherDisplayName>Thomas</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -31,10 +31,10 @@
                  Executable="AGHost.exe"
                  EntryPoint="MainPage.xaml">
       <m3:VisualElements
-          DisplayName="TestApp3"
+          DisplayName="GryphonSecurityUnitTest"
           Square150x150Logo="Assets\SquareTile150x150.png"
           Square44x44Logo="Assets\Logo.png"
-          Description="TestApp3"
+          Description="GryphonSecurityUnitTest"
           ForegroundText="light"
           BackgroundColor="#464646">
         <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png"/>

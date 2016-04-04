@@ -6,9 +6,9 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using TestApp3.Resources;
+using TestApp1.Resources;
 
-namespace TestApp3
+namespace TestApp1
 {
     public partial class App : Application
     {

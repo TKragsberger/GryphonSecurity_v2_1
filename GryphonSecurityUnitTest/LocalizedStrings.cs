@@ -1,6 +1,6 @@
-﻿using TestApp3.Resources;
+﻿using GryphonSecurityUnitTest.Resources;
 
-namespace TestApp3
+namespace GryphonSecurityUnitTest
 {
     /// <summary>
     /// Provides access to string resources.

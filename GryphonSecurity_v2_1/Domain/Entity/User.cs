@@ -114,7 +114,7 @@ namespace GryphonSecurity_v2_1.Domain.Entity
         }
         public String toString()
         {
-            return firstname + lastname + address + phonenumber;
+            return id + firstname + lastname + address + phonenumber + username + password;
         }
     }
 }
