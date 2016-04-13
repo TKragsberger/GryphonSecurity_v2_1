@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GryphonSecurity_v2_1", "Gry
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GryphonSecurityUnitTest", "GryphonSecurityUnitTest\GryphonSecurityUnitTest.csproj", "{C1D51FA3-12D3-4EBE-A3DC-82732F099B14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp1", "TestApp1\TestApp1.csproj", "{2C989828-3252-48A5-8962-0DADEEC38DAD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,20 +51,6 @@ Global
 		{C1D51FA3-12D3-4EBE-A3DC-82732F099B14}.Release|x86.ActiveCfg = Release|x86
 		{C1D51FA3-12D3-4EBE-A3DC-82732F099B14}.Release|x86.Build.0 = Release|x86
 		{C1D51FA3-12D3-4EBE-A3DC-82732F099B14}.Release|x86.Deploy.0 = Release|x86
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Debug|Any CPU.ActiveCfg = Debug|ARM
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Debug|ARM.ActiveCfg = Debug|ARM
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Debug|ARM.Build.0 = Debug|ARM
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Debug|ARM.Deploy.0 = Debug|ARM
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Debug|x86.ActiveCfg = Debug|x86
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Debug|x86.Build.0 = Debug|x86
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Debug|x86.Deploy.0 = Debug|x86
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Release|Any CPU.ActiveCfg = Release|x86
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Release|ARM.ActiveCfg = Release|ARM
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Release|ARM.Build.0 = Release|ARM
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Release|ARM.Deploy.0 = Release|ARM
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Release|x86.ActiveCfg = Release|x86
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Release|x86.Build.0 = Release|x86
-		{2C989828-3252-48A5-8962-0DADEEC38DAD}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

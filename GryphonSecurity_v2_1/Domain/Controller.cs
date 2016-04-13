@@ -29,7 +29,6 @@ namespace GryphonSecurity_v2_1
         private GeoCoordinate targetCoordinate;
         private static Controller instance;
         private Boolean check = false;
-        Boolean test = false;
 
         private Controller()
         {
